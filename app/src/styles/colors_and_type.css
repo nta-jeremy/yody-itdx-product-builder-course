@@ -30,7 +30,10 @@
        below so legacy preview files keep working.
    ───────────────────────────────────────────────────────── */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* Display/impact/serif/mono fonts are loaded via next/font/google in
+   src/lib/fonts.ts — no render-blocking @import here. The CSS variables
+   --font-montserrat / --font-playfair / --font-jetbrains are injected
+   on <html> by layout.tsx. */
 
 /* Be Vietnam Pro is loaded via next/font/local in src/lib/fonts.ts — no @font-face here. */
 
@@ -118,15 +121,17 @@
   --s-20: 80px; --s-24: 96px; --s-28: 112px;
 
   /* ═══ TYPOGRAPHY ═══ */
-  --font-body:    'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;
-  --font-ui:      'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;  /* alias */
-  --font-sans:    'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;  /* alias */
-  --font-brand:   'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;
-  --font-impact:  'Montserrat', 'Be Vietnam Pro', sans-serif;        /* impact display */
-  --font-display: 'Montserrat', 'Be Vietnam Pro', sans-serif;        /* alias */
-  --font-serif:   'Playfair Display', Georgia, serif;                /* Hero ONLY */
-  --font-numeric: 'Montserrat', 'Be Vietnam Pro', sans-serif;        /* tabular */
-  --font-mono:    'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  /* next/font variables injected on <html> — fallback chains preserve
+     rendering if a variable is unset (e.g. build without font loader). */
+  --font-body:    var(--font-body-loaded), 'Helvetica Neue', Arial, sans-serif;
+  --font-ui:      var(--font-body-loaded), 'Helvetica Neue', Arial, sans-serif;  /* alias */
+  --font-sans:    var(--font-body-loaded), 'Helvetica Neue', Arial, sans-serif;  /* alias */
+  --font-brand:   var(--font-body-loaded), 'Helvetica Neue', Arial, sans-serif;
+  --font-impact:  var(--font-montserrat), 'Be Vietnam Pro', sans-serif;        /* impact display */
+  --font-display: var(--font-montserrat), 'Be Vietnam Pro', sans-serif;       /* alias */
+  --font-serif:   var(--font-playfair), Georgia, serif;                       /* Hero ONLY */
+  --font-numeric: var(--font-montserrat), 'Be Vietnam Pro', sans-serif;        /* tabular */
+  --font-mono:    var(--font-jetbrains), 'SFMono-Regular', Menlo, monospace;
 
   /* Type scale — blog-portal sizing · generous, lean-back readable */
   --type-hero:        800 clamp(80px, 8.4vw, 120px)/0.94 var(--font-impact);
