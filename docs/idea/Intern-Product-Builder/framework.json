@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "version": "2.0",
+    "created": "2026-06-20",
+    "author": "Jeremy Nguyen / YODY",
+    "loai_tai_lieu": "program_override",
+    "ke_thua_tu": "../00_Core/competency_dictionary.json",
+    "mo_hinh": "base + override — file này CHỈ khai báo phần khác biệt so với bộ gốc. Mọi tiêu chí không liệt kê dùng nguyên định nghĩa + trọng số default từ bộ gốc. Will FIT dùng nguyên ../00_Core/will_fit.json.",
+    "cach_doc": "Để có rubric đầy đủ: lấy bộ gốc + áp các override bên dưới."
+  },
+
+  "ten_bo": "Khung năng lực — Intern Product Builder",
+  "muc_tieu_su_dung": "Đánh giá năng lực theo lộ trình cố định của chương trình Intern Product Builder — dùng cho cả vòng tuyển chọn đầu vào lẫn đánh giá giữa/cuối chương trình.",
+  "doi_tuong": "Thực tập sinh hướng đến trở thành product builder đóng góp vào xây dựng sản phẩm công nghệ cho YODY.",
+
+  "dinh_vi_lo_trinh": {
+    "diem_xuat_phat": "L1–L2",
+    "tran_tot_nghiep": "L5 Architect (chuẩn tốt nghiệp bắt buộc)",
+    "tham_chieu_ladder": "../00_Core/progression_ladder.md"
+  },
+
+  "override_khia_canh": {
+    "A_Outcome": {
+      "ghi_chu": "BẬT tiêu chí role-understanding (đặc thù lộ trình cố định của Intern). Vì thêm 1 tiêu chí 25%, ba tiêu chí Outcome còn lại được tái cân chỉnh để tổng = 100% (giữ tương quan default 40:35:25).",
+      "tieu_chi_ap_dung": ["OUT_role_understanding", "OUT_deliverable", "OUT_iterate", "OUT_risk_awareness"],
+      "override_trong_so": [
+        { "id": "OUT_role_understanding", "bat": true, "trong_so": "25%", "diem_toi_da": 1.25,
+          "boi_canh_doi_tuong": "Intern hiểu đây không phải vai trò 'học quan sát' mà được kỳ vọng contribute vào ≥1 product initiative; phân biệt được Product Builder và vai trò thực thi đơn thuần; nắm lộ trình + milestone." },
+        { "id": "OUT_deliverable", "trong_so": "30%", "diem_toi_da": 1.5,
+          "boi_canh_doi_tuong": "≥1 deliverable sản phẩm cụ thể: feature spec / prototype-mockup / AI-assisted workflow / insight report từ dữ liệu thực, được mentor hoặc đội sản phẩm review. Không phải bài tập lý thuyết." },
+        { "id": "OUT_iterate", "trong_so": "25%", "diem_toi_da": 1.25 },
+        { "id": "OUT_risk_awareness", "trong_so": "20%", "diem_toi_da": 1.0 }
+      ],
+      "kiem_tra_tong": "25 + 30 + 25 + 20 = 100%"
+    },
+
+    "B_Can_Do": {
+      "ghi_chu": "Trần L5: áp dụng đầy đủ cả 5 tiêu chí kỹ thuật, gồm Product Thinking đầy đủ. Trọng số nhấn vào Product Thinking và prompt/tool proficiency cho product work.",
+      "tieu_chi_ap_dung": ["CAN_ai_foundations", "CAN_prompt_tools", "CAN_product_thinking", "CAN_workflow_design", "CAN_output_qc"],
+      "override_trong_so": [
+        { "id": "CAN_ai_foundations", "trong_so": "20%", "diem_toi_da": 1.0,
+          "boi_canh_doi_tuong": "Đủ để ra quyết định product đúng khi AI là một component: token, context window, temperature, hallucination, RAG conceptual. Không cần code ML." },
+        { "id": "CAN_prompt_tools", "trong_so": "25%", "diem_toi_da": 1.25,
+          "boi_canh_doi_tuong": "2–3 AI tools cho product building (Claude/ChatGPT cho research/spec, Cursor/Copilot nếu coding, v0/Midjourney cho design, Notion AI). Prompt để extract insight, draft spec, synthesize research, prototype UI." },
+        { "id": "CAN_product_thinking", "trong_so": "25%", "diem_toi_da": 1.25,
+          "boi_canh_doi_tuong": "Vòng lặp đầy đủ: bài toán người dùng → solution hypothesis → build → measure; success metric, edge case, trade-off, quyết định AI-fit." },
+        { "id": "CAN_workflow_design", "trong_so": "15%", "diem_toi_da": 0.75,
+          "boi_canh_doi_tuong": "Workflow cho product context: AI-assisted spec/prototype/insight report; Cowork task loop, skills & plugins; QC mức product (nguồn dữ liệu, edge case)." },
+        { "id": "CAN_output_qc", "trong_so": "15%", "diem_toi_da": 0.75 }
+      ],
+      "kiem_tra_tong": "20 + 25 + 25 + 15 + 15 = 100%"
+    },
+
+    "C_Will_Do": {
+      "ghi_chu": "Dùng nguyên trọng số default bộ gốc (30/40/30). Điều chỉnh ngữ cảnh câu hỏi theo môi trường thực tập.",
+      "tieu_chi_ap_dung": ["WILLDO_motivation", "WILLDO_career", "WILLDO_stability"],
+      "override_tieu_chi": [
+        {
+          "id": "WILLDO_motivation",
+          "boi_canh_doi_tuong": "Gắn với bài toán Retail/Fashion/Supply Chain của YODY hoặc xây dựng sản phẩm AI ở môi trường thực — không phải chỉ 'muốn học AI' chung chung.",
+          "cau_hoi_goi_y_override": "Điều gì ở YODY mà bạn muốn contribute cụ thể?"
+        },
+        {
+          "id": "WILLDO_career",
+          "boi_canh_doi_tuong": "Định hướng sau thực tập tương thích: PM, AI Product Builder, Technical Product Owner, hoặc Software Engineer với product mindset. Cần thấy bước đi có chủ đích, không phải 'thử cho biết'."
+        },
+        {
+          "id": "WILLDO_stability",
+          "boi_canh_doi_tuong": "Khả năng cam kết full timeline chương trình + track record tự build/tự học trước đó (project cá nhân, side project)."
+        }
+      ]
+    },
+
+    "D_Will_FIT": {
+      "ghi_chu": "Dùng nguyên ../00_Core/will_fit.json — không override.",
+      "tham_chieu": "../00_Core/will_fit.json"
+    }
+  }
+}
