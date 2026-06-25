@@ -27,7 +27,7 @@ First-time flags:
 
 The content layer (`src/lib/content/`) reads markdown + JSON from the filesystem **at build time only** (Server Components / SSG, no runtime fs). Originally the content lived at `../docs/idea/` (monorepo root) — this broke single-project Vercel deploys because the build context didn't include the parent directory. The content was moved into `app/content/idea/` so the project is self-contained.
 
-All four reader files reference `resolveAppRoot()` (3 hops up from `app/src/lib/content/sessions.ts` → `app/`) — see `app/src/lib/content/`.
+All five reader files (`sessions.ts`, `learner.ts`, `root-docs.ts`, `canonical.ts`, `index.ts`) reference `resolveAppRoot()` (3 hops up from `app/src/lib/content/sessions.ts` → `app/`) — see `app/src/lib/content/`.
 
 ## Environment Variables
 
@@ -58,7 +58,7 @@ legacy-peer-deps=true
 
 Required because the project pins older majors of `react-day-picker`, `recharts`, `react-resizable-panels` (see `app/CLAUDE.md` → "Pinned deps"). Without this, `npm install` fails on React 19 peer-dep conflicts.
 
-## Routes (36 static pages)
+## Routes (52 static pages)
 
 All routes are pre-rendered at build time (SSG):
 
@@ -69,8 +69,12 @@ All routes are pre-rendered at build time (SSG):
 | `/sessions` | Static | `src/app/sessions/page.tsx` |
 | `/sessions/[code]` | SSG (14) | `src/app/sessions/[code]/page.tsx` |
 | `/sessions/[code]/print` | SSG (14) | `src/app/sessions/[code]/print/page.tsx` |
+| `/learn` | Static | `src/app/learn/page.tsx` |
+| `/learn/[code]` | SSG (14) | `src/app/learn/[code]/page.tsx` |
 | `/badges` | Static | `src/app/badges/page.tsx` |
 | `/mock-showcase` | Static | `src/app/mock-showcase/page.tsx` |
+
+> `/learn` + `/learn/[code]` are the learner-facing routes (reader: `src/lib/content/learner.ts`); `/sessions/*` remains the mentor view.
 
 Verified live (HTTP 200) on production:
 - `https://app-plum-three-64.vercel.app/`

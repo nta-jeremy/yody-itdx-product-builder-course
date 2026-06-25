@@ -4,9 +4,10 @@
  * Reads markdown from `content/idea/Intern-Product-Builder/` (app-relative).
  * The content directory lives INSIDE the Next.js app at `./content/idea/`.
  * Reading happens at BUILD TIME only: Next.js 16 Server Components execute
- * during `next build` (SSG), and with `output: 'export'` every route is
- * prerendered — no runtime fs. This lib is therefore safe to use from Server
- * Components / `generateStaticParams`.
+ * during `next build` (default SSG — `output` is not set in next.config.ts),
+ * and `generateStaticParams` prerenders every known route — no runtime fs.
+ * This lib is therefore safe to use from Server Components /
+ * `generateStaticParams`.
  *
  * FK contract: `sessionCode` is the ONLY stable identifier exposed. The
  * underlying file path is never leaked — file renames do not break the DB
@@ -21,7 +22,8 @@
  *  - fs/promises is fine in Server Components (default nodejs runtime).
  *  - cacheComponents is NOT enabled in this app's next.config.ts, so the
  *    "generateStaticParams must return >=1 param" constraint does NOT apply.
- *  - output:'export' is a Phase 2c concern; this lib is build-time only.
+ *  - `output` is not set (default SSG); `generateStaticParams` prerenders
+ *    routes at build time. This lib is build-time only.
  *  - params is a Promise in v15+/16 — Phase 2c routes must `await params`.
  */
 

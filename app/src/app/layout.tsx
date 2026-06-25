@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { fontVariables } from "@/lib/fonts";
 import { SiteHeader } from "@/components/shell";
 import { Footer } from "@/components/shell";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,11 +36,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={`${fontVariables} h-full antialiased`}>
+    <html lang="vi" suppressHydrationWarning className={`${fontVariables} h-full antialiased`}>
       <body data-surface="app" className="min-h-full flex flex-col bg-background text-foreground">
-        <SiteHeader />
-        <main className="flex flex-1 flex-col">{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <SiteHeader />
+          <main className="flex flex-1 flex-col">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

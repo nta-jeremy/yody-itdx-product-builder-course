@@ -1,12 +1,14 @@
 /**
- * Content layer barrel — the single import surface for routes (Phase 2c).
+ * Content layer barrel — the single import surface for routes (Phase 2c + G2).
  *
- * Per plan decision #21, exports exactly 5 typed functions:
- *   - getContent     — generic content resolver (session | root doc | canonical)
- *   - listSessions    — 14 sessions (delegates to sessions.ts)
- *   - listBadges      — badge inventory from `_mock-data/mock_badges.json`
- *   - listLearners    — learners from `_mock-data/mock_learners.json`
- *   - listGateEvidence — gate submissions from `_mock-data/mock_gate_evidence.json`
+ * Per plan decision #21 + the G2 learner layer, exports 7 typed functions:
+ *   - getContent        — generic content resolver (session | root doc | canonical)
+ *   - listSessions       — 14 sessions (delegates to sessions.ts)
+ *   - listBadges         — badge inventory from `_mock-data/mock_badges.json`
+ *   - listLearners       — learners from `_mock-data/mock_learners.json`
+ *   - listGateEvidence   — gate submissions from `_mock-data/mock_gate_evidence.json`
+ *   - getLearnerContent  — learner-facing main-content by code (G2)
+ *   - listLearnerSessions — 14 learner sessions sorted (G2)
  *
  * Also exports `listScorecards` (mock scorecards) used by /mock-showcase.
  *
@@ -30,6 +32,7 @@ import {
   type SessionContent,
   isValidSessionCode,
 } from "./sessions";
+import { getLearnerContent, listLearnerSessions, type LearnerContent } from "./learner";
 import { getRootDoc, isRootDocName, type RootDocName } from "./root-docs";
 import {
   getCanonicalFile,
@@ -39,7 +42,7 @@ import {
 } from "./canonical";
 
 // ─── Re-exports for Phase 2c routes ────────────────────────────────────
-export type { SessionContent, RootDocName, CanonicalName };
+export type { SessionContent, RootDocName, CanonicalName, LearnerContent };
 export {
   getSession,
   listSessions,
@@ -49,6 +52,8 @@ export {
   getCanonicalFile,
   getCanonicalJson,
   isCanonicalName,
+  getLearnerContent,
+  listLearnerSessions,
 };
 
 // ─── Mock data location ─────────────────────────────────────────────────

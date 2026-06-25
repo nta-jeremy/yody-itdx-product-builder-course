@@ -188,6 +188,37 @@
   white-space: pre;
 }
 
+/* ─── Code block wrapper (copy button + lang label) ─────────────────── */
+/* The `pre` map in markdown.tsx wraps each fenced block in this container. */
+.yody-prose .yody-code-wrap {
+  position: relative;
+  margin: 0 0 var(--s-6);
+}
+/* Reset the pre margin when nested in the wrap (avoid double margin). */
+.yody-prose .yody-code-wrap .yody-pre {
+  margin: 0;
+}
+
+.yody-prose .yody-lang-label {
+  position: absolute;
+  top: var(--s-2);
+  left: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Copy button base (interactive states live in the component). The wrap
+   holds the dark ink surface, so the button uses translucent-white hovers. */
+.yody-prose .yody-code-copy {
+  z-index: 1;
+}
+
 /* ─── Tables (GFM) ───────────────────────────────────────────────────── */
 
 .yody-prose .yody-table-wrap {

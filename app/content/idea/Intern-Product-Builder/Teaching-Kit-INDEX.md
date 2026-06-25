@@ -23,7 +23,7 @@
 | **I4.3** | Tích hợp Initiative & Iterate | L4 | **Gate L4→L5** | [Teaching-Kit-I4.3](Teaching-Kit-I4.3/I4.3-Cam-Nang-Giang-Tich-Hop-Initiative-Iterate.md) |
 | **I5.1** | Kiến trúc giải pháp AI | L5 | tích lũy | [Teaching-Kit-I5.1](Teaching-Kit-I5.1/I5.1-Cam-Nang-Giang-Kien-Truc-Giai-Phap-AI.md) |
 | **I5.2** | Production Readiness & Guardrails | L5 | tích lũy | [Teaching-Kit-I5.2](Teaching-Kit-I5.2/I5.2-Cam-Nang-Giang-Production-Readiness-Guardrails.md) |
-| **I5.3** | Ship & Bảo vệ Capstone | L5 | **Gate tốt nghiệp L5** | [Teaching-Kit-I5.3](Teaching-Kit-I5.3/I5.3-Cam-Nang-Giang-Ship-Bao-Ve-Capstone.md) |
+| **I5.3** | Ship & Bảo vệ Sản Phẩm AI Cuối Khóa | L5 | **Gate tốt nghiệp L5** | [Teaching-Kit-I5.3](Teaching-Kit-I5.3/I5.3-Cam-Nang-Giang-Ship-Bao-Ve-Capstone.md) |
 
 > **Đủ trọn 14 buổi (I1.1 → I5.3) + 15 cẩm nang (incl. INDEX).** L3–L5 (đợt 22/06/2026) theo cùng cấu trúc 8 phần; các buổi gate (I3.3, I4.3, I5.3) có thêm phần exit criteria + chuẩn ĐẠT. I5.3 là buổi tốt nghiệp (100% bảo vệ, không khối lý thuyết) nên Phần 1 là kịch bản điều phối Hội đồng thay cho talk-track slide.
 

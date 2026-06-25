@@ -36,18 +36,27 @@ const LEVELS: ReadonlyArray<{
   { level: "L5", numeral: "V",   title: "Kiến trúc & ship", colorVar: "var(--gold-deep)", modulePrefix: "I5" },
 ];
 
+/**
+ * Structural session ref — Sidebar only reads `code` + `title`, so both the
+ * mentor `SessionContent[]` and the learner `LearnerContent[]` (G2) satisfy it.
+ * Backward compatible: existing callers passing `SessionContent[]` keep working.
+ */
+type SidebarSession = { code: string; title: string };
+
 export interface SidebarProps {
   /** sessionCode of the page being viewed, to highlight its link. */
   activeCode?: string;
   /** Sessions already fetched (avoid duplicate reads when the page has them). */
-  sessions?: SessionContent[];
+  sessions?: ReadonlyArray<SidebarSession>;
+  /** Route prefix for each session link. Default `/sessions` (mentor view). */
+  linkBase?: string;
 }
 
 async function loadSessions(): Promise<SessionContent[]> {
   return listSessions();
 }
 
-export async function Sidebar({ activeCode, sessions }: SidebarProps) {
+export async function Sidebar({ activeCode, sessions, linkBase = "/sessions" }: SidebarProps) {
   const all = sessions ?? (await loadSessions());
 
   return (
@@ -79,7 +88,7 @@ export async function Sidebar({ activeCode, sessions }: SidebarProps) {
                 return (
                   <Link
                     key={s.code}
-                    href={`/sessions/${s.code}` as Route}
+                    href={`${linkBase}/${s.code}` as Route}
                     aria-current={isActive ? "page" : undefined}
                     className={cn(
                       "min-h-[36px] rounded-[6px] px-2.5 py-1.5 text-left font-[family-name:var(--font-body)] text-[13px] leading-[1.4] outline-ring/50 transition-colors focus-visible:ring-[3px]",

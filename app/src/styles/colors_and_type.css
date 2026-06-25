@@ -223,6 +223,51 @@
   --grad-rose:  linear-gradient(180deg, #f472b6 0%, #be185d 100%);   /* @kind color */
 }
 
+/* ════════════════════════════════════════════════════════════════════
+   DARK MODE — foundation token overrides (opt-in via `.dark` on <html>)
+   ────────────────────────────────────────────────────────────────────
+   Mirrors the shadcn role block in globals.css (same ink surface family)
+   but overrides the FOUNDATION tokens (--fg-*, --bg-*, --border*,
+   --iris-deep, --brand) so components reading these directly — Sidebar
+   `bg-[var(--bg-warm)]`, prose.css `color:var(--fg-2)` / `var(--border)`
+   / `var(--bg-ink)` — flip with the theme.
+   Values are token-only: lifted from the .dark shadcn block in globals.css
+   (`#0e0f24` ink bg, `#f4f5fb` fg, `rgba(255,255,255,.10)` border). No new
+   raw hex outside this dark palette.
+   ═══════════════════════════════════════════════════════════════════ */
+.dark {
+  /* TEXT — lifted for dark contrast */
+  --fg-1: #f4f5fb;          /* primary ink on dark — paper-on-ink */
+  --fg-2: #9aa0c4;          /* secondary — muted lavender */
+  --fg-3: #7a80a8;          /* tertiary — labels, metadata */
+  --fg-on-brand: #0e0f24;
+
+  /* SURFACES — ink family from the shadcn dark block */
+  --bg:        #0e0f24;     /* page bg — YODY ink */
+  --bg-2:      #16183a;     /* section alt / blockquote bg */
+  --bg-muted:  #1d2046;     /* chip / hover */
+  --bg-warm:   #0e0f24;     /* sidebar / header bg — same as bg in dark */
+  --bg-ink:    #0e0f24;     /* code bg — unchanged (already dark) */
+
+  /* BORDERS — translucent white on dark (from shadcn .dark) */
+  --border:        rgba(255, 255, 255, 0.10);
+  --border-light:  rgba(255, 255, 255, 0.06);
+  --border-hover:  rgba(255, 255, 255, 0.18);
+
+  /* BRAND + IRIS — lifted for contrast on dark */
+  --brand:        #4a4bc8;  /* = --brand-light, lifted navy */
+  --brand-light:  #7c6cf5;  /* lifted further for hover/active on dark */
+  --brand-tint:   rgba(124, 108, 245, 0.16);
+  --iris-deep:    #7c6cf5;  /* lifted for link/toc active on dark */
+  --iris-tint:    rgba(124, 108, 245, 0.16);
+
+  /* STATUS bg alphas stay readable on dark (keep tints, deepen bg) */
+  --live-bg:   rgba(16, 185, 129, 0.14);
+  --build-bg:  rgba(124, 108, 245, 0.14);
+  --gap-bg:    rgba(239, 68, 68, 0.16);
+  --plan-bg:   rgba(245, 158, 11, 0.14);
+}
+
 /* ══════════════════════════════════════════════════════
    SURFACE ADAPTERS — v3 multi-surface architecture
    ---------------------------------------------------
