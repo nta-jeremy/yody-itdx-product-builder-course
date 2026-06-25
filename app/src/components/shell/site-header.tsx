@@ -19,9 +19,10 @@
 import Link from "next/link";
 import type { Route } from "next";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/learn/theme-toggle";
 
 /** Top-level nav target. */
-export type NavKey = "home" | "sessions" | "roadmap" | "badges";
+export type NavKey = "home" | "learn" | "sessions" | "roadmap" | "badges";
 
 export interface SiteHeaderProps {
   /** Currently active section, used to highlight the matching nav link. */
@@ -30,7 +31,8 @@ export interface SiteHeaderProps {
 
 /** Nav link descriptors — order matches the rendered bar. */
 const NAV_ITEMS: ReadonlyArray<{ key: NavKey; href: Route; label: string }> = [
-  { key: "sessions", href: "/sessions", label: "Buổi học" },
+  { key: "learn", href: "/learn", label: "Học" },
+  { key: "sessions", href: "/sessions", label: "Giáo án" },
   { key: "roadmap", href: "/roadmap", label: "Lộ trình" },
   { key: "badges", href: "/badges", label: "Huy hiệu" },
 ];
@@ -74,6 +76,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
           );
         })}
       </nav>
+      <ThemeToggle />
     </header>
   );
 }

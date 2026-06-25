@@ -8,14 +8,14 @@
  * next-mdx-remote.
  *
  * YODY DS compliance:
- *  - No emoji anywhere (markdown source is trusted docs/idea, already clean).
+ *  - No emoji anywhere (markdown source is trusted content/idea, already clean).
  *  - Token colors only — no raw hex. All styling via the `yody-prose` class
  *    (prose.css) which references CSS variables from colors_and_type.css.
  *  - Be Vietnam Pro inherits from the app surface (body font var).
  *  - Root container carries `data-surface="app"`.
  *
  * This is a Server Component — no "use client". It renders to static HTML at
- * build time, which is what `output: 'export'` requires.
+ * build time (default SSG — `output` is not set in next.config.ts).
  */
 
 import * as React from "react";
@@ -24,6 +24,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { cn } from "@/lib/utils";
+import { CodeCopyButton } from "./code-copy-button";
 import "./prose.css";
 
 export interface MarkdownViewProps {
@@ -117,9 +118,30 @@ export function MarkdownView({ source, className }: MarkdownViewProps) {
               <code className="yody-code-inline" {...props}>{children}</code>
             );
           },
-          pre: ({ children, ...props }) => (
-            <pre className="yody-pre" {...props}>{children}</pre>
-          ),
+          pre: ({ children, ...props }) => {
+            // Extract the fenced-block language + raw code text from the
+            // child <code> element. react-markdown v10 (no syntax highlight)
+            // renders the code block's children as a plain string.
+            const child = React.Children.toArray(children)[0];
+            const codeEl = React.isValidElement(child)
+              ? (child as React.ReactElement<{ className?: string; children?: unknown }>)
+              : null;
+            const codeClassName = codeEl?.props?.className ?? "";
+            const lang = codeClassName.match(/language-(\w+)/)?.[1] ?? "";
+            const codeText =
+              typeof codeEl?.props?.children === "string"
+                ? codeEl.props.children
+                : "";
+            return (
+              <div className="yody-code-wrap">
+                {lang && <span className="yody-lang-label">{lang}</span>}
+                {codeText && <CodeCopyButton code={codeText} />}
+                <pre className="yody-pre" {...props}>
+                  {children}
+                </pre>
+              </div>
+            );
+          },
           hr: (props) => <hr className="yody-hr" {...props} />,
           strong: ({ children, ...props }) => (
             <strong className="yody-strong" {...props}>{children}</strong>

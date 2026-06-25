@@ -27,15 +27,17 @@ npm run lint      # eslint — ui/ and use-mobile.ts ignored (vendored shadcn)
 
 ```
 src/
-  app/            # Next.js App Router — 7 showcase routes (see "Showcase app" below)
+  app/            # Next.js App Router — 9 showcase routes (see "Showcase app" below)
     globals.css   # YODY theme entry (imports colors_and_type.css + tailwindcss + tw-animate-css)
-    layout.tsx    # data-surface="app" + Be Vietnam Pro font variable
+    layout.tsx    # data-surface="app" + Be Vietnam Pro font variable + ThemeProvider
     page.tsx      # / — Intern program cover (hero + stats + CTA → /sessions)
     error.tsx / loading.tsx / not-found.tsx
     roadmap/        page.tsx          # /roadmap
-    sessions/       page.tsx          # /sessions (14-session index)
-      [code]/       page.tsx          # /sessions/[code] (session detail + TOC)
+    sessions/       page.tsx          # /sessions (14-session mentor index)
+      [code]/       page.tsx          # /sessions/[code] (mentor session detail + TOC)
         print/      page.tsx          # /sessions/[code]/print (print layout)
+    learn/          page.tsx          # /learn (learner-facing index)
+      [code]/       page.tsx          # /learn/[code] (learner session detail, reads learner.ts)
     badges/         page.tsx          # /badges
     mock-showcase/  page.tsx          # /mock-showcase (learners / gates / scorecards)
   components/
@@ -44,10 +46,11 @@ src/
     markdown/     # Markdown renderer: markdown.tsx (react-markdown + remark-gfm + rehype-slug/autolink), toc.tsx, prose.css
   hooks/
     use-mobile.ts # shadcn hook — DO NOT lint
-  lib/
+    lib/
     fonts.ts      # next/font/local Be Vietnam Pro (weights 400/500/600/700 + italic 400)
     utils.ts      # cn() — clsx + tailwind-merge
-    content/      # Content layer (build-time only): sessions.ts, root-docs.ts, canonical.ts, index.ts
+    content/      # Content layer (build-time only): sessions.ts, learner.ts, root-docs.ts, canonical.ts, index.ts
+    theme-provider.tsx  # next-themes wrapper (attribute="class" → .dark on <html>)
   styles/
     colors_and_type.css  # YODY foundation tokens (brand, accents, surfaces, type, motion) — source of truth
 public/
@@ -57,15 +60,16 @@ components.json   # shadcn config (style: new-york, css: src/app/globals.css, al
 
 ## Showcase app (Intern Product Builder)
 
-The `app/` is the live showcase for the **YODY Intern Product Builder Course**. Content lives outside the Next.js app, at the monorepo root `../docs/idea/`, and is read **at build time only** (Server Components / SSG — no runtime fs).
+The `app/` is the live showcase for the **YODY Intern Product Builder Course**. Content lives INSIDE the Next.js app at `./content/idea/`, and is read **at build time only** (Server Components / SSG — no runtime fs). Self-contained for deploy: the entire `app/` directory can be deployed as a single Next.js project (e.g. Vercel).
 
 ### Content layer — `src/lib/content/`
 
-Single import surface for routes. Barrel `index.ts` exports 5 typed, `cache`-memoised readers (+`listScorecards`):
+Single import surface for routes. Barrel `index.ts` exports 7 typed, `cache`-memoised readers (+`listScorecards`):
 
 - `getContent(kind, id)` — generic resolver for `"session" | "root-doc" | "canonical"`
-- `listSessions()` — 14 sessions from `docs/idea/Intern-Product-Builder/`
-- `listBadges()` / `listLearners()` / `listGateEvidence()` / `listScorecards()` — read `docs/idea/_mock-data/*.json` (Phase 1c owns those files; this lib only READS them)
+- `listSessions()` — 14 sessions from `content/idea/Intern-Product-Builder/`
+- `getLearnerContent(code)` / `listLearnerSessions()` — learner-facing main-content from `Teaching-Kit-${code}/main-content/*.md` (reader in `learner.ts`, used by `/learn/*`)
+- `listBadges()` / `listLearners()` / `listGateEvidence()` / `listScorecards()` — read `content/idea/_mock-data/*.json` (Phase 1c owns those files; this lib only READS them)
 
 FK contract: `sessionCode` (`^I[1-5]\.[1-3]$`, validated before any fs touch — path-traversal guarded) is the only stable id exposed; underlying file paths are never leaked. Read-only module.
 
@@ -73,9 +77,9 @@ FK contract: `sessionCode` (`^I[1-5]\.[1-3]$`, validated before any fs touch —
 
 `<MarkdownView source=…>` — Server Component, RSC-safe (synchronous `react-markdown@10`, no async plugins). Pipeline: `remark-gfm` (tables, task lists) → `rehype-slug` (heading ids) → `rehype-autolink-headings` (anchor links for TOC). Styled via the `yody-prose` class in `prose.css` (token colors only). `<Toc>` builds a sidebar TOC from the same heading ids.
 
-### Routes (7, all static-prerendered)
+### Routes (9, all static-prerendered)
 
-`/` · `/roadmap` · `/sessions` · `/sessions/[code]` · `/sessions/[code]/print` · `/badges` · `/mock-showcase` — 36 static pages at build. `params` is a `Promise` in Next 15+/16; route handlers `await params`.
+`/` · `/roadmap` · `/sessions` · `/sessions/[code]` · `/sessions/[code]/print` · `/badges` · `/mock-showcase` · `/learn` · `/learn/[code]` — 52 static pages at build. `/learn` is the learner-facing entry (`/learn/[code]` = learner session detail, reads `learner.ts`); `/sessions/*` remains the mentor view, untouched. `params` is a `Promise` in Next 15+/16; route handlers `await params`.
 
 ### Markdown deps (added Phase 2a)
 
@@ -88,7 +92,7 @@ FK contract: `sessionCode` (`^I[1-5]\.[1-3]$`, validated before any fs touch —
 - **Gold is decoration only** (logo, one climax moment / page). Never gold text or buttons.
 - **No emoji.** Status = tag pills (`LIVE / BUILD / GAP / PLAN`) via `<Badge variant="live">`.
 - **A11y floor:** visible focus ring, tap target ≥ 44px, honor `prefers-reduced-motion`.
-- **Light is default;** dark mode opt-in via `.dark`.
+- **Light is default;** dark mode opt-in via `.dark` — wired through `next-themes` (`ThemeProvider` in `src/components/theme-provider.tsx`, `attribute="class"` → `.dark` on `<html>`; `.dark` foundation-token overrides in `colors_and_type.css`). `layout.tsx` sets `suppressHydrationWarning` on `<html>`.
 
 ## Pinned deps (DS compatibility)
 

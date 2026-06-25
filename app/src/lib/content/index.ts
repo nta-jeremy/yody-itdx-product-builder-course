@@ -1,16 +1,18 @@
 /**
- * Content layer barrel — the single import surface for routes (Phase 2c).
+ * Content layer barrel — the single import surface for routes (Phase 2c + G2).
  *
- * Per plan decision #21, exports exactly 5 typed functions:
- *   - getContent     — generic content resolver (session | root doc | canonical)
- *   - listSessions    — 14 sessions (delegates to sessions.ts)
- *   - listBadges      — badge inventory from `_mock-data/mock_badges.json`
- *   - listLearners    — learners from `_mock-data/mock_learners.json`
- *   - listGateEvidence — gate submissions from `_mock-data/mock_gate_evidence.json`
+ * Per plan decision #21 + the G2 learner layer, exports 7 typed functions:
+ *   - getContent        — generic content resolver (session | root doc | canonical)
+ *   - listSessions       — 14 sessions (delegates to sessions.ts)
+ *   - listBadges         — badge inventory from `_mock-data/mock_badges.json`
+ *   - listLearners       — learners from `_mock-data/mock_learners.json`
+ *   - listGateEvidence   — gate submissions from `_mock-data/mock_gate_evidence.json`
+ *   - getLearnerContent  — learner-facing main-content by code (G2)
+ *   - listLearnerSessions — 14 learner sessions sorted (G2)
  *
  * Also exports `listScorecards` (mock scorecards) used by /mock-showcase.
  *
- * Mock data lives in `docs/idea/_mock-data/` (Phase 1c owns those files; this
+ * Mock data lives in `content/idea/_mock-data/` (Phase 1c owns those files; this
  * lib only READS them). Read at build time — same constraints as sessions.ts.
  *
  * FK contract: every mock record references `sessionCode` (e.g. gate evidence
@@ -23,13 +25,14 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { cache } from "react";
-import { resolveRepoRoot } from "./sessions";
+import { resolveAppRoot } from "./sessions";
 import {
   getSession,
   listSessions,
   type SessionContent,
   isValidSessionCode,
 } from "./sessions";
+import { getLearnerContent, listLearnerSessions, type LearnerContent } from "./learner";
 import { getRootDoc, isRootDocName, type RootDocName } from "./root-docs";
 import {
   getCanonicalFile,
@@ -39,7 +42,7 @@ import {
 } from "./canonical";
 
 // ─── Re-exports for Phase 2c routes ────────────────────────────────────
-export type { SessionContent, RootDocName, CanonicalName };
+export type { SessionContent, RootDocName, CanonicalName, LearnerContent };
 export {
   getSession,
   listSessions,
@@ -49,11 +52,13 @@ export {
   getCanonicalFile,
   getCanonicalJson,
   isCanonicalName,
+  getLearnerContent,
+  listLearnerSessions,
 };
 
 // ─── Mock data location ─────────────────────────────────────────────────
 
-const MOCK_DIR = join(resolveRepoRoot(), "docs", "idea", "_mock-data");
+const MOCK_DIR = join(resolveAppRoot(), "content", "idea", "_mock-data");
 
 /** Read + parse a mock JSON file. Returns null if missing. */
 async function readMockJson<T>(file: string): Promise<T | null> {
@@ -65,7 +70,7 @@ async function readMockJson<T>(file: string): Promise<T | null> {
   }
 }
 
-// ─── Mock data types (mirror docs/idea/_mock-data/*.json shapes) ─────────
+// ─── Mock data types (mirror content/idea/_mock-data/*.json shapes) ──────
 
 /** One badge from mock_badges.json. `color_token` ∈ {mint, iris, gold}. */
 export type Badge = {

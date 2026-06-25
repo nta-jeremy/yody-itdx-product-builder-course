@@ -1,5 +1,5 @@
 /**
- * Reader for the 3 root program docs under `docs/idea/`:
+ * Reader for the 3 root program docs under `content/idea/`:
  *   "01" → 01_Tong-Quan-Chuong-Trinh.md
  *   "02" → 02_Khung-Nang-Luc-Danh-Gia.md
  *   "03" → 03_Giao-An-Trien-Khai.md
@@ -11,9 +11,9 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { cache } from "react";
-import { resolveRepoRoot } from "./sessions";
+import { resolveAppRoot } from "./sessions";
 
-const ROOT_DOCS_DIR = join(resolveRepoRoot(), "docs", "idea");
+const ROOT_DOCS_DIR = join(resolveAppRoot(), "content", "idea");
 
 /**
  * Whitelisted root-doc short names. The `01`/`02`/`03` prefix is the stable
