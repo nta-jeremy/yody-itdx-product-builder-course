@@ -1,1 +1,0 @@
-export { YodyHoc } from "./yody-hoc";

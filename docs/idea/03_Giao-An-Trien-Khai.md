@@ -317,7 +317,7 @@ Bốn đòn bẩy bắt buộc:
 
 ## 6. Thư viện tài nguyên (đã verify)
 
-> **Kiểm tra lần cuối:** 21/06/2026 (truy cập trực tiếp). Nếu link đổi, tra lại tại [Anthropic Academy](https://www.anthropic.com/learn) và [Tutorials](https://claude.com/resources/tutorials). Mọi nội dung lab dùng dữ liệu giả lập, không PII thật (Luật 91/2025/QH15, NĐ 356/2025/NĐ-CP).
+> **Kiểm tra lần cuối:** 24/06/2026 (truy cập trực tiếp — chi tiết 29 URL xms `_link-verification-log.md`). Nếu link đổi, tra lại tại [Anthropic Academy](https://www.anthropic.com/learn) và [Tutorials](https://claude.com/resources/tutorials). Mọi nội dung lab dùng dữ liệu giả lập, không PII thật (Luật 91/2025/QH15, NĐ 356/2025/NĐ-CP).
 
 ### L1 — Aware (nhận thức, giới hạn, an toàn)
 
@@ -333,7 +333,7 @@ Bốn đòn bẩy bắt buộc:
 - **AI Fluency: Framework & Foundations** (chứa *Deep Dive 2: Effective Prompting Techniques*) — [anthropic.skilljar.com/ai-fluency-framework-foundations](https://anthropic.skilljar.com/ai-fluency-framework-foundations)
 - **Deep Dive: Effective Prompting Techniques** — [anthropic.com/ai-fluency/deep-dive-2-effective-prompting-techniques](https://www.anthropic.com/ai-fluency/deep-dive-2-effective-prompting-techniques)
 - **Prompt engineering overview** (Claude docs) — [platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview)
-- **Chain-of-thought prompting** (Claude docs) — [docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-of-thought](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-of-thought)
+- **Chain-of-thought & prompting best practices** (Claude docs) — [platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
 
 ### L3 — Builder (workflow & Cowork)
 

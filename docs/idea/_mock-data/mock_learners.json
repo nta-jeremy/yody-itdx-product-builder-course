@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-06-24",
+    "note": "Mock data — NO PII. Prefix mock_ enforced. Department names = YODY public business units (không PII). Projects = mô tả giả. Reference I1.1 lab (30 review áo giả lập) — không duplicate.",
+    "program_scope": "Intern-Product-Builder only (decision #1 — bỏ Non-IT mock branch).",
+    "handshake": "badge.criteria_ref → 00_Core/progression_ladder.md anchors; scorecard.score field ids → 00_Core/competency_dictionary.json; gate.session_code → I1.2/I3.3/I5.3."
+  },
+  "learners": [
+    {
+      "id": "mock_learner_01",
+      "display_name": "Mock Learner 01 (Retail Ops intern)",
+      "department": "Retail Operations",
+      "program": "Intern-Product-Builder",
+      "current_level": "L2",
+      "gate_status": { "L1_to_L2": "passed", "L2_to_L3": "in_review", "L3_to_L4": "not_started", "L4_to_L5": "not_started", "L5_graduation": "not_started" },
+      "scorecard_ids": ["mock_scorecard_01_entry", "mock_scorecard_01_mid"],
+      "gate_evidence_ids": ["mock_gate_01_l1_l2"],
+      "session_progress": { "I1.1": "completed", "I1.2": "completed", "I2.1": "completed", "I2.2": "completed", "I2.3": "in_review", "I3.1": "not_started", "I3.2": "not_started", "I3.3": "not_started", "I4.1": "not_started", "I4.2": "not_started", "I4.3": "not_started", "I5.1": "not_started", "I5.2": "not_started", "I5.3": "not_started" },
+      "badges": ["mock_badge_L1"],
+      "joined_at": "2026-07-01"
+    },
+    {
+      "id": "mock_learner_02",
+      "display_name": "Mock Learner 02 (Fashion Design intern)",
+      "department": "Fashion Design",
+      "program": "Intern-Product-Builder",
+      "current_level": "L4",
+      "gate_status": { "L1_to_L2": "passed", "L2_to_L3": "passed", "L3_to_L4": "passed", "L4_to_L5": "in_review", "L5_graduation": "not_started" },
+      "scorecard_ids": ["mock_scorecard_02_mid", "mock_scorecard_02_end"],
+      "gate_evidence_ids": ["mock_gate_02_l3_l4"],
+      "session_progress": { "I1.1": "completed", "I1.2": "completed", "I2.1": "completed", "I2.2": "completed", "I2.3": "completed", "I3.1": "completed", "I3.2": "completed", "I3.3": "completed", "I4.1": "completed", "I4.2": "completed", "I4.3": "in_review", "I5.1": "not_started", "I5.2": "not_started", "I5.3": "not_started" },
+      "badges": ["mock_badge_L1", "mock_badge_L2", "mock_badge_L3"],
+      "joined_at": "2026-07-01"
+    },
+    {
+      "id": "mock_learner_03",
+      "display_name": "Mock Learner 03 (Supply Chain intern)",
+      "department": "Supply Chain",
+      "program": "Intern-Product-Builder",
+      "current_level": "L5",
+      "gate_status": { "L1_to_L2": "passed", "L2_to_L3": "passed", "L3_to_L4": "passed", "L4_to_L5": "passed", "L5_graduation": "passed_with_conditions" },
+      "scorecard_ids": ["mock_scorecard_03_end"],
+      "gate_evidence_ids": ["mock_gate_03_l5_graduation"],
+      "session_progress": { "I1.1": "completed", "I1.2": "completed", "I2.1": "completed", "I2.2": "completed", "I2.3": "completed", "I3.1": "completed", "I3.2": "completed", "I3.3": "completed", "I4.1": "completed", "I4.2": "completed", "I4.3": "completed", "I5.1": "completed", "I5.2": "completed", "I5.3": "completed" },
+      "badges": ["mock_badge_L1", "mock_badge_L2", "mock_badge_L3", "mock_badge_L4", "mock_badge_L5"],
+      "joined_at": "2026-07-01"
+    },
+    {
+      "id": "mock_learner_04",
+      "display_name": "Mock Learner 04 (CSKH intern)",
+      "department": "Customer Service & Khách Hàng",
+      "program": "Intern-Product-Builder",
+      "current_level": "L1",
+      "gate_status": { "L1_to_L2": "not_started", "L2_to_L3": "not_started", "L3_to_L4": "not_started", "L4_to_L5": "not_started", "L5_graduation": "not_started" },
+      "scorecard_ids": ["mock_scorecard_04_entry"],
+      "gate_evidence_ids": [],
+      "session_progress": { "I1.1": "completed", "I1.2": "in_progress", "I2.1": "not_started", "I2.2": "not_started", "I2.3": "not_started", "I3.1": "not_started", "I3.2": "not_started", "I3.3": "not_started", "I4.1": "not_started", "I4.2": "not_started", "I4.3": "not_started", "I5.1": "not_started", "I5.2": "not_started", "I5.3": "not_started" },
+      "badges": [],
+      "joined_at": "2026-07-15"
+    },
+    {
+      "id": "mock_learner_05",
+      "display_name": "Mock Learner 05 (Marketing intern)",
+      "department": "Marketing",
+      "program": "Intern-Product-Builder",
+      "current_level": "L3",
+      "gate_status": { "L1_to_L2": "passed", "L2_to_L3": "passed", "L3_to_L4": "in_review", "L4_to_L5": "not_started", "L5_graduation": "not_started" },
+      "scorecard_ids": ["mock_scorecard_05_mid"],
+      "gate_evidence_ids": [],
+      "session_progress": { "I1.1": "completed", "I1.2": "completed", "I2.1": "completed", "I2.2": "completed", "I2.3": "completed", "I3.1": "completed", "I3.2": "completed", "I3.3": "in_review", "I4.1": "not_started", "I4.2": "not_started", "I4.3": "not_started", "I5.1": "not_started", "I5.2": "not_started", "I5.3": "not_started" },
+      "badges": ["mock_badge_L1", "mock_badge_L2"],
+      "joined_at": "2026-07-01"
+    }
+  ]
+}

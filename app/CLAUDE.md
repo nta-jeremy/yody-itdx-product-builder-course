@@ -27,23 +27,59 @@ npm run lint      # eslint — ui/ and use-mobile.ts ignored (vendored shadcn)
 
 ```
 src/
-  app/            # Next.js App Router
+  app/            # Next.js App Router — 7 showcase routes (see "Showcase app" below)
     globals.css   # YODY theme entry (imports colors_and_type.css + tailwindcss + tw-animate-css)
     layout.tsx    # data-surface="app" + Be Vietnam Pro font variable
-    page.tsx      # demo: Button / Card / Badge (YODY-branded)
+    page.tsx      # / — Intern program cover (hero + stats + CTA → /sessions)
+    error.tsx / loading.tsx / not-found.tsx
+    roadmap/        page.tsx          # /roadmap
+    sessions/       page.tsx          # /sessions (14-session index)
+      [code]/       page.tsx          # /sessions/[code] (session detail + TOC)
+        print/      page.tsx          # /sessions/[code]/print (print layout)
+    badges/         page.tsx          # /badges
+    mock-showcase/  page.tsx          # /mock-showcase (learners / gates / scorecards)
   components/
     ui/           # 47 shadcn components, YODY-branded via tokens — DO NOT lint
+    shell/        # App shell (Server Components): site-header, sidebar, footer, print-layout, print-toolbar, index
+    markdown/     # Markdown renderer: markdown.tsx (react-markdown + remark-gfm + rehype-slug/autolink), toc.tsx, prose.css
   hooks/
     use-mobile.ts # shadcn hook — DO NOT lint
   lib/
     fonts.ts      # next/font/local Be Vietnam Pro (weights 400/500/600/700 + italic 400)
     utils.ts      # cn() — clsx + tailwind-merge
+    content/      # Content layer (build-time only): sessions.ts, root-docs.ts, canonical.ts, index.ts
   styles/
     colors_and_type.css  # YODY foundation tokens (brand, accents, surfaces, type, motion) — source of truth
 public/
   fonts/          # Be Vietnam Pro .ttf (self-hosted)
 components.json   # shadcn config (style: new-york, css: src/app/globals.css, aliases @/*)
 ```
+
+## Showcase app (Intern Product Builder)
+
+The `app/` is the live showcase for the **YODY Intern Product Builder Course**. Content lives outside the Next.js app, at the monorepo root `../docs/idea/`, and is read **at build time only** (Server Components / SSG — no runtime fs).
+
+### Content layer — `src/lib/content/`
+
+Single import surface for routes. Barrel `index.ts` exports 5 typed, `cache`-memoised readers (+`listScorecards`):
+
+- `getContent(kind, id)` — generic resolver for `"session" | "root-doc" | "canonical"`
+- `listSessions()` — 14 sessions from `docs/idea/Intern-Product-Builder/`
+- `listBadges()` / `listLearners()` / `listGateEvidence()` / `listScorecards()` — read `docs/idea/_mock-data/*.json` (Phase 1c owns those files; this lib only READS them)
+
+FK contract: `sessionCode` (`^I[1-5]\.[1-3]$`, validated before any fs touch — path-traversal guarded) is the only stable id exposed; underlying file paths are never leaked. Read-only module.
+
+### Markdown renderer — `src/components/markdown/`
+
+`<MarkdownView source=…>` — Server Component, RSC-safe (synchronous `react-markdown@10`, no async plugins). Pipeline: `remark-gfm` (tables, task lists) → `rehype-slug` (heading ids) → `rehype-autolink-headings` (anchor links for TOC). Styled via the `yody-prose` class in `prose.css` (token colors only). `<Toc>` builds a sidebar TOC from the same heading ids.
+
+### Routes (7, all static-prerendered)
+
+`/` · `/roadmap` · `/sessions` · `/sessions/[code]` · `/sessions/[code]/print` · `/badges` · `/mock-showcase` — 36 static pages at build. `params` is a `Promise` in Next 15+/16; route handlers `await params`.
+
+### Markdown deps (added Phase 2a)
+
+`react-markdown@10`, `remark-gfm@4`, `remark-parse@11`, `unified@11`, `rehype-slug@6`, `rehype-autolink-headings@7`, `github-slugger@2`, `@types/mdast@4` (see Pinned deps below for the `--legacy-peer-deps` rule).
 
 ## Non-negotiable rules (YODY DS)
 

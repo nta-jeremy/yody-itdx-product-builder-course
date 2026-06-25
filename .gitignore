@@ -3,3 +3,5 @@
 # Ignore all nta-test directories except 'sample'
 nta-test/*
 !nta-test/sample/
+
+plans/

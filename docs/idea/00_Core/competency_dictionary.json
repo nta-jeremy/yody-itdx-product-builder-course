@@ -1,0 +1,213 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-06-24",
+    "author": "Jeremy Nguyen / YODY",
+    "loai_tai_lieu": "canonical_dictionary",
+    "mo_hinh": "base + override — file này là BASE, bộ con chỉ override phần khác biệt",
+    "cach_doc": "rubric đầy đủ = file này + override framework.json của chương trình",
+    "thang_diem": "4 khía cạnh × 5.0 = 20.0 điểm",
+    "nguon": "02_Khung-Nang-Luc-Danh-Gia.md Phần I"
+  },
+  "khai_thing": {
+    "phan_vai": "Mỗi trait chỉ đo ở đúng một khía cạnh — không double-count. Outcome đo iterate; Can Do thuần kỹ thuật; Will Do động lực/cam kết; Will FIT đo Growth Mindset (gồm self-learning) + Ownership (gồm proactiveness).",
+    "overlap_da_don": [
+      "self-learning → chỉ Will FIT/Growth Mindset",
+      "iterate/feedback → chỉ Outcome",
+      "proactiveness → chỉ Will FIT/Ownership"
+    ],
+    "khong_ap_dung": "Năng lực lãnh đạo — chương trình đào tạo individual contributor ở mọi cấp độ."
+  },
+  "khia_canh": {
+    "A_Outcome": {
+      "ten": "Outcome — Kết quả tạo ra",
+      "cau_hoi": "Đã tạo ra kết quả thực bằng product thinking + AI chưa?",
+      "diem_toi_da": 5.0,
+      "tieu_chi": [
+        {
+          "id": "OUT_role_understanding",
+          "ten": "Hiểu vai trò & kỳ vọng Product Builder",
+          "label": "A0",
+          "default_bat": false,
+          "default_trong_so": "0%",
+          "default_diem": 0.0,
+          "optional": true,
+          "mo_ta": "Hiểu Product Builder không phải 'học quan sát' hay 'thực thi đơn thuần' — mà là tư duy xây dựng sản phẩm từ bài toán thực, được kỳ vọng contribute thật. Nắm rõ lộ trình + milestone.",
+          "cau_hoi_goi_y": "Product Builder khác gì người chỉ thực thi task được giao? Bạn được kỳ vọng đóng góp gì cụ thể trong chương trình này?",
+          "muc": ["Xuất sắc", "Đạt", "Cần cải thiện", "Chưa đạt"]
+        },
+        {
+          "id": "OUT_deliverable",
+          "ten": "Đã xây dựng ≥1 deliverable có giá trị thực",
+          "label": "A1",
+          "default_bat": true,
+          "default_trong_so": "40%",
+          "default_diem": 2.0,
+          "mo_ta": "Output cụ thể được người khác dùng/review: workflow AI tiết kiệm thời gian đo được, feature spec được đội sản phẩm tham khảo, prototype/insight report từ dữ liệu thực, bài toán công việc được giải nhờ AI. Điểm then chốt: có người khác dùng/đánh giá.",
+          "muc_mo_ta": {
+            "Xuất sắc": "Deliverable rõ ràng, đã được người khác dùng/review, impact đo được",
+            "Đạt": "Deliverable hoàn chỉnh, qua review, chất lượng đủ dùng",
+            "Cần cải thiện": "Có output nhưng chưa qua review thực sự hoặc impact mờ",
+            "Chưa đạt": "Chỉ có bài tập lý thuyết hoặc thử nghiệm chưa hoàn chỉnh"
+          }
+        },
+        {
+          "id": "OUT_iterate",
+          "ten": "Vòng lặp build → feedback → iterate",
+          "label": "A2",
+          "default_bat": true,
+          "default_trong_so": "35%",
+          "default_diem": 1.75,
+          "mo_ta": "Không dừng ở version đầu. Đã nhận feedback (mentor/đồng nghiệp/kết quả thực) và điều chỉnh output/approach. Tín hiệu learning velocity + builder mindset.",
+          "noi_duy_nhat_do": "hành vi iterate/nhận feedback trên deliverable",
+          "muc_mo_ta": {
+            "Xuất sắc": "Nhận feedback không defensive, iterate nhanh có định hướng, chủ động khi gặp ambiguity",
+            "Đạt": "Xử lý được feedback, iterate dù có thể chậm",
+            "Cần cải thiện": "Cần nhiều guidance, khó chịu với sự không rõ ràng",
+            "Chưa đạt": "Defensive với feedback, đứng im khi không rõ hướng"
+          }
+        },
+        {
+          "id": "OUT_risk_awareness",
+          "ten": "Hiểu giới hạn, rủi ro và phạm vi ứng dụng AI",
+          "label": "A3",
+          "default_bat": true,
+          "default_trong_so": "25%",
+          "default_diem": 1.25,
+          "mo_ta": "Biết khi nào AI là công cụ đúng và khi nào không. Mô tả được ≥1 rủi ro cụ thể của domain (hallucination, data sensitivity, bias, over-reliance) và có hành vi kiểm soát. Hiểu AI là infrastructure, không phải oracle.",
+          "muc_mo_ta": {
+            "Xuất sắc": "Nêu được rủi ro cụ thể theo domain, có hành vi kiểm soát thực tế",
+            "Đạt": "Biết AI có thể sai, có cross-check cơ bản, không over-rely",
+            "Cần cải thiện": "Hiểu lý thuyết nhưng chưa áp dụng vào hành vi",
+            "Chưa đạt": "Dùng AI output mà không verify, xem AI như oracle"
+          }
+        }
+      ],
+      "kiem_tra_tong": "0 + 40 + 35 + 25 = 100% (A0 default off)"
+    },
+    "B_Can_Do": {
+      "ten": "Can Do — Năng lực chuyên môn",
+      "cau_hoi": "Có đủ nền tảng kỹ thuật để build giải pháp bằng AI không?",
+      "diem_toi_da": 5.0,
+      "tieu_chi": [
+        {
+          "id": "CAN_ai_foundations",
+          "ten": "AI Foundations — hiểu đủ để build, không chỉ dùng",
+          "label": "B1",
+          "default_trong_so": "20%",
+          "default_diem": 1.0,
+          "mo_ta": "Nắm cơ chế LLM conceptual: context window, tokenization, temperature, hallucination, RAG, tool use. Kết nối khái niệm với quyết định thiết kế sản phẩm (context limit → UX flow, hallucination → trust layer). Tư duy 'AI là infrastructure có constraints', không phải 'AI là magic'.",
+          "muc_mo_ta": {
+            "Xuất sắc": "Giải thích conceptual chính xác, kết nối với quyết định product/workflow cụ thể",
+            "Đạt": "Hiểu đủ để làm việc với AI component, không ảo tưởng về khả năng AI",
+            "Cần cải thiện": "Biết khái niệm nhưng chưa kết nối với ứng dụng thực",
+            "Chưa đạt": "Không hiểu nền tảng, xem AI như magic"
+          }
+        },
+        {
+          "id": "CAN_prompt_tools",
+          "ten": "Prompt Engineering & AI tool proficiency",
+          "label": "B2",
+          "default_trong_so": "25%",
+          "default_diem": 1.25,
+          "mo_ta": "Viết prompt đạt output mong muốn trong 1–2 lần, iterate có định hướng. Áp dụng: context injection, format specification, few-shot, chain-of-thought, task decomposition. Dùng được ≥2–3 AI tools phù hợp use case. Đánh giá qua bài tập thực hành — không hỏi lý thuyết.",
+          "muc_mo_ta": {
+            "Xuất sắc": "Đạt output trong 1–2 lần, prompt có cấu trúc rõ, thành thạo 2+ tools",
+            "Đạt": "Đạt output sau 3–4 lần, iterate có định hướng",
+            "Cần cải thiện": "Prompt còn mơ hồ, chưa biết iterate hiệu quả",
+            "Chưa đạt": "Không biết cải thiện khi output sai"
+          }
+        },
+        {
+          "id": "CAN_product_thinking",
+          "ten": "Product Thinking — từ bài toán đến giải pháp",
+          "label": "B3",
+          "default_trong_so": "25%",
+          "default_diem": 1.25,
+          "mo_ta": "Vòng lặp: bài toán người dùng → solution hypothesis → build → measure. Khi gặp feature/workflow biết đặt câu hỏi đúng: giải cho ai, success metric là gì, edge case nào chưa xử lý, AI có thực sự cần không. Không nhảy vào solution trước khi hiểu bài toán. Tư duy feature-first = Chưa đạt.",
+          "bat_mac_dinh": true,
+          "tat_cho_nonit": true,
+          "muc_mo_ta": {
+            "Xuất sắc": "Đặt câu hỏi đúng hướng, không sa vào solution, biết khi nào không cần AI",
+            "Đạt": "Hiểu vòng lặp problem → solution → measure, tư duy có cấu trúc",
+            "Cần cải thiện": "Còn nhảy vào solution, chưa đặt câu hỏi về user/metric",
+            "Chưa đạt": "Tư duy feature-first, không có framework phân tích"
+          }
+        },
+        {
+          "id": "CAN_workflow_design",
+          "ten": "Workflow design — tích hợp AI vào quy trình thực",
+          "label": "B4",
+          "default_trong_so": "15%",
+          "default_diem": 0.75,
+          "mo_ta": "Ánh xạ công việc thực sang AI use case, thiết kế workflow có AI là một bước cụ thể — không phải thêm AI cho có. Mô tả rõ: input là gì, AI làm gì, output đi đâu, human review ở bước nào. Workflow chạy được mà không cần hỗ trợ kỹ thuật liên tục.",
+          "muc_mo_ta": {
+            "Xuất sắc": "Workflow rõ ràng, AI có vai trò cụ thể, có human review layer, không cần hỗ trợ kỹ thuật liên tục",
+            "Đạt": "Dùng AI trong vài bước nhất định, hiểu cách map use case",
+            "Cần cải thiện": "Dùng AI rời rạc, chưa thành workflow có cấu trúc",
+            "Chưa đạt": "Không biết thiết kế workflow với AI"
+          }
+        },
+        {
+          "id": "CAN_output_qc",
+          "ten": "Output quality control",
+          "label": "B5",
+          "default_trong_so": "15%",
+          "default_diem": 0.75,
+          "mo_ta": "Không accept AI output blindly. Verify thông tin quan trọng, nhận ra khi output sai/thiếu, iterate prompt để cải thiện. Hiểu 'human in the loop' phù hợp vai trò. Giữ thuần kiểm soát chất lượng output (kỹ thuật) — self-learning chuyển sang Will FIT.",
+          "muc_mo_ta": {
+            "Xuất sắc": "Verify output thường xuyên & có hệ thống, phát hiện lỗi tinh vi, iterate prompt hiệu quả",
+            "Đạt": "Cross-check thông tin quan trọng, nhận ra lỗi rõ ràng",
+            "Cần cải thiện": "Verify không nhất quán, chỉ bắt được lỗi lớn",
+            "Chưa đạt": "Accept AI output không verify"
+          }
+        }
+      ],
+      "kiem_tra_tong": "20 + 25 + 25 + 15 + 15 = 100%"
+    },
+    "C_Will_Do": {
+      "ten": "Will Do — Động lực & cam kết",
+      "cau_hoi": "Có thực sự muốn trở thành Product Builder và duy trì lâu dài không?",
+      "diem_toi_da": 5.0,
+      "tieu_chi": [
+        {
+          "id": "WILLDO_motivation",
+          "ten": "Motivation fit",
+          "label": "C1",
+          "default_trong_so": "30%",
+          "default_diem": 1.5,
+          "mo_ta": "Có lý do cụ thể và chân thực để tham gia — không vì trend AI hay vì công ty yêu cầu. Lý do gắn với bài toán thực muốn giải: trong công việc hằng ngày, domain YODY (Retail/Fashion/Supply Chain), hoặc con đường nghề nghiệp đang xây.",
+          "cau_hoi_goi_y": "Điều gì khiến bạn tham gia — không phải câu trả lời 'đẹp', mà là lý do thực sự? Bài toán nào bạn muốn giải?"
+        },
+        {
+          "id": "WILLDO_career",
+          "ten": "Career alignment",
+          "label": "C2",
+          "default_trong_so": "40%",
+          "default_diem": 2.0,
+          "mo_ta": "Định hướng tương thích với chương trình — PM, AI Product Builder, Technical Product Owner, hoặc vai trò cần kết hợp product thinking + AI fluency. Chủ động định vị nâng cao AI + product là career development, không phải gánh nặng. Cần thấy chủ đích, không cần chắc 100%.",
+          "cau_hoi_goi_y": "Chương trình này fit vào con đường nghề nghiệp của bạn thế nào? Bạn muốn trở thành ai trong 2–3 năm tới?"
+        },
+        {
+          "id": "WILLDO_stability",
+          "ten": "Stability signal — cam kết dài hạn",
+          "label": "C3",
+          "default_trong_so": "30%",
+          "default_diem": 1.5,
+          "mo_ta": "Tín hiệu duy trì cam kết và tiếp tục phát triển sau chương trình. Đo qua: khả năng cam kết full timeline + track record tự build/tự học trước đây (project cá nhân, side project). Stability = 'không bỏ giữa chừng khi gặp khó', không phải 'không đổi hướng'. Proactiveness đã chuyển sang Will FIT/Ownership.",
+          "cau_hoi_goi_y": "Bạn có thể cam kết theo hết timeline không? Kể về một thứ bạn theo đuổi đến cùng dù gặp khó khăn."
+        }
+      ],
+      "kiem_tra_tong": "30 + 40 + 30 = 100%"
+    }
+  },
+  "will_fit_tham_chieu": "../00_Core/will_fit.json",
+  "ladder_tham_chieu": "../00_Core/progression_ladder.md",
+  "bang_diem_tham_chieu": {
+    "Xuất sắc": "4.5 – 5.0 (90–100% tổng)",
+    "Đạt": "3.5 – 4.4 (70–89% tổng)",
+    "Cần cải thiện": "2.5 – 3.4 (50–69% tổng)",
+    "Chưa đạt": "< 2.5 (<50% tổng)"
+  },
+  "_archive_tham_chieu": "../_archive/README.md"
+}

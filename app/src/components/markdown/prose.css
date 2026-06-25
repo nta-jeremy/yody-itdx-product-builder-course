@@ -1,0 +1,265 @@
+/*
+ * YODY DS prose styles for rendered markdown.
+ *
+ * Token-only: every color references a CSS variable from
+ * colors_and_type.css / globals.css. NO raw hex anywhere — YODY DS rule.
+ * Be Vietnam Pro inherits from the app surface (body font var), no @font-face.
+ * No emoji.
+ *
+ * Scope: `.yody-prose` is the article wrapper (set in markdown.tsx).
+ * Element classes (.yody-h2, .yody-p, …) are applied per-element by the
+ * react-markdown `components` map, so these styles are explicit and do not
+ * rely on bare tag selectors inside the prose container (safer with
+ * Tailwind v4's preflight reset).
+ *
+ * Load: import this file once from the route/layout that renders markdown.
+ * Tailwind v4 (CSS-first) treats a plain CSS @import as a stylesheet layer;
+ * place it after globals.css imports. No `@layer` needed — these are scoped
+ * to `.yody-prose` descendants.
+ */
+
+.yody-prose {
+  font-family: var(--font-body);
+  color: var(--fg-2);
+  font-size: var(--text-body, 18px);
+  line-height: 1.7;
+  max-width: 72ch;
+}
+
+/* ─── Headings ──────────────────────────────────────────────────────── */
+
+.yody-prose .yody-h1 {
+  font: var(--type-h1);
+  letter-spacing: -0.022em;
+  color: var(--fg-1);
+  margin: 0 0 var(--s-6);
+}
+
+.yody-prose .yody-h2 {
+  font: var(--type-h2);
+  letter-spacing: -0.018em;
+  color: var(--fg-1);
+  margin: var(--s-12) 0 var(--s-4);
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--border-light);
+}
+
+.yody-prose .yody-h3 {
+  font: var(--type-h3);
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+  margin: var(--s-10) 0 var(--s-3);
+}
+
+.yody-prose .yody-h4 {
+  font: 600 16px/1.3 var(--font-brand);
+  color: var(--fg-1);
+  margin: var(--s-8) 0 var(--s-2);
+}
+
+.yody-prose .yody-h5,
+.yody-prose .yody-h6 {
+  font: 600 14px/1.3 var(--font-brand);
+  color: var(--fg-2);
+  margin: var(--s-6) 0 var(--s-2);
+}
+
+/* Anchor link wrapper from rehype-autolink-headings (behavior: "wrap"). */
+.yody-prose .yody-anchor {
+  color: inherit;
+  text-decoration: none;
+  margin-left: -0.5em;
+  padding-left: 0.5em;
+}
+.yody-prose .yody-anchor::before {
+  content: "#";
+  color: var(--fg-3);
+  opacity: 0;
+  margin-right: 0.25em;
+  transition: opacity var(--dur) var(--ease-out);
+}
+.yody-prose .yody-h2:hover .yody-anchor::before,
+.yody-prose .yody-h3:hover .yody-anchor::before {
+  opacity: 1;
+}
+
+/* ─── Paragraphs, inline ─────────────────────────────────────────────── */
+
+.yody-prose .yody-p {
+  margin: 0 0 var(--s-5);
+  color: var(--fg-2);
+}
+
+.yody-prose .yody-strong {
+  color: var(--fg-1);
+  font-weight: 600;
+}
+
+.yody-prose .yody-em {
+  font-style: italic;
+}
+
+.yody-prose .yody-link {
+  color: var(--iris-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--dur) var(--ease-out);
+}
+.yody-prose .yody-link:hover {
+  color: var(--brand);
+}
+
+/* ─── Lists ──────────────────────────────────────────────────────────── */
+
+.yody-prose .yody-ul,
+.yody-prose .yody-ol {
+  margin: 0 0 var(--s-5);
+  padding-left: var(--s-6);
+  color: var(--fg-2);
+}
+
+.yody-prose .yody-ul {
+  list-style: disc;
+}
+.yody-prose .yody-ol {
+  list-style: decimal;
+}
+
+.yody-prose .yody-li {
+  margin: var(--s-2) 0;
+}
+.yody-prose .yody-li::marker {
+  color: var(--fg-3);
+}
+
+/* GFM task list items — keep the checkbox aligned, no bullet. */
+.yody-prose .yody-li:has(> input[type="checkbox"]) {
+  list-style: none;
+  padding-left: calc(-1 * var(--s-2));
+  margin-left: calc(-1 * var(--s-4));
+}
+.yody-prose .yody-li > input[type="checkbox"] {
+  margin-right: var(--s-2);
+  accent-color: var(--iris);
+}
+
+/* ─── Blockquote ─────────────────────────────────────────────────────── */
+
+.yody-prose .yody-quote {
+  margin: var(--s-6) 0;
+  padding: var(--s-3) var(--s-5);
+  border-left: 3px solid var(--iris);
+  background: var(--bg-2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--fg-2);
+}
+.yody-prose .yody-quote .yody-p:last-child {
+  margin-bottom: 0;
+}
+
+/* ─── Code ───────────────────────────────────────────────────────────── */
+
+.yody-prose .yody-code-inline {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 2px var(--s-2);
+  background: var(--bg-muted);
+  color: var(--fg-1);
+  border-radius: var(--radius-xs);
+}
+
+.yody-prose .yody-pre {
+  margin: 0 0 var(--s-6);
+  padding: var(--s-4) var(--s-5);
+  background: var(--bg-ink);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+.yody-prose .yody-code-block {
+  font-family: var(--font-mono);
+  font-size: var(--type-mono, 13px);
+  line-height: 1.5;
+  /* Light text on the dark ink surface — `white` is a CSS keyword, not a
+     raw hex, keeping YODY DS compliance (no hex literals in components). */
+  color: white;
+  background: transparent;
+  white-space: pre;
+}
+
+/* ─── Tables (GFM) ───────────────────────────────────────────────────── */
+
+.yody-prose .yody-table-wrap {
+  margin: 0 0 var(--s-6);
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.yody-prose .yody-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-body-sm, 15px);
+  color: var(--fg-2);
+}
+
+.yody-prose .yody-table thead {
+  background: var(--bg-2);
+}
+
+.yody-prose .yody-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--fg-1);
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.yody-prose .yody-table td {
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+}
+
+.yody-prose .yody-table tr:last-child td {
+  border-bottom: none;
+}
+
+.yody-prose .yody-table tr:hover td {
+  background: var(--bg-2);
+}
+
+/* ─── Misc ────────────────────────────────────────────────────────────── */
+
+.yody-prose .yody-hr {
+  margin: var(--s-10) 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.yody-prose .yody-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  margin: var(--s-6) 0;
+  display: block;
+}
+
+/* ─── TOC aside (toc.tsx) ────────────────────────────────────────────── */
+
+.yody-toc {
+  font-family: var(--font-body);
+}
+.yody-toc .yody-toc-link {
+  transition: color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .yody-prose .yody-anchor::before,
+  .yody-toc .yody-toc-link {
+    transition: none;
+  }
+}

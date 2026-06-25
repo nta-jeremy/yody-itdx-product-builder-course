@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-06-24",
+    "note": "Mock gate evidence — NO PII. Prefix mock_ enforced. Business context giả (đổi/trả hàng, review áo, tra cứu chính sách) — không trích từ DB thật.",
+    "handshake": "gate.session_code → progression_ladder.md D.2 (I1.2/I3.3/I5.3); reviewer role → D.2 bảng gate reviewers."
+  },
+  "gate_submissions": [
+    {
+      "id": "mock_gate_01_l1_l2",
+      "learner_id": "mock_learner_01",
+      "gate": "L1_to_L2",
+      "session_code": "I1.2",
+      "submitted_at": "2026-07-15",
+      "submission_type": "feature_analysis",
+      "evidence": {
+        "deliverable_ref": "mock_evidence_l1_l2.md",
+        "summary": "Phân tích 1 feature AI cho bài toán đổi/trả hàng YODY — giải bài toán gì (gợi ý policy cho khách/nhân viên cửa hàng), giới hạn gì (hallucination risk trên policy detail, PII redaction khi input có thông tin khách).",
+        "quiz_score": "5/5",
+        "diligence_statement": "Phần nào do AI draft, phần nào verify tay, kênh xử lý input có PII."
+      },
+      "reviewer_id": "mock_mentor_01",
+      "reviewer_role": "Trainer chương trình",
+      "decision": "passed",
+      "reviewed_at": "2026-07-17",
+      "review_notes": "Phân tích rõ ràng, nêu đúng 2 rủi ro (hallucination, PII). Diligence statement đầy đủ. Gate L1→L2 passed."
+    },
+    {
+      "id": "mock_gate_02_l3_l4",
+      "learner_id": "mock_learner_02",
+      "gate": "L3_to_L4",
+      "session_code": "I3.3",
+      "submitted_at": "2026-09-20",
+      "submission_type": "workflow_demo",
+      "evidence": {
+        "deliverable_ref": "mock_evidence_l3_l4.md",
+        "workflow_summary": "Workflow AI tóm tắt 30 review áo (giả lập từ I1.1 lab) → insight report cho team CSKH: top 3 lỗi phổ biến + đề xuất ưu tiên.",
+        "user_evidence": "Team CSKH dùng report 1 tuần, tiết kiệm ~3h/tuần tổng hợp tay.",
+        "value_measured": "3h/tuần tiết kiệm, 3 lỗi top ưu tiên xác định, 2 đề xuất đã đưa vào backlog.",
+        "human_review_layer": "Mentor review insight trước share; không auto-send."
+      },
+      "reviewer_id": "mock_mentor_02",
+      "reviewer_role": "Mentor sản phẩm",
+      "decision": "passed",
+      "reviewed_at": "2026-09-22",
+      "review_notes": "Workflow hoàn chỉnh có human review, bằng chứng người dùng rõ (CSKH team dùng 1 tuần), giá trị đo được (3h/tuần). Product Thinking đầy đủ. Gate L3→L4 passed."
+    },
+    {
+      "id": "mock_gate_03_l5_graduation",
+      "learner_id": "mock_learner_03",
+      "gate": "L5_graduation",
+      "session_code": "I5.3",
+      "submitted_at": "2026-12-10",
+      "submission_type": "capstone_defense",
+      "evidence": {
+        "deliverable_ref": "mock_evidence_l5_graduation.md",
+        "product_summary": "Trợ lý tra cứu chính sách đổi/trả cho nhân viên cửa hàng — RAG trên policy docs, có trích nguồn, guardrail (prompt injection/redaction), eval set 15 ca (cần mở rộng ≥20).",
+        "user_evidence": "5 cửa hàng pilot dùng 2 tuần, ~120 query, feedback tích cực (tiết kiệm thời gian tra policy, giảm sai policy).",
+        "architecture_doc_ref": "mock_arch_doc.md",
+        "risk_doc_ref": "mock_risk_doc.md",
+        "monitoring_plan": "Latency, hallucination rate sampling, fallback to human khi confidence thấp."
+      },
+      "reviewer_id": "mock_council_01",
+      "reviewer_role": "Hội đồng Product Builder",
+      "decision": "passed_with_conditions",
+      "reviewed_at": "2026-12-12",
+      "review_notes": "Sản phẩm ship thật (5 cửa hàng pilot), tài liệu kiến trúc + rủi ro đầy đủ, guardrail + redaction có. Condition: bổ sung eval set ≥20 ca + monitoring dashboard trước 30/01/2027."
+    }
+  ]
+}
