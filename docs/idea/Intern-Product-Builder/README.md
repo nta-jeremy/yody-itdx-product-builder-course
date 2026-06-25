@@ -28,4 +28,4 @@ Rubric đầy đủ = bộ gốc `../00_Core/competency_dictionary.json` + overr
 
 ---
 
-*Cập nhật: 2026-06-20 · v2.0*
+*Cập nhật: 2026-06-24 · v2.0 (version/date sync `../_version.md`)*

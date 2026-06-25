@@ -1,0 +1,42 @@
+/**
+ * Print stylesheet — `/sessions/[code]/print` route.
+ *
+ * Loads ONLY on this route. Hides screen chrome (handled by PrintLayout's
+ * `print:hidden` on the toolbar) and applies page-break hygiene for the
+ * markdown content. The `@media print` rule scopes physical pagination.
+ */
+
+@media print {
+  /* Each top-level section breaks cleanly, but inner blocks stay together. */
+  .print-content section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Avoid breaking right after a heading. */
+  .print-content h1,
+  .print-content h2,
+  .print-content h3,
+  .print-content h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Tables and figures try not to split across pages. */
+  .print-content table,
+  .print-content figure,
+  .print-content .yody-table-wrap {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Hide anchor links in print. */
+  .print-content .yody-anchor {
+    display: none !important;
+  }
+
+  /* Use the YODY paper token for the print background. */
+  html, body {
+    background: var(--bg) !important;
+  }
+}

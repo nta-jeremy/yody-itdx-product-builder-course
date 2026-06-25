@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-06-24",
+    "note": "Mock badges — metadata only, no PII. Prefix mock_ enforced.",
+    "handshake": "criteria_ref → 00_Core/progression_ladder.md anchors (B.3, B.4.c, B.5.c, B.6.c, B.8.c). color_token ∈ {mint, iris, gold} — YODY DS tokens (decision #20: L1 mint · L2-L4 iris · L5 gold).",
+    "award_rule": "Badge cấp khi QUẢ GATE hành vi (không phải khi đậu điểm) — xem progression_ladder.md B.1 + D.1."
+  },
+  "badges": [
+    {
+      "id": "mock_badge_L1",
+      "name": "L1 Aware",
+      "level": "L1",
+      "color_token": "mint",
+      "criteria_ref": "00_Core/progression_ladder.md#b3-l1-aware--exit-criteria",
+      "gate": null,
+      "awarded_when": "Hoàn I1.1 + Diligence statement (không có gate riêng — L1 là nhận thức, badge cấp khi nhận thức đúng kỳ vọng)."
+    },
+    {
+      "id": "mock_badge_L2",
+      "name": "L2 Operator",
+      "level": "L2",
+      "color_token": "iris",
+      "criteria_ref": "00_Core/progression_ladder.md#b4c-gate-l1l2--exit-criteria",
+      "gate": "L1_to_L2",
+      "awarded_when": "Qua Gate L1→L2 (I1.2 deliverable + Trainer duyệt)."
+    },
+    {
+      "id": "mock_badge_L3",
+      "name": "L3 Builder",
+      "level": "L3",
+      "color_token": "iris",
+      "criteria_ref": "00_Core/progression_ladder.md#b5c-gate-l2l3--exit-criteria",
+      "gate": "L2_to_L3",
+      "awarded_when": "Qua Gate L2→L3 (I2.3 deliverable + Trainer/Team lead duyệt)."
+    },
+    {
+      "id": "mock_badge_L4",
+      "name": "L4 Integrator",
+      "level": "L4",
+      "color_token": "iris",
+      "criteria_ref": "00_Core/progression_ladder.md#b6c-gate-l3l4--exit-criteria",
+      "gate": "L3_to_L4",
+      "awarded_when": "Qua Gate L3→L4 (I3.3 workflow demo + bằng chứng user + Mentor sản phẩm duyệt)."
+    },
+    {
+      "id": "mock_badge_L5",
+      "name": "L5 Architect",
+      "level": "L5",
+      "color_token": "gold",
+      "criteria_ref": "00_Core/progression_ladder.md#b8c-gate-tốt-nghiệp-l5--exit-criteria",
+      "gate": "L5_graduation",
+      "is_graduation": true,
+      "awarded_when": "Qua Gate tốt nghiệp L5 (I5.3 capstone defense + Hội đồng Product Builder duyệt)."
+    }
+  ]
+}

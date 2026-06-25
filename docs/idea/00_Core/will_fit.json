@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-06-24",
+    "author": "Jeremy Nguyen / YODY",
+    "loai_tai_lieu": "canonical_will_fit",
+    "ghi_chu": "Dùng chung cho cả 2 chương trình, KHÔNG override. Đánh giá hành vi, không phụ thuộc cấp bậc — intern và nhân viên 5 năm đều có thể đạt Xuất sắc.",
+    "nguon": "02_Khung-Nang-Luc-Danh-Gia.md §I.D"
+  },
+  "ten_bo": "Will FIT — Giá trị cốt lõi YODY",
+  "tong_diem": 5.0,
+  "nguyen_tac": "Mỗi trait đo ở đúng một nơi: Growth Mindset (gồm self-learning) và Ownership (gồm proactiveness) — chỉ đo ở đây. Will Do/Stability giữ thuần cam kết timeline; Outcome giữ thuần iterate trên deliverable.",
+  "gia_tri": [
+    {
+      "id": "FIT_customer_centric",
+      "ten": "Customer Centric",
+      "label": "D1",
+      "trong_so": "25%",
+      "diem_toi_da": 1.25,
+      "mo_ta": "Trong mọi quyết định, luôn hỏi 'Điều này ảnh hưởng đến khách hàng thế nào?' — dù không trực tiếp làm việc với khách hàng. Hiểu kết quả cuối cùng luôn chạm đến người mua/người dùng.",
+      "vi_tri_do": "Nơi duy nhất đo customer centricity hành vi",
+      "cau_hoi": "Kể về lần bạn thay đổi cách làm vì nghĩ đến người dùng/khách hàng — dù không ai yêu cầu.",
+      "di_hien": [
+        "Tự hỏi về impact phía khách hàng trước khi thay đổi; đặt câu hỏi về trải nghiệm người dùng; ưu tiên giải pháp tốt cho khách hàng dù phức tạp hơn cho bản thân."
+      ],
+      "di_chua": [
+        "Chỉ tối ưu quy trình nội bộ, không quan tâm downstream; xem khách hàng là người ngoài."
+      ]
+    },
+    {
+      "id": "FIT_ownership",
+      "ten": "Ownership & Autonomy (gồm proactiveness)",
+      "label": "D2",
+      "trong_so": "15%",
+      "diem_toi_da": 0.75,
+      "mo_ta": "Nhận trách nhiệm về kết quả, không chỉ hành động. Gặp vấn đề, phản xạ đầu tiên là 'tôi có thể làm gì?' thay vì 'lỗi của ai?'. Chủ động raise vấn đề + đề xuất giải pháp thay vì chờ giao. Hoạt động hiệu quả cả khi thiếu hướng dẫn chi tiết.",
+      "vi_tri_do": "Nơi duy nhất đo proactiveness/'không chờ giao việc'",
+      "cau_hoi": "Kể về lần bạn tự xử lý một vấn đề mà không ai yêu cầu — kết quả ra sao?",
+      "di_hien": [
+        "Tự raise vấn đề & đề xuất giải pháp; nhận lỗi và rút kinh nghiệm; tìm cách làm tiếp khi ambiguity."
+      ],
+      "di_chua": [
+        "Làm đúng task nhưng không quan tâm kết quả thực; cần nhắc/check-in liên tục mới tiến."
+      ]
+    },
+    {
+      "id": "FIT_integrity",
+      "ten": "Integrity",
+      "label": "D3",
+      "trong_so": "20%",
+      "diem_toi_da": 1.0,
+      "mo_ta": "Nhất quán giữa lời nói và hành động, kể cả khi không ai nhìn. Nói thật khi có vấn đề thay vì che giấu. Không cam kết điều biết mình không làm được. Nền tảng để xây trust.",
+      "cau_hoi": "Kể về lần bạn phải nói điều không dễ nghe với người có thẩm quyền. Bạn xử lý thế nào?",
+      "di_hien": [
+        "Báo sớm khi có rủi ro trễ/chất lượng; nói thẳng khi không đồng ý; giữ cam kết nhỏ nhất (đúng giờ, đúng format, đúng scope)."
+      ],
+      "di_chua": [
+        "Nói điều người khác muốn nghe thay vì sự thật; che giấu vấn đề đến khi không giấu được."
+      ]
+    },
+    {
+      "id": "FIT_growth_mindset",
+      "ten": "Growth Mindset (gồm self-learning)",
+      "label": "D4",
+      "trong_so": "20%",
+      "diem_toi_da": 1.0,
+      "mo_ta": "Xem năng lực là thứ phát triển được. Nhận feedback như dữ liệu hữu ích, không phải công kích. Chủ động tự học ngoài vùng quen, gồm tự đọc tài liệu kỹ thuật/tool/concept mới không cần tay dắt. Ở YODY thay đổi nhanh, đây là trait quyết định ai bắt kịp.",
+      "vi_tri_do": "Nơi duy nhất đo self-learning",
+      "cau_hoi": "Kể về thứ bạn tự học trong 6 tháng gần đây — không phải vì công việc yêu cầu. Bạn học và áp dụng thế nào?",
+      "di_hien": [
+        "Tự học tool/kỹ năng mới không cần yêu cầu; tự đọc API docs/changelog và giải thích lại; nhận feedback không defensive; thoải mái nói 'tôi không biết'."
+      ],
+      "di_chua": [
+        "Tránh task mới vì sợ sai/bị đánh giá; phản ứng defensive với feedback."
+      ]
+    },
+    {
+      "id": "FIT_good_relationship",
+      "ten": "Good Relationship",
+      "label": "D5",
+      "trong_so": "20%",
+      "diem_toi_da": 1.0,
+      "mo_ta": "Xây quan hệ làm việc tốt với đồng nghiệp ở các team khác — không chỉ trong nhóm mình. Collaborate để đạt kết quả chung, không chỉ bảo vệ lợi ích team mình. Ở YODY (cross-functional cao), khả năng này tác động trực tiếp tới tốc độ + chất lượng.",
+      "cau_hoi": "Kể về lần bạn phải làm việc với người team khác để giải một bài toán. Điều gì khó nhất và bạn xử lý thế nào?",
+      "di_hien": [
+        "Chủ động kết nối với team khác khi có bài toán liên quan; chia sẻ thông tin hữu ích không cần được hỏi; giải quyết conflict tập trung vào kết quả chung."
+      ],
+      "di_chua": [
+        "Chỉ communicate khi cần thiết; cạnh tranh thay vì collaborate khi lợi ích team xung đột."
+      ]
+    }
+  ],
+  "kiem_tra_tong": "25 + 15 + 20 + 20 + 20 = 100%",
+  "bang_diem_tham_chieu": "Xuất sắc 4.5–5.0 · Đạt 3.5–4.4 · Cần cải thiện 2.5–3.4 · Chưa đạt <2.5"
+}

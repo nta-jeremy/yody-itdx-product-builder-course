@@ -1,0 +1,2872 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="00c9794b-0f20-4f8d-8599-54e5fdaa78b3"></script>
+
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>/* ─────────────────────────────────────────────────────────
+   YODY Design System — Color & Type Tokens
+   Canonical reference: DESIGN.md (this project)
+   ─────────────────────────────────────────────────────────
+   Architecture (v3):
+     · Foundation tokens (brand, accent, status, font families,
+       motion, a11y) live in :root — universal across surfaces.
+     · Surface scale (type-size, gutter, container-max,
+       motion-budget, accent-freq) resolves through one of:
+         [data-surface="portal"]     ← default if omitted
+         [data-surface="marketing"]
+         [data-surface="app"]
+         [data-surface="store"]      ← scoped for v3.1
+     · Set the attribute on <body> or any container.
+
+   Color discipline:
+     · Iris  → AI/tech default · 90% of accent surface
+     · Gold  → climax · 1 moment / page max · achievement
+     · Mint  → growth · LIVE · prosperity
+     · Rose  → human · warm · ESG / people
+     · Brand → primary anchor · headlines · navy ink
+     · Crimson (--gap) → ALERT ONLY · not for governance
+
+   Type discipline (4 families — canonical, no others):
+     · Be Vietnam Pro → body default · brand chrome · VN-first (self-hosted)
+     · Montserrat     → impact display · headlines · numerals
+     · Playfair Italic → Hero ONLY (1 art moment / portal)
+     · JetBrains Mono → tags · code · technical metadata
+     · Motion tokens (semantic --motion-* aliases) are aliased
+       below so legacy preview files keep working.
+   ───────────────────────────────────────────────────────── */
+
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("0a00c336-8c62-4e1b-b607-28c7c1101868") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("10c5d59c-00f3-4dc5-91d7-a4e5cf90f62e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("3874532a-ce7b-4898-bf5c-73cdb6f7f44b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("be7c48a0-2980-4761-a384-85046b1ee1b5") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("184fb891-6e1b-4595-a024-be4409771e94") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("aaedb462-02e6-4824-8820-e2dc9631b5d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("0a00c336-8c62-4e1b-b607-28c7c1101868") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("10c5d59c-00f3-4dc5-91d7-a4e5cf90f62e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("3874532a-ce7b-4898-bf5c-73cdb6f7f44b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("be7c48a0-2980-4761-a384-85046b1ee1b5") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("184fb891-6e1b-4595-a024-be4409771e94") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("aaedb462-02e6-4824-8820-e2dc9631b5d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("0a00c336-8c62-4e1b-b607-28c7c1101868") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("10c5d59c-00f3-4dc5-91d7-a4e5cf90f62e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("3874532a-ce7b-4898-bf5c-73cdb6f7f44b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("be7c48a0-2980-4761-a384-85046b1ee1b5") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("184fb891-6e1b-4595-a024-be4409771e94") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("aaedb462-02e6-4824-8820-e2dc9631b5d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("0a00c336-8c62-4e1b-b607-28c7c1101868") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("10c5d59c-00f3-4dc5-91d7-a4e5cf90f62e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("3874532a-ce7b-4898-bf5c-73cdb6f7f44b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("be7c48a0-2980-4761-a384-85046b1ee1b5") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("184fb891-6e1b-4595-a024-be4409771e94") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("aaedb462-02e6-4824-8820-e2dc9631b5d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+/* ── Be Vietnam Pro — brand font (self-hosted, full weight range) ── */
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 100; font-style: normal; font-display: swap; src: url("c8e96594-809e-4f2b-a072-d64f26a4d4f5") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 100; font-style: italic; font-display: swap; src: url("d6e865b0-18a0-4ea7-86c6-262113efd5d0") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 200; font-style: normal; font-display: swap; src: url("072c3d66-21a9-4e8a-8d27-99087d06978b") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 200; font-style: italic; font-display: swap; src: url("04457779-ef68-4978-9f63-a98f594a631e") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 300; font-style: normal; font-display: swap; src: url("95adfcc3-5718-4bf8-bffe-f7ef1cafa5ae") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 300; font-style: italic; font-display: swap; src: url("29854bc5-9af6-464b-8b83-18b2ab4abc90") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 400; font-style: normal; font-display: swap; src: url("a6e691d2-e89c-40f8-a8d1-6f8c8c923683") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 400; font-style: italic; font-display: swap; src: url("9e337e85-3038-4eee-a16c-176b703bf2d5") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 500; font-style: normal; font-display: swap; src: url("0901e04a-d4c8-4556-af0d-a40507eb66a9") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 500; font-style: italic; font-display: swap; src: url("bd383b0b-0f86-425e-a04c-3f82faf25d76") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 600; font-style: normal; font-display: swap; src: url("7b34dd3f-89ff-420c-9aae-41597c135f3d") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 600; font-style: italic; font-display: swap; src: url("ab3d20d1-3828-49c8-a3e7-ca90544efc7c") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 700; font-style: normal; font-display: swap; src: url("dcf292f7-a15d-4169-923b-12b924b89906") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 700; font-style: italic; font-display: swap; src: url("bc006e5f-e32a-42a0-8d73-b0e5b7600798") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 800; font-style: normal; font-display: swap; src: url("2c44d2fc-e3de-4f56-8151-b5cd06293256") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 800; font-style: italic; font-display: swap; src: url("a81973c1-bfd8-46f4-8cb7-096284fd2e87") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 900; font-style: normal; font-display: swap; src: url("e2e4c0c4-a780-4ebd-9265-31bad0a52ba4") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 900; font-style: italic; font-display: swap; src: url("e1224429-5126-474b-9e69-2314d303d1f6") format('truetype'); }
+
+:root {
+  /* ═══ BRAND (anchor) ═══ */
+  --brand:        #2a2b86;   /* YODY Navy — primary */
+  --brand-light:  #4a4bc8;   /* gradient pair */
+  --brand-deep:   #16175a;   /* deep variant for big-num gradient */
+  --brand-tint:   #eeeefb;
+  --brand-gold:   #fcaf16;   /* alias */
+
+  /* ═══ ACCENTS · semantic ═══ */
+  --iris:        #7c6cf5;   /* AI/tech · default accent */
+  --iris-deep:   #4a4bc8;
+  --iris-tint:   #eeeefb;
+
+  --gold:        #fcaf16;   /* climax · 1/page */
+  --gold-deep:   #b07a00;
+  --gold-tint:   #fff4d8;
+
+  --mint:        #10b981;   /* growth · live */
+  --mint-deep:   #047857;
+  --mint-tint:   #d1fae5;
+
+  --rose:        #f472b6;   /* human · warm */
+  --rose-deep:   #be185d;
+  --rose-tint:   #fde7f1;
+
+  /* Legacy aliases — keep compatibility with older previews */
+  --accent:       var(--iris);
+  --accent-tint:  var(--iris-tint);
+
+  /* ═══ STATUS ═══ */
+  --live:    var(--mint);     --live-bg:  rgba(16,185,129,.10);
+  --build:   var(--iris);     --build-bg: rgba(124,108,245,.10);
+  --gap:     #ef4444;         --gap-bg:   rgba(239,68,68,.08);     /* ALERT only */
+  --plan:    #f59e0b;         --plan-bg:  rgba(245,158,11,.10);
+  --plan-deep: #7a5400;
+
+  /* ═══ TEXT ═══ */
+  --fg-1: #1a1b3a;   /* primary ink — navy-tinted, NOT pure black */
+  --fg-2: #5a5c7e;   /* secondary — body, descriptions */
+  --fg-3: #6b6d8c;   /* tertiary — labels, metadata (lifted from 9a9cb8 for projector legibility) */
+  --fg-brand: var(--brand);
+  --fg-on-brand: #ffffff;
+
+  /* Legacy aliases */
+  --text-1: var(--fg-1);
+  --text-2: var(--fg-2);
+  --text-3: var(--fg-3);
+
+  /* ═══ SURFACES ═══ */
+  --bg:        #fcfcff;   /* Paper */
+  --bg-2:      #f4f5fb;   /* Mist — section alt bands */
+  --bg-muted:  #ecedf8;   /* Lavender — chip / hover */
+  --bg-ink:    #0e0f24;   /* Dark surface — hero / footer */
+  --bg-warm:   #fbfaf6;   /* Hero warm wash */
+
+  --border:        #e6e7f2;
+  --border-light:  #f0f1f8;
+  --border-hover:  #d0d2e8;
+
+  /* ═══ SHADOWS (iris-tinted, weightless) ═══ */
+  --shadow-sm: 0 1px 2px  rgba(74,75,200,0.05);
+  --shadow:    0 2px 6px  rgba(74,75,200,0.06);
+  --shadow-md: 0 4px 16px rgba(74,75,200,0.08);
+  --shadow-lg: 0 12px 32px rgba(74,75,200,0.12);
+  --shadow-xl: 0 16px 40px rgba(74,75,200,0.14);
+  --shadow-gold: 0 12px 32px rgba(252,175,22,0.32);
+  --shadow-brand: 0 12px 32px rgba(42,43,134,0.32);
+
+  /* ═══ RADIUS ═══ */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius:      12px;
+  --radius-md:   14px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-pill: 9999px;
+
+  /* ═══ SPACING (4px base) ═══ */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 20px; --s-6: 24px; --s-8: 32px; --s-10: 40px;
+  --s-12: 48px; --s-14: 56px; --s-16: 64px; --s-18: 72px;
+  --s-20: 80px; --s-24: 96px; --s-28: 112px;
+
+  /* ═══ TYPOGRAPHY ═══ */
+  --font-body:    'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;
+  --font-ui:      'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;  /* alias */
+  --font-sans:    'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;  /* alias */
+  --font-brand:   'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;
+  --font-impact:  'Montserrat', 'Be Vietnam Pro', sans-serif;        /* impact display */
+  --font-display: 'Montserrat', 'Be Vietnam Pro', sans-serif;        /* alias */
+  --font-serif:   'Playfair Display', Georgia, serif;                /* Hero ONLY */
+  --font-numeric: 'Montserrat', 'Be Vietnam Pro', sans-serif;        /* tabular */
+  --font-mono:    'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+
+  /* Type scale — blog-portal sizing · generous, lean-back readable */
+  --type-hero:        800 clamp(80px, 8.4vw, 120px)/0.94 var(--font-impact);
+  --type-display:     800 clamp(64px, 6.4vw, 96px)/0.98 var(--font-impact);
+  --type-h1:          800 clamp(48px, 5.2vw, 64px)/1.08 var(--font-impact);
+  --type-h2:          700 clamp(32px, 3.4vw, 40px)/1.18 var(--font-impact);
+  --type-h3:          700 26px/1.3 var(--font-impact);
+  --type-card-title:  700 20px/1.35 var(--font-brand);
+  --type-kpi:         800 clamp(48px, 4.6vw, 64px)/0.9 var(--font-numeric);
+
+  /* Numeral rhythm — Montserrat italic 800 (NOT Playfair) — geometric not ornamental */
+  --type-roman:       italic 800 clamp(64px, 6.4vw, 96px)/0.85 var(--font-impact);
+
+  /* Hero artistic accent — Playfair italic — RESERVE FOR HERO ONLY */
+  --type-art-italic:  italic 800 clamp(80px, 8.4vw, 120px)/0.94 var(--font-serif);
+
+  --type-body-lg:     400 24px/1.65 var(--font-body);   /* section lede */
+  --type-body:        400 18px/1.7  var(--font-body);   /* default body — blog readable */
+  --type-body-sm:     400 16px/1.6  var(--font-body);
+  --type-label:       500 14px/1.4  var(--font-body);
+  --type-caption:     400 12px/1.5  var(--font-body);
+
+  --type-mono:        500 12px/1.5  var(--font-mono);
+  --type-tag:         700 12px/1    var(--font-mono);
+  --type-eyebrow:     700 12px/1    var(--font-mono);  /* 0.32em tracking — set inline */
+
+  /* ═══ MOTION ═══ */
+  --ease-out:        cubic-bezier(0.4, 0, 0.2, 1);          /* @kind other */
+  --ease-overshoot:  cubic-bezier(0.34, 1.56, 0.64, 1);     /* @kind other */
+  --dur-fast: 150ms; /* @kind other */ --dur: 200ms; /* @kind other */ --dur-slow: 300ms; /* @kind other */
+
+  /* ═══ A11Y FLOOR (v3 · universal) ═══ */
+  --focus-ring:        0 0 0 3px rgba(124,108,245,0.40);
+  --focus-ring-gold:   0 0 0 3px rgba(252,175,22,0.45);
+  --focus-ring-gap:    0 0 0 3px rgba(239,68,68,0.40);
+  --tap-min:           44px;     /* override per-surface: 56px store, 72px primary CTA */
+
+  /* MOTION semantic aliases (compat for legacy previews using motion.css names) */
+  --motion-enter:   250ms cubic-bezier(0.34, 1.56, 0.64, 1);   /* @kind other */
+  --motion-exit:    180ms cubic-bezier(0.4, 0, 0.2, 1);        /* @kind other */
+  --motion-hover:   150ms cubic-bezier(0.4, 0, 0.2, 1);        /* @kind other */
+  --motion-press:   80ms  ease-out;                            /* @kind other */
+  --motion-page:    300ms cubic-bezier(0.4, 0, 0.2, 1);        /* @kind other */
+  --motion-count:   600ms cubic-bezier(0.2, 0.6, 0.2, 1);      /* @kind other */
+
+  /* ═══ SURFACE DEFAULTS — portal scale (v3 adapter contract) ═══ */
+  /* These are PORTAL defaults so existing previews keep working without `data-surface`.
+     The marketing / app / store adapter blocks below override only what differs. */
+  --gutter:        20px;
+  --gutter-tight:  12px;
+  --gutter-wide:   32px;
+  --section-pad:   clamp(48px, 8vw, 96px) clamp(24px, 4vw, 56px);
+  --container-max: 1280px;
+  --motion-budget: ambient;       /* @kind other */ /* 1 ambient/page · respect reduce-motion */
+  --accent-freq:   narrative;     /* @kind other */ /* 1 gold climax · ≤2 accent / section */
+  --shadow-rest:   var(--shadow-sm);
+
+  /* Button scale (portal default) — see foundation/buttons.css */
+  --btn-h-sm:   40px;  --btn-px-sm: 18px; --btn-fs-sm: 15px;
+  --btn-h:      52px;  --btn-px:    28px; --btn-fs:    17px;
+  --btn-h-lg:   64px;  --btn-px-lg: 36px; --btn-fs-lg: 19px;
+  --btn-radius: var(--radius-pill);
+
+  /* Form scale (portal default) — see foundation/forms.css */
+  --input-h-sm:    36px;
+  --input-h:       44px;
+  --input-h-lg:    52px;
+  --input-fs:      16px;
+  --input-px:      14px;
+  --input-radius:  10px;
+  --check-size:    18px;
+  --radio-size:    18px;
+  --toggle-w:      40px;
+  --toggle-h:      22px;
+  --toggle-pad:    3px;
+
+  /* Admin-grade type roles (portal defaults; app overrides for density) */
+  --type-h4:        600 18px/1.3   var(--font-brand);
+  --type-label-sm:  600 11px/1     var(--font-body);
+  --type-num-lg:    700 36px/1.05  var(--font-numeric);
+  --type-num:       600 22px/1.1   var(--font-numeric);
+  --type-num-sm:    600 15px/1.2   var(--font-numeric);
+
+  /* ═══ BIG NUMERAL GRADIENT (per-tone, for hero KPIs) ═══ */
+  --grad-brand: linear-gradient(180deg, #2a2b86 0%, #16175a 100%);   /* @kind color */
+  --grad-iris:  linear-gradient(180deg, #7c6cf5 0%, #4a4bc8 100%);   /* @kind color */
+  --grad-gold:  linear-gradient(180deg, #fcaf16 0%, #b07a00 100%);   /* @kind color */
+  --grad-mint:  linear-gradient(180deg, #10b981 0%, #047857 100%);   /* @kind color */
+  --grad-rose:  linear-gradient(180deg, #f472b6 0%, #be185d 100%);   /* @kind color */
+}
+
+/* ══════════════════════════════════════════════════════
+   SURFACE ADAPTERS — v3 multi-surface architecture
+   ---------------------------------------------------
+   Foundation tokens above are universal.
+   Each adapter resolves SCALE for its archetype:
+     · portal     — default (uses :root above; executive briefing / report)
+     · marketing  — landing pages, public web
+     · app        — internal admin (back-office, dashboards, internal mobile)
+     · store      — POS / signage / fitting-room tablet (build out at v3.1)
+   Activate by setting `data-surface="..."` on <body> or any container.
+   ═════════════════════════════════════════════════════ */
+
+/* ─── PORTAL — default (already in :root, declared here for clarity) ─── */
+[data-surface="portal"] {
+  --motion-budget: ambient;   /* @kind other */
+  --accent-freq:   narrative; /* @kind other */
+  --container-max: 1280px;
+  --section-pad:   clamp(48px, 8vw, 96px) clamp(24px, 4vw, 56px);
+
+  /* Button scale */
+  --btn-h-sm:  40px;  --btn-px-sm: 18px; --btn-fs-sm: 14px;
+  --btn-h:     52px;  --btn-px:    28px; --btn-fs:    16px;
+  --btn-h-lg:  64px;  --btn-px-lg: 36px; --btn-fs-lg: 18px;
+  --btn-radius: var(--radius-pill);
+}
+
+/* ─── MARKETING — landing pages, public web ─── */
+[data-surface="marketing"] {
+  /* Type — hero scales up, body slightly lighter LH */
+  --type-hero:     800 clamp(72px, 8vw,   120px)/0.94 var(--font-impact);
+  --type-display:  800 clamp(56px, 5.6vw, 88px)/0.98  var(--font-impact);
+  --type-h1:       800 clamp(40px, 4.4vw, 56px)/1.08  var(--font-impact);
+  --type-h2:       700 clamp(28px, 3vw,   36px)/1.18  var(--font-impact);
+  --type-body-lg:  400 22px/1.55 var(--font-body);
+  --type-body:     400 18px/1.6  var(--font-body);
+  --type-body-sm:  400 16px/1.55 var(--font-body);
+
+  /* Layout */
+  --gutter:        24px;
+  --gutter-wide:   40px;
+  --section-pad:   clamp(72px, 10vw, 160px) clamp(24px, 6vw, 80px);
+  --container-max: 1200px;
+
+  /* Discipline */
+  --motion-budget: rich;            /* @kind other */ /* scroll-reveal · parallax OK */
+  --accent-freq:   bold;            /* @kind other */ /* full-bleed brand sections OK */
+  --shadow-rest:   var(--shadow);
+
+  /* Button scale */
+  --btn-h-sm:  44px;  --btn-px-sm: 20px; --btn-fs-sm: 14px;
+  --btn-h:     52px;  --btn-px:    28px; --btn-fs:    16px;
+  --btn-h-lg:  64px;  --btn-px-lg: 36px; --btn-fs-lg: 18px;
+  --btn-radius: var(--radius-pill);
+
+  /* Form scale */
+  --input-h-sm:    40px;
+  --input-h:       48px;
+  --input-h-lg:    56px;
+  --input-fs:      16px;
+  --input-px:      16px;
+  --input-radius:  12px;
+  --check-size:    20px;
+  --radio-size:    20px;
+  --toggle-w:      44px;
+  --toggle-h:      24px;
+  --toggle-pad:    3px;
+}
+
+/* ─── APP — internal admin, PLM, OMS, vendor portal, internal mobile ─── */
+[data-surface="app"] {
+  /* Type — Linear/Notion grade · Be Vietnam Pro pairing (no Montserrat in admin chrome) */
+  --type-display:  700 28px/1.15 var(--font-brand);    /* page title — rare, breadcrumbs preferred */
+  --type-h1:       700 22px/1.2  var(--font-brand);    /* section title */
+  --type-h2:       700 18px/1.25 var(--font-brand);    /* sub-section */
+  --type-h3:       600 16px/1.3  var(--font-brand);    /* card title */
+  --type-h4:       600 14px/1.3  var(--font-brand);    /* small card / list group */
+
+  --type-body-lg:  400 16px/1.55 var(--font-body);     /* lede · long-form readme */
+  --type-body:     400 14px/1.5  var(--font-body);     /* default body */
+  --type-body-sm:  400 12px/1.45 var(--font-body);     /* secondary text */
+
+  --type-label:    500 12px/1.3  var(--font-body);     /* form label · table header */
+  --type-label-sm: 600 10px/1    var(--font-body);     /* tiny pill / chip label */
+  --type-caption:  400 12px/1.4  var(--font-body);     /* metadata, timestamps */
+
+  --type-eyebrow:  700 10px/1    var(--font-mono);     /* uppercase mono eyebrow */
+  --type-mono:     500 12px/1.45 var(--font-mono);     /* inline code, IDs */
+  --type-mono-sm:  500 10px/1.4  var(--font-mono);     /* tiny code */
+  --type-tag:      600 10px/1    var(--font-mono);     /* status pill */
+
+  /* Tabular KPI numerals — Be Vietnam Pro 700 with tnum (NOT Montserrat) */
+  --type-num-lg:   700 28px/1.05 var(--font-brand);    /* hero KPI on dashboard */
+  --type-num:      600 16px/1.1  var(--font-brand);    /* table number, value */
+  --type-num-sm:   600 14px/1.2 var(--font-brand);   /* small KPI · table cell */
+
+  /* Form scale — dense, table-aligned (matches button h) */
+  --input-h-sm:    28px;
+  --input-h:       32px;
+  --input-h-lg:    40px;
+  --input-fs:      14px;
+  --input-px:      10px;
+  --input-radius:  6px;
+  --check-size:    14px;
+  --radio-size:    14px;
+  --toggle-w:      28px;
+  --toggle-h:      16px;
+  --toggle-pad:    2px;
+
+  /* Layout */
+  --gutter-tight:  8px;
+  --gutter:        12px;
+  --gutter-wide:   20px;
+  --section-pad:   20px 24px;
+  --container-max: 100%;            /* fluid — app fills its frame */
+
+  /* Density tiers (app-specific) */
+  --row-compact:   32px;
+  --row-cozy:      44px;
+  --row-spacious:  56px;
+
+  /* Discipline */
+  --motion-budget: instant;         /* @kind other */ /* state transitions only · no scroll reveal */
+  --accent-freq:   signal;          /* @kind other */ /* color = status only */
+  --shadow-rest:   var(--shadow-sm);
+
+  /* Button scale — tight for high-density tables */
+  --btn-h-sm:  28px;  --btn-px-sm: 10px; --btn-fs-sm: 12px;
+  --btn-h:     32px;  --btn-px:    14px; --btn-fs:    14px;
+  --btn-h-lg:  40px;  --btn-px-lg: 20px; --btn-fs-lg: 16px;
+  --btn-radius: var(--radius-sm);  /* squarer corners in dense UI */
+}
+
+/* ─── STORE — POS / signage / fitting-room tablet (v3.1) ─── */
+[data-surface="store"] {
+  /* Type — readable from 2-3m, high-contrast */
+  --type-signage:  800 clamp(96px, 12vw, 160px)/0.92 var(--font-impact);   /* window display */
+  --type-price:    700 clamp(32px, 4vw,   48px)/1.05  var(--font-numeric);  /* sticker */
+  --type-cta:      700 20px/1.2  var(--font-brand);
+  --type-body:     500 18px/1.45 var(--font-body);
+  --type-body-sm:  500 16px/1.4  var(--font-body);
+  --type-label:    600 14px/1.3  var(--font-body);
+
+  /* Layout & tap targets (touch-first) */
+  --gutter:                  24px;
+  --tap-min:                 56px;
+  --tap-min-store-primary:   72px;
+  --row-touch:               72px;
+  --section-pad:             32px 24px;
+
+  /* Discipline */
+  --motion-budget: ambient-loop;    /* @kind other */ /* signage only · ZERO motion on POS */
+  --accent-freq:   high-contrast;   /* @kind other */ /* navy + gold only · max contrast */
+  --shadow-rest:   none;            /* flat · glare-resistant */
+
+  /* Button scale — touch-first, large hit areas */
+  --btn-h-sm:  56px;  --btn-px-sm: 24px; --btn-fs-sm: 16px;
+  --btn-h:     72px;  --btn-px:    32px; --btn-fs:    20px;
+  --btn-h-lg:  88px;  --btn-px-lg: 40px; --btn-fs-lg: 22px;
+  --btn-radius: var(--radius);
+
+  /* Form scale — touch-first */
+  --input-h-sm:    52px;
+  --input-h:       64px;
+  --input-h-lg:    80px;
+  --input-fs:      16px;
+  --input-px:      18px;
+  --input-radius:  12px;
+  --check-size:    24px;
+  --radio-size:    24px;
+  --toggle-w:      56px;
+  --toggle-h:      32px;
+  --toggle-pad:    4px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  font-family: var(--font-body); font-size: 18px; line-height: 1.7;
+  color: var(--fg-1); background: var(--bg);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1 { font: var(--type-h1); letter-spacing: -0.022em; color: var(--fg-1); }
+h2, .h2 { font: var(--type-h2); letter-spacing: -0.018em; color: var(--fg-1); }
+h3, .h3 { font: var(--type-h3); letter-spacing: -0.01em; color: var(--fg-1); }
+p       { font: var(--type-body); color: var(--fg-2); }
+
+.display       { font: var(--type-display); letter-spacing: -0.025em; }
+.hero-display  { font: var(--type-hero); letter-spacing: -0.03em; }
+.brand-face    { font-family: var(--font-brand); }
+.kpi-num       { font: var(--type-kpi); font-variant-numeric: tabular-nums; letter-spacing: -0.025em; }
+
+/* Hero-only artistic italic — Playfair */
+.art-italic    { font: var(--type-art-italic); letter-spacing: -0.005em; }
+
+/* Geometric italic accent — Montserrat italic — for H1/H2 inside headlines */
+em.accent, .em-accent { font: italic 800 1em/1 var(--font-impact); font-style: italic; color: var(--iris); letter-spacing: -0.015em; }
+em.accent.gold,  .em-accent.gold  { color: var(--gold-deep); }
+em.accent.mint,  .em-accent.mint  { color: var(--mint-deep); }
+em.accent.rose,  .em-accent.rose  { color: var(--rose-deep); }
+em.accent.brand, .em-accent.brand { color: var(--brand); }
+
+/* Roman numerals (I/II/III/IV/V) — Montserrat italic 800, per-tone */
+.roman        { font: var(--type-roman); }
+.roman.iris   { color: var(--iris); }
+.roman.gold   { color: var(--gold-deep); }
+.roman.mint   { color: var(--mint-deep); }
+.roman.rose   { color: var(--rose-deep); }
+.roman.brand  { color: var(--brand); }
+
+/* Big-num — gradient numerals for hero KPIs */
+.big-num       { font-family: var(--font-impact); font-weight: 800;
+                 line-height: 0.85; letter-spacing: -0.04em;
+                 color: transparent; background-clip: text; -webkit-background-clip: text;
+                 display: inline-block; }
+.big-num.brand { background-image: var(--grad-brand); }
+.big-num.iris  { background-image: var(--grad-iris); }
+.big-num.gold  { background-image: var(--grad-gold); }
+.big-num.mint  { background-image: var(--grad-mint); }
+.big-num.rose  { background-image: var(--grad-rose); }
+
+/* Section eyebrow — mono uppercase with flanking dashes */
+.s-eyebrow {
+  font-family: var(--font-mono); font-weight: 700;
+  font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--brand);
+  display: inline-flex; align-items: center; gap: 14px;
+}
+.s-eyebrow::before, .s-eyebrow::after {
+  content: ''; width: 32px; height: 1px; background: currentColor; opacity: 0.5;
+}
+.s-eyebrow.gold  { color: var(--gold-deep); }
+.s-eyebrow.iris  { color: var(--iris-deep); }
+.s-eyebrow.mint  { color: var(--mint-deep); }
+.s-eyebrow.rose  { color: var(--rose-deep); }
+
+/* Insight callout — mandatory per section */
+.insight {
+  margin-top: 56px; padding: 36px 44px;
+  background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.insight::before {
+  content: ''; position: absolute; left: 0; top: 28px; bottom: 28px;
+  width: 3px; background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+  border-radius: 0 3px 3px 0;
+}
+.insight-label {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--fg-3); font-weight: 700;
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 16px;
+}
+.insight-label::before { content: ''; width: 18px; height: 1px; background: currentColor; opacity: 0.5; }
+.insight-body { font-size: 22px; line-height: 1.6; color: var(--fg-1); }
+.insight-body em { font: italic 700 1em/1.6 var(--font-serif); color: var(--iris); }
+.insight-body em.gold { color: var(--gold-deep); }
+.insight-body em.mint { color: var(--mint-deep); }
+
+/* Status pills — JetBrains Mono uppercase pill */
+.tag {
+  display: inline-flex; align-items: center;
+  font: var(--type-tag); text-transform: uppercase; letter-spacing: 0.6px;
+  padding: 3px 10px; border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+.tag-lg { font-size: 12px; padding: 5px 12px; letter-spacing: 0.8px; }
+.tag-live  { background: var(--live-bg);  color: var(--mint-deep); border: 1px solid rgba(16,185,129,.22); }
+.tag-build { background: var(--build-bg); color: var(--iris-deep); border: 1px solid rgba(124,108,245,.22); }
+.tag-gap   { background: var(--gap-bg);   color: var(--gap);       border: 1px solid rgba(239,68,68,.20); }
+.tag-plan  { background: var(--plan-bg);  color: var(--gold-deep); border: 1px solid rgba(245,158,11,.22); }
+
+/* CTA system */
+.cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 0 32px; height: 56px; border-radius: var(--radius-pill);
+  font: 600 17px/1 var(--font-body); text-decoration: none; cursor: pointer; border: none;
+  transition: all var(--dur) var(--ease-out);
+}
+.cta-primary   { background: var(--brand); color: #fff; }
+.cta-primary:hover { background: var(--brand-light); transform: translateY(-1px); box-shadow: var(--shadow-brand); }
+.cta-secondary { border: 1px solid var(--border); color: var(--fg-1); background: transparent; }
+.cta-secondary:hover { background: var(--bg-muted); }
+.cta-gold      { background: var(--gold); color: #0e0f24; font-weight: 700; }
+.cta-gold:hover { transform: translateY(-1px); box-shadow: var(--shadow-gold); }
+
+/* Utility */
+.label   { font: var(--type-label); color: var(--fg-3); }
+.caption { font: var(--type-caption); color: var(--fg-3); }
+.mono    { font: var(--type-mono); }
+.eyebrow { font: var(--type-eyebrow); text-transform: uppercase; letter-spacing: 0.32em; color: var(--brand); }
+</style>
+<style>/* ════════════════════════════════════════════════════════════════════
+   YODY Design System · styles.css
+   ────────────────────────────────────────────────────────────────────
+   Root entry — link THIS one file to get the full token foundation
+   (brand · accents · status · surfaces · type scale · motion · a11y)
+   plus the self-hosted Be Vietnam Pro @font-face set and the four
+   surface adapters ([data-surface="marketing|app|portal|store"]).
+
+   This is the single source of truth for tokens. The Tailwind v4 layer
+   and component CSS live alongside it and are loaded per build target:
+
+     · Build (Vite/PostCSS) → import  tailwind/globals.css  as the theme
+       entry (shadcn role tokens + @theme inline + @layer base + .dark).
+     · No-build CDN        → inline  tailwind/yody.components.css  inside
+       a <style type="text/tailwindcss"> block.
+     · Composite blocks    → link the kits on demand:
+         ui_kits/yody-app/index.css   · ui_kits/yody-ai/index.css
+         ui_kits/yody-collab/index.css · ui_kits/yody-fashion/index.css
+
+   These are intentionally NOT @import-ed here: globals.css /
+   yody.components.css pull in Tailwind via a bare tailwind import
+   (resolved by the build tool, not a plain CSS loader), and the kits are
+   load-on-demand. Keeping styles.css token-only makes it safe to link
+   anywhere — even without a Tailwind toolchain.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────
+   YODY Design System — Color & Type Tokens
+   Canonical reference: DESIGN.md (this project)
+   ─────────────────────────────────────────────────────────
+   Architecture (v3):
+     · Foundation tokens (brand, accent, status, font families,
+       motion, a11y) live in :root — universal across surfaces.
+     · Surface scale (type-size, gutter, container-max,
+       motion-budget, accent-freq) resolves through one of:
+         [data-surface="portal"]     ← default if omitted
+         [data-surface="marketing"]
+         [data-surface="app"]
+         [data-surface="store"]      ← scoped for v3.1
+     · Set the attribute on <body> or any container.
+
+   Color discipline:
+     · Iris  → AI/tech default · 90% of accent surface
+     · Gold  → climax · 1 moment / page max · achievement
+     · Mint  → growth · LIVE · prosperity
+     · Rose  → human · warm · ESG / people
+     · Brand → primary anchor · headlines · navy ink
+     · Crimson (--gap) → ALERT ONLY · not for governance
+
+   Type discipline (4 families — canonical, no others):
+     · Be Vietnam Pro → body default · brand chrome · VN-first (self-hosted)
+     · Montserrat     → impact display · headlines · numerals
+     · Playfair Italic → Hero ONLY (1 art moment / portal)
+     · JetBrains Mono → tags · code · technical metadata
+     · Motion tokens (semantic --motion-* aliases) are aliased
+       below so legacy preview files keep working.
+   ───────────────────────────────────────────────────────── */
+
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("0a00c336-8c62-4e1b-b607-28c7c1101868") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("10c5d59c-00f3-4dc5-91d7-a4e5cf90f62e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("3874532a-ce7b-4898-bf5c-73cdb6f7f44b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("be7c48a0-2980-4761-a384-85046b1ee1b5") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("184fb891-6e1b-4595-a024-be4409771e94") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("aaedb462-02e6-4824-8820-e2dc9631b5d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("0a00c336-8c62-4e1b-b607-28c7c1101868") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("10c5d59c-00f3-4dc5-91d7-a4e5cf90f62e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("3874532a-ce7b-4898-bf5c-73cdb6f7f44b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("be7c48a0-2980-4761-a384-85046b1ee1b5") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("184fb891-6e1b-4595-a024-be4409771e94") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("aaedb462-02e6-4824-8820-e2dc9631b5d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("0a00c336-8c62-4e1b-b607-28c7c1101868") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("10c5d59c-00f3-4dc5-91d7-a4e5cf90f62e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("3874532a-ce7b-4898-bf5c-73cdb6f7f44b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("be7c48a0-2980-4761-a384-85046b1ee1b5") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("184fb891-6e1b-4595-a024-be4409771e94") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("aaedb462-02e6-4824-8820-e2dc9631b5d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("0a00c336-8c62-4e1b-b607-28c7c1101868") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("10c5d59c-00f3-4dc5-91d7-a4e5cf90f62e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("3874532a-ce7b-4898-bf5c-73cdb6f7f44b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("be7c48a0-2980-4761-a384-85046b1ee1b5") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("184fb891-6e1b-4595-a024-be4409771e94") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("aaedb462-02e6-4824-8820-e2dc9631b5d7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("6533eb54-a548-4cdf-9f59-c86ab4b64206") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("cc92d066-2d6c-4496-822f-363f94774a2e") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("c57c2395-e52c-486a-a1cc-a49981475f57") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("cf97a2a8-ed66-48ce-911d-7ace7c7078c9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("a264a685-9a6d-4500-bddb-da5a94fb4677") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("eaa3ea24-0b40-4b92-8505-6f37e630c7cb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("9f74862e-5966-4b60-b82e-24119e250aa3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("8a8e7268-ce32-4b59-9eed-32701ef311c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("ca6c361e-477e-403c-8c3b-810d7ec203ce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+/* ── Be Vietnam Pro — brand font (self-hosted, full weight range) ── */
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 100; font-style: normal; font-display: swap; src: url("c8e96594-809e-4f2b-a072-d64f26a4d4f5") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 100; font-style: italic; font-display: swap; src: url("d6e865b0-18a0-4ea7-86c6-262113efd5d0") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 200; font-style: normal; font-display: swap; src: url("072c3d66-21a9-4e8a-8d27-99087d06978b") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 200; font-style: italic; font-display: swap; src: url("04457779-ef68-4978-9f63-a98f594a631e") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 300; font-style: normal; font-display: swap; src: url("95adfcc3-5718-4bf8-bffe-f7ef1cafa5ae") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 300; font-style: italic; font-display: swap; src: url("29854bc5-9af6-464b-8b83-18b2ab4abc90") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 400; font-style: normal; font-display: swap; src: url("a6e691d2-e89c-40f8-a8d1-6f8c8c923683") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 400; font-style: italic; font-display: swap; src: url("9e337e85-3038-4eee-a16c-176b703bf2d5") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 500; font-style: normal; font-display: swap; src: url("0901e04a-d4c8-4556-af0d-a40507eb66a9") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 500; font-style: italic; font-display: swap; src: url("bd383b0b-0f86-425e-a04c-3f82faf25d76") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 600; font-style: normal; font-display: swap; src: url("7b34dd3f-89ff-420c-9aae-41597c135f3d") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 600; font-style: italic; font-display: swap; src: url("ab3d20d1-3828-49c8-a3e7-ca90544efc7c") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 700; font-style: normal; font-display: swap; src: url("dcf292f7-a15d-4169-923b-12b924b89906") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 700; font-style: italic; font-display: swap; src: url("bc006e5f-e32a-42a0-8d73-b0e5b7600798") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 800; font-style: normal; font-display: swap; src: url("2c44d2fc-e3de-4f56-8151-b5cd06293256") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 800; font-style: italic; font-display: swap; src: url("a81973c1-bfd8-46f4-8cb7-096284fd2e87") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 900; font-style: normal; font-display: swap; src: url("e2e4c0c4-a780-4ebd-9265-31bad0a52ba4") format('truetype'); }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 900; font-style: italic; font-display: swap; src: url("e1224429-5126-474b-9e69-2314d303d1f6") format('truetype'); }
+
+:root {
+  /* ═══ BRAND (anchor) ═══ */
+  --brand:        #2a2b86;   /* YODY Navy — primary */
+  --brand-light:  #4a4bc8;   /* gradient pair */
+  --brand-deep:   #16175a;   /* deep variant for big-num gradient */
+  --brand-tint:   #eeeefb;
+  --brand-gold:   #fcaf16;   /* alias */
+
+  /* ═══ ACCENTS · semantic ═══ */
+  --iris:        #7c6cf5;   /* AI/tech · default accent */
+  --iris-deep:   #4a4bc8;
+  --iris-tint:   #eeeefb;
+
+  --gold:        #fcaf16;   /* climax · 1/page */
+  --gold-deep:   #b07a00;
+  --gold-tint:   #fff4d8;
+
+  --mint:        #10b981;   /* growth · live */
+  --mint-deep:   #047857;
+  --mint-tint:   #d1fae5;
+
+  --rose:        #f472b6;   /* human · warm */
+  --rose-deep:   #be185d;
+  --rose-tint:   #fde7f1;
+
+  /* Legacy aliases — keep compatibility with older previews */
+  --accent:       var(--iris);
+  --accent-tint:  var(--iris-tint);
+
+  /* ═══ STATUS ═══ */
+  --live:    var(--mint);     --live-bg:  rgba(16,185,129,.10);
+  --build:   var(--iris);     --build-bg: rgba(124,108,245,.10);
+  --gap:     #ef4444;         --gap-bg:   rgba(239,68,68,.08);     /* ALERT only */
+  --plan:    #f59e0b;         --plan-bg:  rgba(245,158,11,.10);
+  --plan-deep: #7a5400;
+
+  /* ═══ TEXT ═══ */
+  --fg-1: #1a1b3a;   /* primary ink — navy-tinted, NOT pure black */
+  --fg-2: #5a5c7e;   /* secondary — body, descriptions */
+  --fg-3: #6b6d8c;   /* tertiary — labels, metadata (lifted from 9a9cb8 for projector legibility) */
+  --fg-brand: var(--brand);
+  --fg-on-brand: #ffffff;
+
+  /* Legacy aliases */
+  --text-1: var(--fg-1);
+  --text-2: var(--fg-2);
+  --text-3: var(--fg-3);
+
+  /* ═══ SURFACES ═══ */
+  --bg:        #fcfcff;   /* Paper */
+  --bg-2:      #f4f5fb;   /* Mist — section alt bands */
+  --bg-muted:  #ecedf8;   /* Lavender — chip / hover */
+  --bg-ink:    #0e0f24;   /* Dark surface — hero / footer */
+  --bg-warm:   #fbfaf6;   /* Hero warm wash */
+
+  --border:        #e6e7f2;
+  --border-light:  #f0f1f8;
+  --border-hover:  #d0d2e8;
+
+  /* ═══ SHADOWS (iris-tinted, weightless) ═══ */
+  --shadow-sm: 0 1px 2px  rgba(74,75,200,0.05);
+  --shadow:    0 2px 6px  rgba(74,75,200,0.06);
+  --shadow-md: 0 4px 16px rgba(74,75,200,0.08);
+  --shadow-lg: 0 12px 32px rgba(74,75,200,0.12);
+  --shadow-xl: 0 16px 40px rgba(74,75,200,0.14);
+  --shadow-gold: 0 12px 32px rgba(252,175,22,0.32);
+  --shadow-brand: 0 12px 32px rgba(42,43,134,0.32);
+
+  /* ═══ RADIUS ═══ */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius:      12px;
+  --radius-md:   14px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-pill: 9999px;
+
+  /* ═══ SPACING (4px base) ═══ */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 20px; --s-6: 24px; --s-8: 32px; --s-10: 40px;
+  --s-12: 48px; --s-14: 56px; --s-16: 64px; --s-18: 72px;
+  --s-20: 80px; --s-24: 96px; --s-28: 112px;
+
+  /* ═══ TYPOGRAPHY ═══ */
+  --font-body:    'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;
+  --font-ui:      'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;  /* alias */
+  --font-sans:    'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;  /* alias */
+  --font-brand:   'Be Vietnam Pro', 'Helvetica Neue', Arial, sans-serif;
+  --font-impact:  'Montserrat', 'Be Vietnam Pro', sans-serif;        /* impact display */
+  --font-display: 'Montserrat', 'Be Vietnam Pro', sans-serif;        /* alias */
+  --font-serif:   'Playfair Display', Georgia, serif;                /* Hero ONLY */
+  --font-numeric: 'Montserrat', 'Be Vietnam Pro', sans-serif;        /* tabular */
+  --font-mono:    'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+
+  /* Type scale — blog-portal sizing · generous, lean-back readable */
+  --type-hero:        800 clamp(80px, 8.4vw, 120px)/0.94 var(--font-impact);
+  --type-display:     800 clamp(64px, 6.4vw, 96px)/0.98 var(--font-impact);
+  --type-h1:          800 clamp(48px, 5.2vw, 64px)/1.08 var(--font-impact);
+  --type-h2:          700 clamp(32px, 3.4vw, 40px)/1.18 var(--font-impact);
+  --type-h3:          700 26px/1.3 var(--font-impact);
+  --type-card-title:  700 20px/1.35 var(--font-brand);
+  --type-kpi:         800 clamp(48px, 4.6vw, 64px)/0.9 var(--font-numeric);
+
+  /* Numeral rhythm — Montserrat italic 800 (NOT Playfair) — geometric not ornamental */
+  --type-roman:       italic 800 clamp(64px, 6.4vw, 96px)/0.85 var(--font-impact);
+
+  /* Hero artistic accent — Playfair italic — RESERVE FOR HERO ONLY */
+  --type-art-italic:  italic 800 clamp(80px, 8.4vw, 120px)/0.94 var(--font-serif);
+
+  --type-body-lg:     400 24px/1.65 var(--font-body);   /* section lede */
+  --type-body:        400 18px/1.7  var(--font-body);   /* default body — blog readable */
+  --type-body-sm:     400 16px/1.6  var(--font-body);
+  --type-label:       500 14px/1.4  var(--font-body);
+  --type-caption:     400 12px/1.5  var(--font-body);
+
+  --type-mono:        500 12px/1.5  var(--font-mono);
+  --type-tag:         700 12px/1    var(--font-mono);
+  --type-eyebrow:     700 12px/1    var(--font-mono);  /* 0.32em tracking — set inline */
+
+  /* ═══ MOTION ═══ */
+  --ease-out:        cubic-bezier(0.4, 0, 0.2, 1);          /* @kind other */
+  --ease-overshoot:  cubic-bezier(0.34, 1.56, 0.64, 1);     /* @kind other */
+  --dur-fast: 150ms; /* @kind other */ --dur: 200ms; /* @kind other */ --dur-slow: 300ms; /* @kind other */
+
+  /* ═══ A11Y FLOOR (v3 · universal) ═══ */
+  --focus-ring:        0 0 0 3px rgba(124,108,245,0.40);
+  --focus-ring-gold:   0 0 0 3px rgba(252,175,22,0.45);
+  --focus-ring-gap:    0 0 0 3px rgba(239,68,68,0.40);
+  --tap-min:           44px;     /* override per-surface: 56px store, 72px primary CTA */
+
+  /* MOTION semantic aliases (compat for legacy previews using motion.css names) */
+  --motion-enter:   250ms cubic-bezier(0.34, 1.56, 0.64, 1);   /* @kind other */
+  --motion-exit:    180ms cubic-bezier(0.4, 0, 0.2, 1);        /* @kind other */
+  --motion-hover:   150ms cubic-bezier(0.4, 0, 0.2, 1);        /* @kind other */
+  --motion-press:   80ms  ease-out;                            /* @kind other */
+  --motion-page:    300ms cubic-bezier(0.4, 0, 0.2, 1);        /* @kind other */
+  --motion-count:   600ms cubic-bezier(0.2, 0.6, 0.2, 1);      /* @kind other */
+
+  /* ═══ SURFACE DEFAULTS — portal scale (v3 adapter contract) ═══ */
+  /* These are PORTAL defaults so existing previews keep working without `data-surface`.
+     The marketing / app / store adapter blocks below override only what differs. */
+  --gutter:        20px;
+  --gutter-tight:  12px;
+  --gutter-wide:   32px;
+  --section-pad:   clamp(48px, 8vw, 96px) clamp(24px, 4vw, 56px);
+  --container-max: 1280px;
+  --motion-budget: ambient;       /* @kind other */ /* 1 ambient/page · respect reduce-motion */
+  --accent-freq:   narrative;     /* @kind other */ /* 1 gold climax · ≤2 accent / section */
+  --shadow-rest:   var(--shadow-sm);
+
+  /* Button scale (portal default) — see foundation/buttons.css */
+  --btn-h-sm:   40px;  --btn-px-sm: 18px; --btn-fs-sm: 15px;
+  --btn-h:      52px;  --btn-px:    28px; --btn-fs:    17px;
+  --btn-h-lg:   64px;  --btn-px-lg: 36px; --btn-fs-lg: 19px;
+  --btn-radius: var(--radius-pill);
+
+  /* Form scale (portal default) — see foundation/forms.css */
+  --input-h-sm:    36px;
+  --input-h:       44px;
+  --input-h-lg:    52px;
+  --input-fs:      16px;
+  --input-px:      14px;
+  --input-radius:  10px;
+  --check-size:    18px;
+  --radio-size:    18px;
+  --toggle-w:      40px;
+  --toggle-h:      22px;
+  --toggle-pad:    3px;
+
+  /* Admin-grade type roles (portal defaults; app overrides for density) */
+  --type-h4:        600 18px/1.3   var(--font-brand);
+  --type-label-sm:  600 11px/1     var(--font-body);
+  --type-num-lg:    700 36px/1.05  var(--font-numeric);
+  --type-num:       600 22px/1.1   var(--font-numeric);
+  --type-num-sm:    600 15px/1.2   var(--font-numeric);
+
+  /* ═══ BIG NUMERAL GRADIENT (per-tone, for hero KPIs) ═══ */
+  --grad-brand: linear-gradient(180deg, #2a2b86 0%, #16175a 100%);   /* @kind color */
+  --grad-iris:  linear-gradient(180deg, #7c6cf5 0%, #4a4bc8 100%);   /* @kind color */
+  --grad-gold:  linear-gradient(180deg, #fcaf16 0%, #b07a00 100%);   /* @kind color */
+  --grad-mint:  linear-gradient(180deg, #10b981 0%, #047857 100%);   /* @kind color */
+  --grad-rose:  linear-gradient(180deg, #f472b6 0%, #be185d 100%);   /* @kind color */
+}
+
+/* ══════════════════════════════════════════════════════
+   SURFACE ADAPTERS — v3 multi-surface architecture
+   ---------------------------------------------------
+   Foundation tokens above are universal.
+   Each adapter resolves SCALE for its archetype:
+     · portal     — default (uses :root above; executive briefing / report)
+     · marketing  — landing pages, public web
+     · app        — internal admin (back-office, dashboards, internal mobile)
+     · store      — POS / signage / fitting-room tablet (build out at v3.1)
+   Activate by setting `data-surface="..."` on <body> or any container.
+   ═════════════════════════════════════════════════════ */
+
+/* ─── PORTAL — default (already in :root, declared here for clarity) ─── */
+[data-surface="portal"] {
+  --motion-budget: ambient;   /* @kind other */
+  --accent-freq:   narrative; /* @kind other */
+  --container-max: 1280px;
+  --section-pad:   clamp(48px, 8vw, 96px) clamp(24px, 4vw, 56px);
+
+  /* Button scale */
+  --btn-h-sm:  40px;  --btn-px-sm: 18px; --btn-fs-sm: 14px;
+  --btn-h:     52px;  --btn-px:    28px; --btn-fs:    16px;
+  --btn-h-lg:  64px;  --btn-px-lg: 36px; --btn-fs-lg: 18px;
+  --btn-radius: var(--radius-pill);
+}
+
+/* ─── MARKETING — landing pages, public web ─── */
+[data-surface="marketing"] {
+  /* Type — hero scales up, body slightly lighter LH */
+  --type-hero:     800 clamp(72px, 8vw,   120px)/0.94 var(--font-impact);
+  --type-display:  800 clamp(56px, 5.6vw, 88px)/0.98  var(--font-impact);
+  --type-h1:       800 clamp(40px, 4.4vw, 56px)/1.08  var(--font-impact);
+  --type-h2:       700 clamp(28px, 3vw,   36px)/1.18  var(--font-impact);
+  --type-body-lg:  400 22px/1.55 var(--font-body);
+  --type-body:     400 18px/1.6  var(--font-body);
+  --type-body-sm:  400 16px/1.55 var(--font-body);
+
+  /* Layout */
+  --gutter:        24px;
+  --gutter-wide:   40px;
+  --section-pad:   clamp(72px, 10vw, 160px) clamp(24px, 6vw, 80px);
+  --container-max: 1200px;
+
+  /* Discipline */
+  --motion-budget: rich;            /* @kind other */ /* scroll-reveal · parallax OK */
+  --accent-freq:   bold;            /* @kind other */ /* full-bleed brand sections OK */
+  --shadow-rest:   var(--shadow);
+
+  /* Button scale */
+  --btn-h-sm:  44px;  --btn-px-sm: 20px; --btn-fs-sm: 14px;
+  --btn-h:     52px;  --btn-px:    28px; --btn-fs:    16px;
+  --btn-h-lg:  64px;  --btn-px-lg: 36px; --btn-fs-lg: 18px;
+  --btn-radius: var(--radius-pill);
+
+  /* Form scale */
+  --input-h-sm:    40px;
+  --input-h:       48px;
+  --input-h-lg:    56px;
+  --input-fs:      16px;
+  --input-px:      16px;
+  --input-radius:  12px;
+  --check-size:    20px;
+  --radio-size:    20px;
+  --toggle-w:      44px;
+  --toggle-h:      24px;
+  --toggle-pad:    3px;
+}
+
+/* ─── APP — internal admin, PLM, OMS, vendor portal, internal mobile ─── */
+[data-surface="app"] {
+  /* Type — Linear/Notion grade · Be Vietnam Pro pairing (no Montserrat in admin chrome) */
+  --type-display:  700 28px/1.15 var(--font-brand);    /* page title — rare, breadcrumbs preferred */
+  --type-h1:       700 22px/1.2  var(--font-brand);    /* section title */
+  --type-h2:       700 18px/1.25 var(--font-brand);    /* sub-section */
+  --type-h3:       600 16px/1.3  var(--font-brand);    /* card title */
+  --type-h4:       600 14px/1.3  var(--font-brand);    /* small card / list group */
+
+  --type-body-lg:  400 16px/1.55 var(--font-body);     /* lede · long-form readme */
+  --type-body:     400 14px/1.5  var(--font-body);     /* default body */
+  --type-body-sm:  400 12px/1.45 var(--font-body);     /* secondary text */
+
+  --type-label:    500 12px/1.3  var(--font-body);     /* form label · table header */
+  --type-label-sm: 600 10px/1    var(--font-body);     /* tiny pill / chip label */
+  --type-caption:  400 12px/1.4  var(--font-body);     /* metadata, timestamps */
+
+  --type-eyebrow:  700 10px/1    var(--font-mono);     /* uppercase mono eyebrow */
+  --type-mono:     500 12px/1.45 var(--font-mono);     /* inline code, IDs */
+  --type-mono-sm:  500 10px/1.4  var(--font-mono);     /* tiny code */
+  --type-tag:      600 10px/1    var(--font-mono);     /* status pill */
+
+  /* Tabular KPI numerals — Be Vietnam Pro 700 with tnum (NOT Montserrat) */
+  --type-num-lg:   700 28px/1.05 var(--font-brand);    /* hero KPI on dashboard */
+  --type-num:      600 16px/1.1  var(--font-brand);    /* table number, value */
+  --type-num-sm:   600 14px/1.2 var(--font-brand);   /* small KPI · table cell */
+
+  /* Form scale — dense, table-aligned (matches button h) */
+  --input-h-sm:    28px;
+  --input-h:       32px;
+  --input-h-lg:    40px;
+  --input-fs:      14px;
+  --input-px:      10px;
+  --input-radius:  6px;
+  --check-size:    14px;
+  --radio-size:    14px;
+  --toggle-w:      28px;
+  --toggle-h:      16px;
+  --toggle-pad:    2px;
+
+  /* Layout */
+  --gutter-tight:  8px;
+  --gutter:        12px;
+  --gutter-wide:   20px;
+  --section-pad:   20px 24px;
+  --container-max: 100%;            /* fluid — app fills its frame */
+
+  /* Density tiers (app-specific) */
+  --row-compact:   32px;
+  --row-cozy:      44px;
+  --row-spacious:  56px;
+
+  /* Discipline */
+  --motion-budget: instant;         /* @kind other */ /* state transitions only · no scroll reveal */
+  --accent-freq:   signal;          /* @kind other */ /* color = status only */
+  --shadow-rest:   var(--shadow-sm);
+
+  /* Button scale — tight for high-density tables */
+  --btn-h-sm:  28px;  --btn-px-sm: 10px; --btn-fs-sm: 12px;
+  --btn-h:     32px;  --btn-px:    14px; --btn-fs:    14px;
+  --btn-h-lg:  40px;  --btn-px-lg: 20px; --btn-fs-lg: 16px;
+  --btn-radius: var(--radius-sm);  /* squarer corners in dense UI */
+}
+
+/* ─── STORE — POS / signage / fitting-room tablet (v3.1) ─── */
+[data-surface="store"] {
+  /* Type — readable from 2-3m, high-contrast */
+  --type-signage:  800 clamp(96px, 12vw, 160px)/0.92 var(--font-impact);   /* window display */
+  --type-price:    700 clamp(32px, 4vw,   48px)/1.05  var(--font-numeric);  /* sticker */
+  --type-cta:      700 20px/1.2  var(--font-brand);
+  --type-body:     500 18px/1.45 var(--font-body);
+  --type-body-sm:  500 16px/1.4  var(--font-body);
+  --type-label:    600 14px/1.3  var(--font-body);
+
+  /* Layout & tap targets (touch-first) */
+  --gutter:                  24px;
+  --tap-min:                 56px;
+  --tap-min-store-primary:   72px;
+  --row-touch:               72px;
+  --section-pad:             32px 24px;
+
+  /* Discipline */
+  --motion-budget: ambient-loop;    /* @kind other */ /* signage only · ZERO motion on POS */
+  --accent-freq:   high-contrast;   /* @kind other */ /* navy + gold only · max contrast */
+  --shadow-rest:   none;            /* flat · glare-resistant */
+
+  /* Button scale — touch-first, large hit areas */
+  --btn-h-sm:  56px;  --btn-px-sm: 24px; --btn-fs-sm: 16px;
+  --btn-h:     72px;  --btn-px:    32px; --btn-fs:    20px;
+  --btn-h-lg:  88px;  --btn-px-lg: 40px; --btn-fs-lg: 22px;
+  --btn-radius: var(--radius);
+
+  /* Form scale — touch-first */
+  --input-h-sm:    52px;
+  --input-h:       64px;
+  --input-h-lg:    80px;
+  --input-fs:      16px;
+  --input-px:      18px;
+  --input-radius:  12px;
+  --check-size:    24px;
+  --radio-size:    24px;
+  --toggle-w:      56px;
+  --toggle-h:      32px;
+  --toggle-pad:    4px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  font-family: var(--font-body); font-size: 18px; line-height: 1.7;
+  color: var(--fg-1); background: var(--bg);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1 { font: var(--type-h1); letter-spacing: -0.022em; color: var(--fg-1); }
+h2, .h2 { font: var(--type-h2); letter-spacing: -0.018em; color: var(--fg-1); }
+h3, .h3 { font: var(--type-h3); letter-spacing: -0.01em; color: var(--fg-1); }
+p       { font: var(--type-body); color: var(--fg-2); }
+
+.display       { font: var(--type-display); letter-spacing: -0.025em; }
+.hero-display  { font: var(--type-hero); letter-spacing: -0.03em; }
+.brand-face    { font-family: var(--font-brand); }
+.kpi-num       { font: var(--type-kpi); font-variant-numeric: tabular-nums; letter-spacing: -0.025em; }
+
+/* Hero-only artistic italic — Playfair */
+.art-italic    { font: var(--type-art-italic); letter-spacing: -0.005em; }
+
+/* Geometric italic accent — Montserrat italic — for H1/H2 inside headlines */
+em.accent, .em-accent { font: italic 800 1em/1 var(--font-impact); font-style: italic; color: var(--iris); letter-spacing: -0.015em; }
+em.accent.gold,  .em-accent.gold  { color: var(--gold-deep); }
+em.accent.mint,  .em-accent.mint  { color: var(--mint-deep); }
+em.accent.rose,  .em-accent.rose  { color: var(--rose-deep); }
+em.accent.brand, .em-accent.brand { color: var(--brand); }
+
+/* Roman numerals (I/II/III/IV/V) — Montserrat italic 800, per-tone */
+.roman        { font: var(--type-roman); }
+.roman.iris   { color: var(--iris); }
+.roman.gold   { color: var(--gold-deep); }
+.roman.mint   { color: var(--mint-deep); }
+.roman.rose   { color: var(--rose-deep); }
+.roman.brand  { color: var(--brand); }
+
+/* Big-num — gradient numerals for hero KPIs */
+.big-num       { font-family: var(--font-impact); font-weight: 800;
+                 line-height: 0.85; letter-spacing: -0.04em;
+                 color: transparent; background-clip: text; -webkit-background-clip: text;
+                 display: inline-block; }
+.big-num.brand { background-image: var(--grad-brand); }
+.big-num.iris  { background-image: var(--grad-iris); }
+.big-num.gold  { background-image: var(--grad-gold); }
+.big-num.mint  { background-image: var(--grad-mint); }
+.big-num.rose  { background-image: var(--grad-rose); }
+
+/* Section eyebrow — mono uppercase with flanking dashes */
+.s-eyebrow {
+  font-family: var(--font-mono); font-weight: 700;
+  font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--brand);
+  display: inline-flex; align-items: center; gap: 14px;
+}
+.s-eyebrow::before, .s-eyebrow::after {
+  content: ''; width: 32px; height: 1px; background: currentColor; opacity: 0.5;
+}
+.s-eyebrow.gold  { color: var(--gold-deep); }
+.s-eyebrow.iris  { color: var(--iris-deep); }
+.s-eyebrow.mint  { color: var(--mint-deep); }
+.s-eyebrow.rose  { color: var(--rose-deep); }
+
+/* Insight callout — mandatory per section */
+.insight {
+  margin-top: 56px; padding: 36px 44px;
+  background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.insight::before {
+  content: ''; position: absolute; left: 0; top: 28px; bottom: 28px;
+  width: 3px; background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+  border-radius: 0 3px 3px 0;
+}
+.insight-label {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--fg-3); font-weight: 700;
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 16px;
+}
+.insight-label::before { content: ''; width: 18px; height: 1px; background: currentColor; opacity: 0.5; }
+.insight-body { font-size: 22px; line-height: 1.6; color: var(--fg-1); }
+.insight-body em { font: italic 700 1em/1.6 var(--font-serif); color: var(--iris); }
+.insight-body em.gold { color: var(--gold-deep); }
+.insight-body em.mint { color: var(--mint-deep); }
+
+/* Status pills — JetBrains Mono uppercase pill */
+.tag {
+  display: inline-flex; align-items: center;
+  font: var(--type-tag); text-transform: uppercase; letter-spacing: 0.6px;
+  padding: 3px 10px; border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+.tag-lg { font-size: 12px; padding: 5px 12px; letter-spacing: 0.8px; }
+.tag-live  { background: var(--live-bg);  color: var(--mint-deep); border: 1px solid rgba(16,185,129,.22); }
+.tag-build { background: var(--build-bg); color: var(--iris-deep); border: 1px solid rgba(124,108,245,.22); }
+.tag-gap   { background: var(--gap-bg);   color: var(--gap);       border: 1px solid rgba(239,68,68,.20); }
+.tag-plan  { background: var(--plan-bg);  color: var(--gold-deep); border: 1px solid rgba(245,158,11,.22); }
+
+/* CTA system */
+.cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 0 32px; height: 56px; border-radius: var(--radius-pill);
+  font: 600 17px/1 var(--font-body); text-decoration: none; cursor: pointer; border: none;
+  transition: all var(--dur) var(--ease-out);
+}
+.cta-primary   { background: var(--brand); color: #fff; }
+.cta-primary:hover { background: var(--brand-light); transform: translateY(-1px); box-shadow: var(--shadow-brand); }
+.cta-secondary { border: 1px solid var(--border); color: var(--fg-1); background: transparent; }
+.cta-secondary:hover { background: var(--bg-muted); }
+.cta-gold      { background: var(--gold); color: #0e0f24; font-weight: 700; }
+.cta-gold:hover { transform: translateY(-1px); box-shadow: var(--shadow-gold); }
+
+/* Utility */
+.label   { font: var(--type-label); color: var(--fg-3); }
+.caption { font: var(--type-caption); color: var(--fg-3); }
+.mono    { font: var(--type-mono); }
+.eyebrow { font: var(--type-eyebrow); text-transform: uppercase; letter-spacing: 0.32em; color: var(--brand); }
+
+</style>
+<style>
+  body { margin:0; background:var(--bg-warm); }
+  ::selection { background:var(--brand); color:#fff; }
+  .yw details > summary { list-style:none; cursor:pointer; }
+  .yw details > summary::-webkit-details-marker { display:none; }
+  .yw details[open] .yw-chev { transform:rotate(90deg); }
+  .yw pre::-webkit-scrollbar { height:8px; }
+  .yw pre::-webkit-scrollbar-thumb { background:rgba(255,255,255,.18); border-radius:8px; }
+  @keyframes yw-up { from { opacity:0; transform:translate(-50%,8px); } to { opacity:1; transform:translate(-50%,0); } }
+</style>
+</helmet>
+
+<div class="yw" style="font-family:var(--font-body);color:var(--fg-1);background:var(--bg-warm);min-height:100vh;">
+
+  <!-- ░░ HEADER (shared) ░░ -->
+  <header style="display:flex;align-items:center;gap:26px;padding:15px 44px;border-bottom:1px solid var(--fg-1);position:sticky;top:0;background:rgba(251,250,246,.92);backdrop-filter:blur(8px);z-index:20;">
+    <a href="#" onclick="{{ goHome }}" style="font:800 17px/1 var(--font-impact);color:var(--brand);text-decoration:none;">YODY<span style="color:var(--fg-1);font-weight:700;font-size:15px;"> Học</span></a>
+    <nav style="display:flex;gap:22px;font:500 14px/1 var(--font-body);">
+      <a href="#" onclick="{{ goList }}" style="text-decoration:none;color:{{ navCourseFg }};font-weight:{{ navCourseW }};">Khóa học</a>
+      <a href="#" onclick="{{ goIntro }}" style="text-decoration:none;color:{{ navIntroFg }};font-weight:{{ navIntroW }};">Giới thiệu</a>
+      <a href="#" style="text-decoration:none;color:var(--fg-2);">Tài nguyên</a>
+    </nav>
+    <div style="flex:1;"></div>
+    <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;color:var(--fg-3);font:13px/1 var(--font-body);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>Tìm kiếm</div>
+    <a href="#" onclick="{{ goRead }}" class="cta cta-primary" style="height:42px;padding:0 22px;font-size:14px;text-decoration:none;">Bắt đầu</a>
+  </header>
+
+  <!-- ═══════════ TRANG CHỦ · THƯ MỤC KHÓA HỌC ═══════════ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Trang chủ" data-surface="marketing">
+      <section style="max-width:1000px;margin:0 auto;padding:76px 44px 40px;text-align:center;">
+        <span class="s-eyebrow">THƯ VIỆN KHÓA HỌC · MIỄN PHÍ</span>
+        <h1 style="font:800 clamp(46px,5.6vw,78px)/1.02 var(--font-impact);letter-spacing:-.028em;margin:22px 0 0;color:var(--fg-1);">Học kỹ thuật tại <span style="font:italic 800 1em/1 var(--font-serif);color:var(--iris);">YODY</span></h1>
+        <p style="font:400 21px/1.6 var(--font-body);color:var(--fg-2);max-width:600px;margin:26px auto 32px;text-wrap:pretty;">Tài liệu đào tạo nội bộ, đọc theo chương như những cuốn sách kỹ thuật — công khai, không cần đăng nhập.</p>
+        <div style="display:flex;gap:28px;justify-content:center;font:500 13px/1 var(--font-body);color:var(--fg-3);flex-wrap:wrap;">
+          <span><b style="color:var(--fg-1);font-family:var(--font-numeric);">{{ stats.courses }}</b> khóa học</span>
+          <span style="opacity:.4;">·</span>
+          <span><b style="color:var(--fg-1);font-family:var(--font-numeric);">{{ stats.lessons }}</b> bài học</span>
+          <span style="opacity:.4;">·</span>
+          <span><b style="color:var(--fg-1);font-family:var(--font-numeric);">{{ stats.hours }}</b> giờ</span>
+        </div>
+      </section>
+
+      <section style="max-width:1040px;margin:0 auto;padding:24px 44px 88px;">
+        <div style="font:700 12px/1 var(--font-mono);letter-spacing:.26em;text-transform:uppercase;color:var(--iris-deep);margin:24px 0 22px;">Tất cả khóa học</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:24px;">
+          <sc-for list="{{ courses }}" as="c" hint-placeholder-count="2">
+            <a href="#" onclick="{{ c.open }}" style="display:flex;flex-direction:column;background:#fff;border:1px solid var(--fg-1);border-radius:8px;overflow:hidden;text-decoration:none;transition:transform .14s,box-shadow .14s;" style-hover="transform:translateY(-3px);box-shadow:var(--shadow-lg);">
+              <div style="height:7px;background:{{ c.c }};"></div>
+              <div style="padding:30px 30px 26px;display:flex;flex-direction:column;flex:1;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+                  <span style="font:700 11px/1 var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:{{ c.cDeep }};background:{{ c.tint }};padding:7px 11px;border-radius:999px;">{{ c.tag }}</span>
+                  <span style="font:italic 800 34px/1 var(--font-serif);color:{{ c.c }};">{{ c.n }}</span>
+                </div>
+                <h3 style="font:700 27px/1.16 var(--font-impact);letter-spacing:-.018em;color:var(--fg-1);margin:0 0 10px;">{{ c.title }}</h3>
+                <p style="font:15px/1.6 var(--font-body);color:var(--fg-2);margin:0 0 22px;flex:1;text-wrap:pretty;">{{ c.desc }}</p>
+                <div style="display:flex;gap:18px;font:500 13px/1 var(--font-body);color:var(--fg-3);margin-bottom:20px;flex-wrap:wrap;">
+                  <span><b style="color:var(--fg-1);font-family:var(--font-numeric);">{{ c.chapters }}</b> chương</span>
+                  <span style="opacity:.4;">·</span>
+                  <span><b style="color:var(--fg-1);font-family:var(--font-numeric);">{{ c.lessons }}</b> bài</span>
+                  <span style="opacity:.4;">·</span>
+                  <span><b style="color:var(--fg-1);font-family:var(--font-numeric);">{{ c.hours }}</b> giờ</span>
+                </div>
+                <span style="display:inline-flex;align-items:center;gap:7px;font:700 14px/1 var(--font-brand);color:{{ c.cDeep }};">{{ c.cta }}<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ═══════════ BÀI HỌC (mục lục) ═══════════ -->
+  <sc-if value="{{ isList }}">
+    <div data-screen-label="Bài học" data-surface="portal" style="display:flex;align-items:flex-start;">
+      <aside style="width:280px;flex:none;border-right:1px solid var(--border);padding:24px 16px;position:sticky;top:73px;max-height:calc(100vh - 73px);overflow:auto;background:var(--bg-warm);">
+        <div style="position:relative;margin-bottom:22px;">
+          <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--fg-3);display:flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg></span>
+          <input placeholder="Tìm trong khóa học…" style="width:100%;height:40px;border:1px solid var(--border);border-radius:10px;padding:0 12px 0 36px;font:14px var(--font-body);background:#fff;color:var(--fg-1);">
+        </div>
+        <sc-for list="{{ modules }}" as="m" hint-placeholder-count="5">
+          <div style="margin-bottom:18px;">
+            <div style="display:flex;align-items:baseline;gap:9px;margin-bottom:7px;">
+              <span style="font:italic 800 15px/1 var(--font-serif);color:{{ m.c }};width:22px;">{{ m.n }}</span>
+              <span style="font:700 12px/1.3 var(--font-brand);color:var(--fg-1);">{{ m.title }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:1px;border-left:1px solid var(--border);margin-left:10px;padding-left:13px;">
+              <sc-for list="{{ m.lessons }}" as="l">
+                <a href="#" onclick="{{ goRead }}" style="font:13px/1.4 var(--font-body);color:{{ l.aFg }};font-weight:{{ l.aw }};background:{{ l.aBg }};padding:6px 9px;border-radius:6px;text-decoration:none;transition:all .12s;" style-hover="background:#fff;color:var(--fg-1);">{{ l.t }}</a>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </aside>
+      <main style="flex:1;min-width:0;">
+        <div style="max-width:760px;margin:0 auto;padding:56px 48px 88px;">
+          <div style="font:700 12px/1 var(--font-mono);letter-spacing:.26em;text-transform:uppercase;color:var(--iris-deep);margin-bottom:14px;">Mục lục khóa học</div>
+          <h1 style="font:800 clamp(36px,4.6vw,52px)/1.06 var(--font-impact);letter-spacing:-.022em;margin:0 0 44px;color:var(--fg-1);">Kỹ thuật Harness cho tác tử AI</h1>
+          <sc-for list="{{ modules }}" as="m" hint-placeholder-count="5">
+            <div style="border-top:2px solid var(--fg-1);padding:26px 0;">
+              <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:12px;">
+                <span style="font:italic 800 40px/1 var(--font-serif);color:{{ m.c }};">{{ m.n }}</span>
+                <h2 style="font:700 24px/1.15 var(--font-impact);color:var(--fg-1);margin:0;">{{ m.title }}</h2>
+              </div>
+              <div style="padding-left:58px;">
+                <sc-for list="{{ m.lessons }}" as="l">
+                  <a href="#" onclick="{{ goRead }}" style="display:flex;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid var(--border);text-decoration:none;" style-hover="opacity:.6;">
+                    <span style="font:600 13px/1 var(--font-mono);color:var(--fg-3);">{{ l.i }}</span>
+                    <span style="flex:1;font:500 17px/1.4 var(--font-body);color:var(--fg-1);">{{ l.t }}</span>
+                    <span style="font:400 13px/1 var(--font-mono);color:var(--fg-3);">{{ l.d }}</span>
+                  </a>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </main>
+    </div>
+  </sc-if>
+
+  <!-- ═══════════ ĐỌC BÀI ═══════════ -->
+  <sc-if value="{{ isRead }}">
+    <div data-screen-label="Đọc bài" data-surface="portal" style="display:flex;align-items:flex-start;">
+      <aside style="width:280px;flex:none;border-right:1px solid var(--border);padding:24px 16px;position:sticky;top:73px;max-height:calc(100vh - 73px);overflow:auto;background:var(--bg-warm);">
+        <div style="position:relative;margin-bottom:22px;">
+          <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--fg-3);display:flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg></span>
+          <input placeholder="Tìm trong khóa học…" style="width:100%;height:40px;border:1px solid var(--border);border-radius:10px;padding:0 12px 0 36px;font:14px var(--font-body);background:#fff;color:var(--fg-1);">
+        </div>
+        <sc-for list="{{ modules }}" as="m" hint-placeholder-count="5">
+          <div style="margin-bottom:18px;">
+            <div style="display:flex;align-items:baseline;gap:9px;margin-bottom:7px;">
+              <span style="font:italic 800 15px/1 var(--font-serif);color:{{ m.c }};width:22px;">{{ m.n }}</span>
+              <span style="font:700 12px/1.3 var(--font-brand);color:var(--fg-1);">{{ m.title }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:1px;border-left:1px solid var(--border);margin-left:10px;padding-left:13px;">
+              <sc-for list="{{ m.lessons }}" as="l">
+                <a href="#" onclick="{{ goRead }}" style="font:13px/1.4 var(--font-body);color:{{ l.aFg }};font-weight:{{ l.aw }};background:{{ l.aBg }};padding:6px 9px;border-radius:6px;text-decoration:none;transition:all .12s;" style-hover="background:#fff;color:var(--fg-1);">{{ l.t }}</a>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </aside>
+
+      <main style="flex:1;min-width:0;">
+        <div style="max-width:720px;margin:0 auto;padding:44px 48px 88px;">
+          <div style="display:flex;align-items:center;gap:8px;font:500 13px/1 var(--font-body);color:var(--fg-3);margin-bottom:22px;">
+            <span>Nền tảng Harness</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"></path></svg><span style="color:var(--fg-1);font-weight:600;">Harness là gì?</span>
+          </div>
+          <div style="font:700 12px/1 var(--font-mono);letter-spacing:.26em;text-transform:uppercase;color:var(--iris-deep);margin-bottom:10px;">Chương I · Bài 1.1</div>
+          <h1 style="font:800 clamp(40px,5vw,58px)/1.04 var(--font-impact);letter-spacing:-.026em;margin:0 0 22px;color:var(--fg-1);">Harness là <span style="font:italic 800 1em/1 var(--font-serif);color:var(--iris);">gì?</span></h1>
+
+          <p style="font:400 19px/1.8 var(--font-body);color:var(--fg-1);margin:0 0 20px;"><span style="float:left;font:italic 900 76px/.72 var(--font-serif);color:var(--iris);padding:6px 12px 0 0;">H</span>arness là lớp khung bao quanh một tác tử AI. Nó định nghĩa môi trường mà tác tử hành động, các công cụ được phép dùng, và cách kết quả của mỗi lượt được kiểm chứng trước khi chấp nhận.</p>
+          <p style="font:400 18px/1.8 var(--font-body);color:var(--fg-2);margin:0 0 28px;">Thay vì để mô hình tự do thao tác, harness đặt ra ranh giới rõ ràng: đầu vào nào hợp lệ, hành động nào an toàn, và khi nào một lượt được coi là thành công.</p>
+
+          <h2 id="h-vd" style="font:700 27px/1.2 var(--font-impact);letter-spacing:-.012em;color:var(--fg-1);margin:36px 0 16px;">Vòng đời một lượt</h2>
+          <div style="display:flex;align-items:stretch;gap:8px;margin:0 0 12px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:100px;text-align:center;padding:16px 10px;border:1px solid var(--border);border-radius:12px;background:#fff;"><div style="font:800 10px/1 var(--font-mono);color:var(--iris);margin-bottom:7px;">01</div><div style="font:700 14px/1.2 var(--font-brand);color:var(--fg-1);">Tác vụ</div></div>
+            <div style="display:flex;align-items:center;color:var(--fg-3);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></div>
+            <div style="flex:1;min-width:100px;text-align:center;padding:16px 10px;border:1px solid var(--iris);border-radius:12px;background:var(--iris-tint);"><div style="font:800 10px/1 var(--font-mono);color:var(--iris-deep);margin-bottom:7px;">02</div><div style="font:700 14px/1.2 var(--font-brand);color:var(--iris-deep);">Harness</div></div>
+            <div style="display:flex;align-items:center;color:var(--fg-3);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></div>
+            <div style="flex:1;min-width:100px;text-align:center;padding:16px 10px;border:1px solid var(--border);border-radius:12px;background:#fff;"><div style="font:800 10px/1 var(--font-mono);color:var(--mint-deep);margin-bottom:7px;">03</div><div style="font:700 14px/1.2 var(--font-brand);color:var(--fg-1);">Môi trường</div></div>
+            <div style="display:flex;align-items:center;color:var(--fg-3);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></div>
+            <div style="flex:1;min-width:100px;text-align:center;padding:16px 10px;border:1px solid var(--border);border-radius:12px;background:#fff;"><div style="font:800 10px/1 var(--font-mono);color:var(--gold-deep);margin-bottom:7px;">04</div><div style="font:700 14px/1.2 var(--font-brand);color:var(--fg-1);">Kiểm chứng</div></div>
+          </div>
+          <p style="font:italic 400 14px/1.5 var(--font-body);color:var(--fg-3);margin:0 0 30px;">Hình 1 — Một lượt khép kín; kết quả kiểm chứng phản hồi lại cho lượt sau.</p>
+
+          <h2 id="h-bk" style="font:700 27px/1.2 var(--font-impact);letter-spacing:-.012em;color:var(--fg-1);margin:36px 0 16px;">Bốn khối của một harness</h2>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 30px;">
+            <div style="padding:18px;border:1px solid var(--border);border-radius:12px;background:#fff;"><div style="font:700 14px/1.2 var(--font-brand);color:var(--iris-deep);margin-bottom:5px;">Môi trường</div><div style="font:13px/1.5 var(--font-body);color:var(--fg-2);">Sandbox, giới hạn thời gian, ranh giới truy cập.</div></div>
+            <div style="padding:18px;border:1px solid var(--border);border-radius:12px;background:#fff;"><div style="font:700 14px/1.2 var(--font-brand);color:var(--mint-deep);margin-bottom:5px;">Công cụ</div><div style="font:13px/1.5 var(--font-body);color:var(--fg-2);">Tập hành động được phép và quyền hạn của chúng.</div></div>
+            <div style="padding:18px;border:1px solid var(--border);border-radius:12px;background:#fff;"><div style="font:700 14px/1.2 var(--font-brand);color:var(--rose-deep);margin-bottom:5px;">Trạng thái</div><div style="font:13px/1.5 var(--font-body);color:var(--fg-2);">Bộ nhớ, ngữ cảnh và checkpoint giữa các lượt.</div></div>
+            <div style="padding:18px;border:1px solid var(--border);border-radius:12px;background:#fff;"><div style="font:700 14px/1.2 var(--font-brand);color:var(--gold-deep);margin-bottom:5px;">Kiểm chứng</div><div style="font:13px/1.5 var(--font-body);color:var(--fg-2);">Oracle xác định khi nào một lượt thành công.</div></div>
+          </div>
+
+          <h2 id="h-ct" style="font:700 27px/1.2 var(--font-impact);letter-spacing:-.012em;color:var(--fg-1);margin:36px 0 16px;">Cấu trúc tối thiểu</h2>
+          <div data-code="" style="border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:0 0 30px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;background:var(--bg-ink);">
+              <span style="font:600 12px/1 var(--font-mono);color:#cdd0ee;">harness.yaml</span>
+              <button onclick="{{ copyCode }}" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.10);border:none;color:#fff;font:600 12px var(--font-body);padding:5px 11px;border-radius:6px;cursor:pointer;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>Sao chép</button>
+            </div>
+            <pre style="margin:0;padding:16px 18px;background:#0e0f24;color:#e6e7f2;font:13px/1.75 var(--font-mono);overflow:auto;">harness:
+  name: agent-harness
+  environment: { sandbox: true, timeout: 120s }
+  tools: [ file.read, file.write, shell.exec ]
+  state: { memory: ephemeral, checkpoint: every-step }
+  verify: { oracle: tests/acceptance, on_fail: rollback }</pre>
+          </div>
+
+          <blockquote style="margin:36px 0;padding:0 0 0 28px;border-left:3px solid var(--iris);">
+            <p style="font:italic 600 25px/1.45 var(--font-serif);color:var(--fg-1);margin:0;">Harness tốt làm cho hành vi của tác tử có thể dự đoán và kiểm chứng — không phải làm nó thông minh hơn.</p>
+          </blockquote>
+
+          <div style="display:flex;gap:16px;margin-top:44px;border-top:2px solid var(--fg-1);padding-top:22px;">
+            <a href="#" onclick="{{ goIntro }}" style="flex:1;text-decoration:none;"><div style="font:600 11px/1 var(--font-mono);color:var(--fg-3);margin-bottom:5px;">← TRƯỚC</div><div style="font:700 16px/1.25 var(--font-impact);color:var(--fg-1);">Giới thiệu khóa học</div></a>
+            <a href="#" style="flex:1;text-align:right;text-decoration:none;"><div style="font:600 11px/1 var(--font-mono);color:var(--fg-3);margin-bottom:5px;">SAU →</div><div style="font:700 16px/1.25 var(--font-impact);color:var(--iris-deep);">Vòng đời tác tử</div></a>
+          </div>
+        </div>
+      </main>
+
+      <aside style="width:200px;flex:none;padding:40px 22px;position:sticky;top:73px;max-height:calc(100vh - 73px);overflow:auto;">
+        <div style="font:700 10px/1 var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--fg-3);margin-bottom:14px;">Trên trang</div>
+        <div style="display:flex;flex-direction:column;gap:2px;border-left:2px solid var(--border);">
+          <a href="#h-vd" style="font:13px/1.4 var(--font-body);color:var(--iris-deep);font-weight:600;padding:5px 0 5px 14px;margin-left:-2px;border-left:2px solid var(--iris);text-decoration:none;">Vòng đời một lượt</a>
+          <a href="#h-bk" style="font:13px/1.4 var(--font-body);color:var(--fg-2);padding:5px 0 5px 14px;text-decoration:none;" style-hover="color:var(--fg-1);">Bốn khối</a>
+          <a href="#h-ct" style="font:13px/1.4 var(--font-body);color:var(--fg-2);padding:5px 0 5px 14px;text-decoration:none;" style-hover="color:var(--fg-1);">Cấu trúc tối thiểu</a>
+        </div>
+      </aside>
+    </div>
+  </sc-if>
+
+  <!-- ═══════════ GIỚI THIỆU ═══════════ -->
+  <sc-if value="{{ isIntro }}">
+    <div data-screen-label="Giới thiệu" data-surface="marketing">
+      <section style="max-width:900px;margin:0 auto;padding:64px 44px 40px;">
+        <span class="s-eyebrow">GIỚI THIỆU KHÓA HỌC</span>
+        <h1 style="font:800 clamp(44px,5.4vw,68px)/1.02 var(--font-impact);letter-spacing:-.026em;margin:18px 0 18px;color:var(--fg-1);">Về <span style="font:italic 800 1em/1 var(--font-serif);color:var(--iris);">khóa học</span></h1>
+        <p style="font:400 20px/1.65 var(--font-body);color:var(--fg-2);margin:0;max-width:660px;text-wrap:pretty;">Trang bị tư duy và công cụ để xây dựng tác tử AI đáng tin cậy — từ môi trường, trạng thái, đến kiểm chứng và vận hành.</p>
+      </section>
+
+      <section style="max-width:900px;margin:0 auto;padding:24px 44px 56px;border-top:2px solid var(--fg-1);display:grid;grid-template-columns:1.35fr 1fr;gap:48px;align-items:start;">
+        <div>
+          <h2 style="font:700 24px/1.2 var(--font-impact);color:var(--fg-1);margin:28px 0 16px;">Bạn sẽ học được gì</h2>
+          <div style="display:flex;flex-direction:column;gap:0;margin-bottom:36px;">
+            <sc-for list="{{ outcomes }}" as="o" hint-placeholder-count="4">
+              <div style="display:flex;gap:13px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);"><span style="color:var(--mint);flex:none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="font:16px/1.55 var(--font-body);color:var(--fg-1);">{{ o }}</span></div>
+            </sc-for>
+          </div>
+          <h2 style="font:700 24px/1.2 var(--font-impact);color:var(--fg-1);margin:0 0 14px;">Yêu cầu trước khi học</h2>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <sc-for list="{{ prereqs }}" as="p" hint-placeholder-count="2"><span style="font:500 14px/1 var(--font-body);color:var(--fg-2);background:#fff;border:1px solid var(--border);padding:9px 14px;border-radius:999px;">{{ p }}</span></sc-for>
+          </div>
+        </div>
+        <div style="border:1px solid var(--fg-1);border-radius:6px;padding:26px;background:#fff;margin-top:28px;">
+          <div style="font:700 11px/1 var(--font-mono);text-transform:uppercase;letter-spacing:.2em;color:var(--fg-3);margin-bottom:18px;">Giảng viên</div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+            <div style="width:60px;height:60px;border-radius:50%;background:var(--iris-tint);color:var(--iris-deep);display:flex;align-items:center;justify-content:center;font:italic 800 22px/1 var(--font-serif);flex:none;">{{ author.initials }}</div>
+            <div><div style="font:700 18px/1.2 var(--font-impact);color:var(--fg-1);">{{ author.name }}</div><div style="font:12px/1.4 var(--font-mono);color:var(--fg-3);margin-top:3px;text-transform:uppercase;letter-spacing:.06em;">{{ author.role }}</div></div>
+          </div>
+          <p style="font:15px/1.65 var(--font-body);color:var(--fg-2);margin:0;">{{ author.bio }}</p>
+        </div>
+      </section>
+
+      <section style="background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:56px 44px;">
+        <div style="max-width:760px;margin:0 auto;">
+          <h2 style="font:700 24px/1.2 var(--font-impact);color:var(--fg-1);margin:0 0 22px;">Câu hỏi thường gặp</h2>
+          <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="4">
+            <details style="border-bottom:1px solid var(--border);">
+              <summary style="display:flex;align-items:center;gap:12px;padding:18px 0;font:600 18px/1.4 var(--font-impact);color:var(--fg-1);">
+                <span style="flex:1;">{{ f.q }}</span>
+                <span class="yw-chev" style="color:var(--iris);transition:transform .2s;display:flex;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"></path></svg></span>
+              </summary>
+              <div style="padding:0 0 18px;font:16px/1.7 var(--font-body);color:var(--fg-2);">{{ f.a }}</div>
+            </details>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="padding:64px 44px;text-align:center;">
+        <h2 style="font:700 clamp(28px,3.4vw,40px)/1.15 var(--font-impact);letter-spacing:-.015em;margin:0 0 14px;color:var(--fg-1);">Sẵn sàng bắt đầu?</h2>
+        <a href="#" onclick="{{ goRead }}" class="cta cta-primary" style="text-decoration:none;margin-top:8px;">Vào bài 1.1 · Harness là gì? →</a>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ░░ FOOTER (shared) ░░ -->
+  <footer style="padding:40px 44px;text-align:center;border-top:1px solid var(--fg-1);font:13px/1.6 var(--font-body);color:var(--fg-3);background:var(--bg-warm);">© 2026 YODY · Tài liệu đào tạo nội bộ — chia sẻ tự do.</footer>
+
+  <sc-if value="{{ toast }}">
+    <div style="position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:var(--fg-1);color:#fff;padding:11px 20px;border-radius:999px;font:600 13px/1 var(--font-body);box-shadow:var(--shadow-lg);z-index:80;animation:yw-up .25s var(--ease-overshoot);display:flex;align-items:center;gap:8px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>Đã sao chép mã
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="">
+class Component extends DCLogic {
+  state = { page: 'home', toast: false };
+
+  modules() {
+    const raw = [
+      { n:'I', c:'#7c6cf5', title:'Nền tảng Harness', desc:'Harness là gì, vòng đời tác tử và ranh giới môi trường.',
+        lessons:[{i:'1.1',t:'Harness là gì?',d:'8 phút'},{i:'1.2',t:'Vòng đời tác tử',d:'12 phút'},{i:'1.3',t:'Môi trường & ranh giới',d:'10 phút'}] },
+      { n:'II', c:'#fcaf16', title:'Thiết kế Môi trường', desc:'Sandbox, công cụ, quyền hạn và ngân sách tài nguyên.',
+        lessons:[{i:'2.1',t:'Sandbox & cô lập',d:'11 phút'},{i:'2.2',t:'Công cụ & quyền hạn',d:'9 phút'},{i:'2.3',t:'Tài nguyên & ngân sách',d:'7 phút'}] },
+      { n:'III', c:'#10b981', title:'Quản lý Trạng thái', desc:'Bộ nhớ, cửa sổ ngữ cảnh, checkpoint và khôi phục.',
+        lessons:[{i:'3.1',t:'Bộ nhớ ngắn & dài hạn',d:'13 phút'},{i:'3.2',t:'Cửa sổ ngữ cảnh',d:'10 phút'},{i:'3.3',t:'Checkpoint & khôi phục',d:'8 phút'}] },
+      { n:'IV', c:'#f472b6', title:'Kiểm chứng & Đánh giá', desc:'Kiểm thử hành vi, oracle đo lường và phát hiện hồi quy.',
+        lessons:[{i:'4.1',t:'Kiểm thử hành vi',d:'12 phút'},{i:'4.2',t:'Oracle & đo lường',d:'9 phút'},{i:'4.3',t:'Phát hiện hồi quy',d:'7 phút'}] },
+      { n:'V', c:'#2a2b86', title:'Vận hành Thực tế', desc:'Triển khai an toàn, giám sát, cảnh báo và tối ưu chi phí.',
+        lessons:[{i:'5.1',t:'Triển khai an toàn',d:'10 phút'},{i:'5.2',t:'Giám sát & cảnh báo',d:'11 phút'},{i:'5.3',t:'Tối ưu chi phí',d:'6 phút'}] },
+    ];
+    raw.forEach((m, mi) => {
+      m.count = m.lessons.length;
+      m.lessons.forEach((l, li) => {
+        const cur = mi === 0 && li === 0;
+        l.aBg = cur ? 'var(--brand-tint)' : 'transparent';
+        l.aFg = cur ? 'var(--brand)' : 'var(--fg-2)';
+        l.aw  = cur ? '700' : '400';
+      });
+    });
+    return raw;
+  }
+
+  nav(page) {
+    return (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ page }); window.scrollTo(0, 0); };
+  }
+
+  courses() {
+    return [
+      { n:'01', c:'var(--iris)', cDeep:'var(--iris-deep)', tint:'var(--iris-tint)',
+        tag:'Tác tử AI', title:'Kỹ thuật Harness cho tác tử AI',
+        desc:'Thiết kế môi trường, quản lý trạng thái và kiểm chứng — đọc theo chương như một cuốn sách kỹ thuật.',
+        chapters:'5', lessons:'15', hours:'~2.5', cta:'Bắt đầu học', page:'list' },
+      { n:'02', c:'var(--mint)', cDeep:'var(--mint-deep)', tint:'var(--mint-tint, #e3f5ee)',
+        tag:'Dữ liệu & RAG', title:'Nền tảng RAG cho hệ thống nội bộ',
+        desc:'Truy hồi tăng cường: chuẩn hóa dữ liệu, embedding, đánh chỉ mục và xếp hạng để trả lời chính xác trên kho tài liệu YODY.',
+        chapters:'4', lessons:'12', hours:'~2', cta:'Xem mục lục', page:'list' },
+    ];
+  }
+
+  renderVals() {
+    const { page, toast } = this.state;
+    const copyCode = (e) => {
+      const wrap = e.currentTarget.closest('[data-code]');
+      const pre = wrap && wrap.querySelector('pre');
+      try { if (pre && navigator.clipboard) navigator.clipboard.writeText(pre.innerText); } catch (_) {}
+      this.setState({ toast: true });
+      clearTimeout(this._t);
+      this._t = setTimeout(() => this.setState({ toast: false }), 1600);
+    };
+
+    const author = { name: 'Nguyễn Minh Khôi', role: 'Kỹ sư AI · YODY Tech', initials: 'MK',
+      bio: 'Phụ trách hạ tầng tác tử AI tại YODY, từng xây các harness vận hành cho công cụ nội bộ. Thích biến hệ thống phức tạp thành những bước nhỏ kiểm chứng được.' };
+    const outcomes = [
+      'Thiết kế môi trường sandbox an toàn cho tác tử',
+      'Quản lý trạng thái, bộ nhớ và cửa sổ ngữ cảnh',
+      'Viết oracle kiểm chứng và phát hiện hồi quy',
+      'Triển khai, giám sát và tối ưu chi phí khi vận hành',
+    ];
+    const prereqs = ['Lập trình Python cơ bản', 'Hiểu khái niệm LLM / API', 'Quen dùng dòng lệnh'];
+    const faqs = [
+      { q: 'Khóa học có mất phí không?', a: 'Hoàn toàn miễn phí và công khai. Bạn không cần đăng ký hay đăng nhập để đọc bất kỳ bài nào.' },
+      { q: 'Tôi cần biết trước những gì?', a: 'Chỉ cần lập trình cơ bản (ưu tiên Python) và hiểu khái niệm API. Các khái niệm về tác tử AI sẽ được giải thích từ đầu.' },
+      { q: 'Có cần cài đặt gì không?', a: 'Phần lý thuyết đọc trực tiếp trên web. Phần thực hành dùng mã nguồn mẫu chạy được trên máy cá nhân với Python 3.10+.' },
+      { q: 'Khóa học có chứng chỉ không?', a: 'Đây là tài liệu đào tạo mở, tập trung vào kiến thức nên không cấp chứng chỉ. Mục tiêu là bạn áp dụng được vào công việc thực tế.' },
+    ];
+
+    const courseActive = page === 'home' || page === 'list' || page === 'read';
+    const courses = this.courses().map(c => ({ ...c, open: this.nav(c.page) }));
+    const stats = { courses: courses.length, lessons: '27', hours: '~4.5' };
+    return {
+      page, toast, copyCode, courses, stats,
+      modules: this.modules(), author, outcomes, prereqs, faqs,
+      goHome: this.nav('home'), goList: this.nav('list'), goRead: this.nav('read'), goIntro: this.nav('intro'),
+      isHome: page === 'home', isList: page === 'list', isRead: page === 'read', isIntro: page === 'intro',
+      navCourseFg: courseActive ? 'var(--fg-1)' : 'var(--fg-2)',
+      navCourseW: courseActive ? '600' : '500',
+      navIntroFg: page === 'intro' ? 'var(--fg-1)' : 'var(--fg-2)',
+      navIntroW: page === 'intro' ? '600' : '500',
+    };
+  }
+}
+</script>
+
+
+</body></html>

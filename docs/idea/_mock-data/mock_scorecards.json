@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-06-24",
+    "note": "Mock scorecards — NO PII. Prefix mock_ enforced. Score schema khớp 00_Core/competency_dictionary.json + scorecard_template.md. Intern program (chọn cột Intern).",
+    "score_scale": "mỗi khía cạnh 5.0; tổng 20.0. Entry focus Will Do/Motivation; mid focus Can Do; end focus Outcome full.",
+    "handshake": "score field ids: A0/A1/A2/A3 (Outcome), B1-B5 (Can Do), C1-C3 (Will Do), D1-D5 (Will FIT). null = chưa chấm."
+  },
+  "scorecards": [
+    {
+      "id": "mock_scorecard_01_entry",
+      "learner_id": "mock_learner_01",
+      "program": "Intern-Product-Builder",
+      "assessor_id": "mock_mentor_01",
+      "stage": "entry",
+      "date": "2026-07-01",
+      "scores": {
+        "A_Outcome": { "A0": 0.8, "A1": null, "A2": null, "A3": 0.6, "total": 1.4, "max": 5.0 },
+        "B_Can_Do": { "B1": 0.5, "B2": 0.5, "B3": null, "B4": null, "B5": null, "total": 1.0, "max": 5.0 },
+        "C_Will_Do": { "C1": 1.2, "C2": 1.5, "C3": 1.0, "total": 3.7, "max": 5.0 },
+        "D_Will_FIT": { "D1": 1.0, "D2": 0.6, "D3": 0.8, "D4": 0.9, "D5": 0.8, "total": 4.1, "max": 5.0 }
+      },
+      "grand_total": 10.2,
+      "grand_max": 20.0,
+      "percent": 51,
+      "decision": "provisional",
+      "notes": "Đầu vào: tiềm năng Will Do + Will FIT mạnh, Can Do cần xây. Nhận vào."
+    },
+    {
+      "id": "mock_scorecard_01_mid",
+      "learner_id": "mock_learner_01",
+      "program": "Intern-Product-Builder",
+      "assessor_id": "mock_mentor_01",
+      "stage": "mid",
+      "date": "2026-09-15",
+      "scores": {
+        "A_Outcome": { "A0": 1.0, "A1": 0.8, "A2": 0.7, "A3": 0.7, "total": 3.2, "max": 5.0 },
+        "B_Can_Do": { "B1": 0.8, "B2": 0.9, "B3": 0.7, "B4": 0.5, "B5": 0.6, "total": 3.5, "max": 5.0 },
+        "C_Will_Do": { "C1": 1.3, "C2": 1.7, "C3": 1.2, "total": 4.2, "max": 5.0 },
+        "D_Will_FIT": { "D1": 1.1, "D2": 0.7, "D3": 0.9, "D4": 1.0, "D5": 0.9, "total": 4.6, "max": 5.0 }
+      },
+      "grand_total": 15.5,
+      "grand_max": 20.0,
+      "percent": 78,
+      "decision": "on_track",
+      "notes": "Giữa kỳ: Can Do catch up tốt, prompt + tool proficiency đã khá. Tiếp tục push Product Thinking."
+    },
+    {
+      "id": "mock_scorecard_02_end",
+      "learner_id": "mock_learner_02",
+      "program": "Intern-Product-Builder",
+      "assessor_id": "mock_mentor_02",
+      "stage": "end",
+      "date": "2026-11-30",
+      "scores": {
+        "A_Outcome": { "A0": 1.2, "A1": 1.3, "A2": 1.1, "A3": 0.9, "total": 4.5, "max": 5.0 },
+        "B_Can_Do": { "B1": 0.9, "B2": 1.1, "B3": 1.1, "B4": 0.7, "B5": 0.7, "total": 4.5, "max": 5.0 },
+        "C_Will_Do": { "C1": 1.4, "C2": 1.8, "C3": 1.3, "total": 4.5, "max": 5.0 },
+        "D_Will_FIT": { "D1": 1.2, "D2": 0.7, "D3": 1.0, "D4": 1.0, "D5": 0.9, "total": 4.8, "max": 5.0 }
+      },
+      "grand_total": 18.3,
+      "grand_max": 20.0,
+      "percent": 92,
+      "decision": "excellent_extend",
+      "notes": "Cuối kỳ: xuất sắc (92%). Tiềm năng offer/extend + AI champion. Gate L4→L5 in review."
+    },
+    {
+      "id": "mock_scorecard_05_mid",
+      "learner_id": "mock_learner_05",
+      "program": "Intern-Product-Builder",
+      "assessor_id": "mock_mentor_02",
+      "stage": "mid",
+      "date": "2026-10-10",
+      "scores": {
+        "A_Outcome": { "A0": 1.1, "A1": 0.9, "A2": 0.8, "A3": 0.7, "total": 3.5, "max": 5.0 },
+        "B_Can_Do": { "B1": 0.7, "B2": 0.8, "B3": 0.6, "B4": 0.6, "B5": 0.5, "total": 3.2, "max": 5.0 },
+        "C_Will_Do": { "C1": 1.2, "C2": 1.5, "C3": 1.1, "total": 3.8, "max": 5.0 },
+        "D_Will_FIT": { "D1": 1.1, "D2": 0.6, "D3": 0.8, "D4": 0.9, "D5": 0.8, "total": 4.2, "max": 5.0 }
+      },
+      "grand_total": 14.7,
+      "grand_max": 20.0,
+      "percent": 74,
+      "decision": "on_track",
+      "notes": "Giữa kỳ: ổn. Product Thinking (B3) cần đẩy trước gate L3→L4."
+    }
+  ]
+}
