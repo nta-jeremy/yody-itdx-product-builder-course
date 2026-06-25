@@ -1,12 +1,12 @@
 /**
  * Content reader — sessions + teaching kits.
  *
- * Reads markdown from `docs/idea/Intern-Product-Builder/` (repo-relative).
- * The content directory lives OUTSIDE the Next.js app (`app/`), at the
- * monorepo root (`../docs/idea/`). Reading happens at BUILD TIME only:
- * Next.js 16 Server Components execute during `next build` (SSG), and with
- * `output: 'export'` every route is prerendered — no runtime fs. This lib is
- * therefore safe to use from Server Components / `generateStaticParams`.
+ * Reads markdown from `content/idea/Intern-Product-Builder/` (app-relative).
+ * The content directory lives INSIDE the Next.js app at `./content/idea/`.
+ * Reading happens at BUILD TIME only: Next.js 16 Server Components execute
+ * during `next build` (SSG), and with `output: 'export'` every route is
+ * prerendered — no runtime fs. This lib is therefore safe to use from Server
+ * Components / `generateStaticParams`.
  *
  * FK contract: `sessionCode` is the ONLY stable identifier exposed. The
  * underlying file path is never leaked — file renames do not break the DB
@@ -65,22 +65,22 @@ export type SessionContent = {
  */
 export const SESSION_CODE_RE = /^I[1-5]\.[1-3]$/;
 
-const REPO_ROOT = resolveRepoRoot();
-export const CONTENT_ROOT = join(REPO_ROOT, "docs", "idea", "Intern-Product-Builder");
+const APP_ROOT = resolveAppRoot();
+export const CONTENT_ROOT = join(APP_ROOT, "content", "idea", "Intern-Product-Builder");
 const SESSIONS_DIR = join(CONTENT_ROOT, "Sessions");
 
-// ─── Repo root resolution ───────────────────────────────────────────────
+// ─── App root resolution ────────────────────────────────────────────────
 
 /**
- * Resolve the monorepo root from this module's location.
+ * Resolve the Next.js app root from this module's location.
  *
- * This file lives at `app/src/lib/content/sessions.ts`, so the repo root is
- * four `dirname` hops up. Computed once at module load — cheap and stable.
+ * This file lives at `app/src/lib/content/sessions.ts`, so the app root is
+ * three `dirname` hops up. Computed once at module load — cheap and stable.
  */
-export function resolveRepoRoot(): string {
-  // app/src/lib/content/sessions.ts → app/src/lib/content → app/src/lib → app/src → app → repo root
+export function resolveAppRoot(): string {
+  // app/src/lib/content/sessions.ts → app/src/lib/content → app/src/lib → app/src → app
   const here = dirname(fileURLToPath(import.meta.url));
-  return resolve(here, "..", "..", "..", "..");
+  return resolve(here, "..", "..", "..");
 }
 
 // ─── Validation ─────────────────────────────────────────────────────────

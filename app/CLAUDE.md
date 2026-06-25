@@ -57,15 +57,15 @@ components.json   # shadcn config (style: new-york, css: src/app/globals.css, al
 
 ## Showcase app (Intern Product Builder)
 
-The `app/` is the live showcase for the **YODY Intern Product Builder Course**. Content lives outside the Next.js app, at the monorepo root `../docs/idea/`, and is read **at build time only** (Server Components / SSG — no runtime fs).
+The `app/` is the live showcase for the **YODY Intern Product Builder Course**. Content lives INSIDE the Next.js app at `./content/idea/`, and is read **at build time only** (Server Components / SSG — no runtime fs). Self-contained for deploy: the entire `app/` directory can be deployed as a single Next.js project (e.g. Vercel).
 
 ### Content layer — `src/lib/content/`
 
 Single import surface for routes. Barrel `index.ts` exports 5 typed, `cache`-memoised readers (+`listScorecards`):
 
 - `getContent(kind, id)` — generic resolver for `"session" | "root-doc" | "canonical"`
-- `listSessions()` — 14 sessions from `docs/idea/Intern-Product-Builder/`
-- `listBadges()` / `listLearners()` / `listGateEvidence()` / `listScorecards()` — read `docs/idea/_mock-data/*.json` (Phase 1c owns those files; this lib only READS them)
+- `listSessions()` — 14 sessions from `content/idea/Intern-Product-Builder/`
+- `listBadges()` / `listLearners()` / `listGateEvidence()` / `listScorecards()` — read `content/idea/_mock-data/*.json` (Phase 1c owns those files; this lib only READS them)
 
 FK contract: `sessionCode` (`^I[1-5]\.[1-3]$`, validated before any fs touch — path-traversal guarded) is the only stable id exposed; underlying file paths are never leaked. Read-only module.
 

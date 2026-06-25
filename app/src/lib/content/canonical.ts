@@ -1,5 +1,5 @@
 /**
- * Reader for canonical reference files under `docs/idea/00_Core/`:
+ * Reader for canonical reference files under `content/idea/00_Core/`:
  *   "competency_dictionary" → competency_dictionary.json
  *   "will_fit"              → will_fit.json
  *   "progression_ladder"    → progression_ladder.md
@@ -11,9 +11,9 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { cache } from "react";
-import { resolveRepoRoot } from "./sessions";
+import { resolveAppRoot } from "./sessions";
 
-const CORE_DIR = join(resolveRepoRoot(), "docs", "idea", "00_Core");
+const CORE_DIR = join(resolveAppRoot(), "content", "idea", "00_Core");
 
 /**
  * Whitelisted canonical file stems (no extension). When the DB (Phase 2b)

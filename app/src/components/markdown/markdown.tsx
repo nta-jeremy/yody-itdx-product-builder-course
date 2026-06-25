@@ -8,7 +8,7 @@
  * next-mdx-remote.
  *
  * YODY DS compliance:
- *  - No emoji anywhere (markdown source is trusted docs/idea, already clean).
+ *  - No emoji anywhere (markdown source is trusted content/idea, already clean).
  *  - Token colors only — no raw hex. All styling via the `yody-prose` class
  *    (prose.css) which references CSS variables from colors_and_type.css.
  *  - Be Vietnam Pro inherits from the app surface (body font var).
