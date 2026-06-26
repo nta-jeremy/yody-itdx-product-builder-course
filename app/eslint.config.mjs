@@ -16,6 +16,13 @@ const eslintConfig = defineConfig([
     "src/components/ui/**",
     "src/hooks/use-mobile.ts",
   ]),
+  {
+    // Vitest test files use `as any` casts for fs/promises mock typing.
+    files: ["**/__tests__/**/*.ts"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

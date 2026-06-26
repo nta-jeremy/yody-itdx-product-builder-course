@@ -25,6 +25,11 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { cn } from "@/lib/utils";
 import { CodeCopyButton } from "./code-copy-button";
+import {
+  remarkImagePlaceholder,
+  REHYPE_IMAGE_PLACEHOLDER_TAG,
+} from "./remark-image-placeholder";
+import { EmptyImage } from "./empty-image";
 import "./prose.css";
 
 export interface MarkdownViewProps {
@@ -41,11 +46,124 @@ export interface MarkdownViewProps {
  * anchor links by rehype-autolink-headings — both feed the `Toc` component,
  * which extracts the same headings.
  */
+
+/** Component map for react-markdown@10. The `image-placeholder` entry
+ *  (custom hast element produced by `remark-image-placeholder` via
+ *  `data.hName` stamping) is accepted because the intrinsic is
+ *  declared in ./jsx.d.ts. */
+const markdownComponents = {
+  h1: ({ children, ...props }) => (
+    <h1 className="yody-h1" {...props}>{children}</h1>
+  ),
+  h2: ({ children, ...props }) => (
+    <h2 className="yody-h2" {...props}>{children}</h2>
+  ),
+  h3: ({ children, ...props }) => (
+    <h3 className="yody-h3" {...props}>{children}</h3>
+  ),
+  h4: ({ children, ...props }) => (
+    <h4 className="yody-h4" {...props}>{children}</h4>
+  ),
+  h5: ({ children, ...props }) => (
+    <h5 className="yody-h5" {...props}>{children}</h5>
+  ),
+  h6: ({ children, ...props }) => (
+    <h6 className="yody-h6" {...props}>{children}</h6>
+  ),
+  p: ({ children, ...props }) => (
+    <p className="yody-p" {...props}>{children}</p>
+  ),
+  a: ({ children, ...props }) => (
+    <a className="yody-link" {...props}>{children}</a>
+  ),
+  ul: ({ children, ...props }) => (
+    <ul className="yody-ul" {...props}>{children}</ul>
+  ),
+  ol: ({ children, ...props }) => (
+    <ol className="yody-ol" {...props}>{children}</ol>
+  ),
+  li: ({ children, ...props }) => (
+    <li className="yody-li" {...props}>{children}</li>
+  ),
+  blockquote: ({ children, ...props }) => (
+    <blockquote className="yody-quote" {...props}>{children}</blockquote>
+  ),
+  table: ({ children, ...props }) => (
+    <div className="yody-table-wrap">
+      <table className="yody-table" {...props}>{children}</table>
+    </div>
+  ),
+  code: ({ children, className, ...props }) => {
+    // Inline vs block: react-markdown gives `code` a `language-*`
+    // className only inside fenced blocks; inline code has none.
+    const isBlock = typeof className === "string" && /language-/.test(className);
+    if (isBlock) {
+      return (
+        <code className={cn("yody-code-block", className)} {...props}>
+          {children}
+        </code>
+      );
+    }
+    return (
+      <code className="yody-code-inline" {...props}>{children}</code>
+    );
+  },
+  pre: ({ children, ...props }) => {
+    // Extract the fenced-block language + raw code text from the
+    // child <code> element. react-markdown v10 (no syntax highlight)
+    // renders the code block's children as a plain string.
+    const child = React.Children.toArray(children)[0];
+    const codeEl = React.isValidElement(child)
+      ? (child as React.ReactElement<{ className?: string; children?: unknown }>)
+      : null;
+    const codeClassName = codeEl?.props?.className ?? "";
+    const lang = codeClassName.match(/language-(\w+)/)?.[1] ?? "";
+    const codeText =
+      typeof codeEl?.props?.children === "string"
+        ? codeEl.props.children
+        : "";
+    return (
+      <div className="yody-code-wrap">
+        {lang && <span className="yody-lang-label">{lang}</span>}
+        {codeText && <CodeCopyButton code={codeText} />}
+        <pre className="yody-pre" {...props}>
+          {children}
+        </pre>
+      </div>
+    );
+  },
+  hr: (props) => <hr className="yody-hr" {...props} />,
+  strong: ({ children, ...props }) => (
+    <strong className="yody-strong" {...props}>{children}</strong>
+  ),
+  em: ({ children, ...props }) => (
+    <em className="yody-em" {...props}>{children}</em>
+  ),
+  img: ({ alt, src, ...props }) => {
+    // Static export: next/image default loader needs a server, so
+    // raw <img> is correct here. The markdown source is trusted.
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img className="yody-img" alt={alt ?? ""} src={src ?? ""} {...props} />
+    );
+  },
+  // Map `<image-placeholder data-prompt="…">` hast element (produced by
+  // `remark-image-placeholder` stamping `data.hName` so `remark-rehype`
+  // emits our custom tag instead of stripping the comment) to the
+  // EmptyImage component. The intrinsic tag is declared in ./jsx.d.ts
+  // so react-markdown@10's `Components` type accepts it without casts.
+  [REHYPE_IMAGE_PLACEHOLDER_TAG]: ({
+    "data-prompt": dataPrompt,
+  }: {
+    "data-prompt"?: string;
+  }) => <EmptyImage prompt={dataPrompt ?? ""} />,
+};
+
 export function MarkdownView({ source, className }: MarkdownViewProps) {
   return (
     <div data-surface="app" className={cn("yody-prose", className)}>
       <Markdown
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[remarkGfm, remarkImagePlaceholder]}
         rehypePlugins={[
           rehypeSlug,
           // Anchor links: wrap heading text in an <a> with aria-hidden + a
@@ -59,105 +177,7 @@ export function MarkdownView({ source, className }: MarkdownViewProps) {
             },
           }],
         ]}
-        components={{
-          // Map headings to carry the YODY prose heading class so prose.css
-          // can target them without relying on bare tag selectors.
-          h1: ({ children, ...props }) => (
-            <h1 className="yody-h1" {...props}>{children}</h1>
-          ),
-          h2: ({ children, ...props }) => (
-            <h2 className="yody-h2" {...props}>{children}</h2>
-          ),
-          h3: ({ children, ...props }) => (
-            <h3 className="yody-h3" {...props}>{children}</h3>
-          ),
-          h4: ({ children, ...props }) => (
-            <h4 className="yody-h4" {...props}>{children}</h4>
-          ),
-          h5: ({ children, ...props }) => (
-            <h5 className="yody-h5" {...props}>{children}</h5>
-          ),
-          h6: ({ children, ...props }) => (
-            <h6 className="yody-h6" {...props}>{children}</h6>
-          ),
-          p: ({ children, ...props }) => (
-            <p className="yody-p" {...props}>{children}</p>
-          ),
-          a: ({ children, ...props }) => (
-            <a className="yody-link" {...props}>{children}</a>
-          ),
-          ul: ({ children, ...props }) => (
-            <ul className="yody-ul" {...props}>{children}</ul>
-          ),
-          ol: ({ children, ...props }) => (
-            <ol className="yody-ol" {...props}>{children}</ol>
-          ),
-          li: ({ children, ...props }) => (
-            <li className="yody-li" {...props}>{children}</li>
-          ),
-          blockquote: ({ children, ...props }) => (
-            <blockquote className="yody-quote" {...props}>{children}</blockquote>
-          ),
-          table: ({ children, ...props }) => (
-            <div className="yody-table-wrap">
-              <table className="yody-table" {...props}>{children}</table>
-            </div>
-          ),
-          code: ({ children, className, ...props }) => {
-            // Inline vs block: react-markdown gives `code` a `language-*`
-            // className only inside fenced blocks; inline code has none.
-            const isBlock = typeof className === "string" && /language-/.test(className);
-            if (isBlock) {
-              return (
-                <code className={cn("yody-code-block", className)} {...props}>
-                  {children}
-                </code>
-              );
-            }
-            return (
-              <code className="yody-code-inline" {...props}>{children}</code>
-            );
-          },
-          pre: ({ children, ...props }) => {
-            // Extract the fenced-block language + raw code text from the
-            // child <code> element. react-markdown v10 (no syntax highlight)
-            // renders the code block's children as a plain string.
-            const child = React.Children.toArray(children)[0];
-            const codeEl = React.isValidElement(child)
-              ? (child as React.ReactElement<{ className?: string; children?: unknown }>)
-              : null;
-            const codeClassName = codeEl?.props?.className ?? "";
-            const lang = codeClassName.match(/language-(\w+)/)?.[1] ?? "";
-            const codeText =
-              typeof codeEl?.props?.children === "string"
-                ? codeEl.props.children
-                : "";
-            return (
-              <div className="yody-code-wrap">
-                {lang && <span className="yody-lang-label">{lang}</span>}
-                {codeText && <CodeCopyButton code={codeText} />}
-                <pre className="yody-pre" {...props}>
-                  {children}
-                </pre>
-              </div>
-            );
-          },
-          hr: (props) => <hr className="yody-hr" {...props} />,
-          strong: ({ children, ...props }) => (
-            <strong className="yody-strong" {...props}>{children}</strong>
-          ),
-          em: ({ children, ...props }) => (
-            <em className="yody-em" {...props}>{children}</em>
-          ),
-          img: ({ alt, src, ...props }) => {
-            // Static export: next/image default loader needs a server, so
-            // raw <img> is correct here. The markdown source is trusted.
-            return (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img className="yody-img" alt={alt ?? ""} src={src ?? ""} {...props} />
-            );
-          },
-        }}
+        components={markdownComponents}
       >
         {source}
       </Markdown>

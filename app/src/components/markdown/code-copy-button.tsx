@@ -48,8 +48,9 @@ export function CodeCopyButton({ code }: CodeCopyButtonProps) {
     <button
       type="button"
       onClick={onCopy}
-      aria-label="Sao chép mã"
-      className="yody-code-copy absolute right-[var(--s-2)] top-[var(--s-2)] inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-[var(--radius-xs)] px-[var(--s-2)] text-[var(--fg-3)] outline-ring/50 transition-colors hover:text-[var(--fg-1)] hover:bg-[rgba(255,255,255,0.08)] focus-visible:ring-[3px]"
+      aria-label={copied ? "Đã sao chép" : "Sao chép mã"}
+      data-copied={copied ? "true" : undefined}
+      className="yody-code-copy absolute right-[10px] top-[10px] inline-flex min-h-[32px] min-w-[32px] items-center justify-center rounded-[6px] px-[8px] text-white/70 outline-ring/50 transition-colors hover:bg-[rgba(255,255,255,0.10)] hover:text-white focus-visible:ring-[3px]"
     >
       {copied ? <Check size={14} /> : <Copy size={14} />}
     </button>
