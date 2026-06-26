@@ -22,8 +22,9 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Lộ trình 5 level",
-  description: "Lộ trình Intern Product Builder — 5 level (L1 Aware → L5 Architect) với gate hành vi chốt giữa các level.",
+  title: "Lộ trình 5 cấp độ",
+  description:
+    "Lộ trình Intern Product Builder — 5 cấp độ từ L1 Nhận thức đến L5 Kiến trúc sư, với các gate hành vi chốt giữa mỗi cấp.",
 };
 
 /** One level row. */
@@ -48,7 +49,7 @@ const LEVELS: ReadonlyArray<LevelRow> = [
     name: "Aware",
     numeral: "I",
     colorClass: "bg-[var(--mint)]",
-    desc: "Nhận thức AI — hiểu cơ chế, giới hạn và hệ quả tới quyết định sản phẩm.",
+    desc: "Nhận thức về AI — hiểu cơ chế hoạt động, giới hạn và hệ quả đối với quyết định sản phẩm.",
     sessions: [
       { code: "I1.1", title: "AI Fundamentals (conceptual)" },
       { code: "I1.2", title: "Giới hạn AI & an toàn dữ liệu" },
@@ -56,7 +57,7 @@ const LEVELS: ReadonlyArray<LevelRow> = [
     exitGate: {
       label: "Gate L1→L2",
       atCode: "I1.2",
-      desc: "Deliverable phân tích 1 feature AI + diligence statement, Trainer duyệt.",
+      desc: "Nộp bài phân tích một tính năng AI kèm bản cam kết thẩm tra, được Trainer duyệt.",
     },
   },
   {
@@ -64,7 +65,7 @@ const LEVELS: ReadonlyArray<LevelRow> = [
     name: "Operator",
     numeral: "II",
     colorClass: "bg-[var(--iris)]",
-    desc: "Vận hành AI — prompting nâng cao, công cụ, đo lường prompt → insight.",
+    desc: "Vận hành AI — prompting nâng cao, sử dụng công cụ AI, đo lường prompt để rút ra insight.",
     sessions: [
       { code: "I2.1", title: "Advanced Prompting" },
       { code: "I2.2", title: "AI Tools trong Product Work" },
@@ -73,7 +74,7 @@ const LEVELS: ReadonlyArray<LevelRow> = [
     exitGate: {
       label: "Gate L2→L3",
       atCode: "I2.3",
-      desc: "Spec insight đo được giá trị, Trainer + Team lead duyệt.",
+      desc: "Bản spec insight đã được đo lường giá trị rõ ràng, được Trainer và Trưởng nhóm duyệt.",
     },
   },
   {
@@ -81,7 +82,7 @@ const LEVELS: ReadonlyArray<LevelRow> = [
     name: "Builder",
     numeral: "III",
     colorClass: "bg-[var(--iris)]",
-    desc: "Xây deliverable — thiết kế workflow, build deliverable, mentor review & iterate.",
+    desc: "Xây dựng deliverable — thiết kế workflow, dựng sản phẩm, mentor review và lặp lại theo góp ý.",
     sessions: [
       { code: "I3.1", title: "Workflow Design & Cowork" },
       { code: "I3.2", title: "Build Deliverable" },
@@ -90,7 +91,7 @@ const LEVELS: ReadonlyArray<LevelRow> = [
     exitGate: {
       label: "Gate L3→L4",
       atCode: "I3.3",
-      desc: "Workflow demo + bằng chứng người dùng + Mentor sản phẩm duyệt.",
+      desc: "Demo workflow kèm bằng chứng từ người dùng thực, được Mentor sản phẩm duyệt.",
     },
   },
   {
@@ -98,7 +99,7 @@ const LEVELS: ReadonlyArray<LevelRow> = [
     name: "Integrator",
     numeral: "IV",
     colorClass: "bg-[var(--iris)]",
-    desc: "Tích hợp & vận hành — Product Thinking, technical track, tích hợp initiative & iterate.",
+    desc: "Tích hợp & vận hành — tư duy sản phẩm, track kỹ thuật, tích hợp sáng kiến vào thực tế và lặp lại.",
     sessions: [
       { code: "I4.1", title: "Product Thinking" },
       { code: "I4.2", title: "Technical Track (Claude Code)" },
@@ -107,7 +108,7 @@ const LEVELS: ReadonlyArray<LevelRow> = [
     exitGate: {
       label: "Gate L4→L5",
       atCode: "I4.3",
-      desc: "Initiative tích hợp vận hành thật, được duyệt.",
+      desc: "Sáng kiến tích hợp đã vận hành thật trong sản phẩm và được duyệt.",
     },
   },
   {
@@ -115,16 +116,16 @@ const LEVELS: ReadonlyArray<LevelRow> = [
     name: "Architect",
     numeral: "V",
     colorClass: "bg-[var(--gold)]",
-    desc: "Kiến trúc & ship — kiến trúc giải pháp AI, production readiness + guardrails, ship & bảo vệ capstone.",
+    desc: "Kiến trúc & ra mắt — thiết kế kiến trúc giải pháp AI, chuẩn bị production readiness và guardrails, ra mắt và bảo vệ dự án.",
     sessions: [
       { code: "I5.1", title: "Kiến trúc giải pháp AI" },
       { code: "I5.2", title: "Production Readiness & Guardrails" },
-      { code: "I5.3", title: "Ship, bảo vệ capstone" },
+      { code: "I5.3", title: "Ship, bảo vệ dự án" },
     ],
     exitGate: {
       label: "Gate tốt nghiệp L5",
       atCode: "I5.3",
-      desc: "Capstone defense + Hội đồng Product Builder duyệt.",
+      desc: "Hoàn thành bảo vệ dự án, được Hội đồng Product Builder đánh giá.",
     },
   },
 ];
@@ -137,12 +138,11 @@ export default function RoadmapPage() {
           Lộ trình
         </span>
         <h1 className="mt-3 font-[family-name:var(--font-impact)] text-[clamp(36px,4vw,52px)] font-extrabold leading-[1.08] text-[var(--fg-1)]">
-          5 level — L1 Aware → L5 Architect
+          Năm cấp độ — từ L1 Nhận thức đến L5 Kiến trúc sư
         </h1>
         <p className="mt-3 max-w-[680px] font-[family-name:var(--font-body)] text-[17px] leading-[1.65] text-[var(--fg-2)]">
-          Mỗi level chốt bằng <strong className="text-[var(--fg-1)]">gate hành vi</strong> — bạn vượt
-          gate bằng deliverable thật được duyệt, không phải điểm số. Màu theo
-          YODY DS: L1 mint · L2-L4 iris · L5 gold.
+          Mỗi cấp độ chốt lại bằng một <strong className="text-[var(--fg-1)]">gate hành vi</strong>:
+          bạn vượt qua gate nhờ một deliverable thực tế được duyệt, không dựa trên điểm số.
         </p>
       </header>
 
@@ -180,7 +180,7 @@ export default function RoadmapPage() {
                   {lvl.sessions.map((s) => (
                     <li key={s.code}>
                       <Link
-                        href={`/sessions/${s.code}` as Route}
+                        href={`/learn/${s.code}` as Route}
                         className="inline-flex min-h-[36px] w-full items-center gap-3 rounded-md px-2 py-1 text-left font-[family-name:var(--font-body)] text-sm text-[var(--fg-2)] outline-ring/50 transition-colors hover:bg-[var(--bg-muted)] hover:text-[var(--fg-1)] focus-visible:ring-[3px]"
                       >
                         <span className="font-[family-name:var(--font-mono)] text-[11px] text-[var(--fg-3)]">

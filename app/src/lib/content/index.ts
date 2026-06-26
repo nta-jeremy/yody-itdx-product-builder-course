@@ -32,7 +32,27 @@ import {
   type SessionContent,
   isValidSessionCode,
 } from "./sessions";
-import { getLearnerContent, listLearnerSessions, type LearnerContent } from "./learner";
+import { getLearnerContent, listLearnerSessions, type LearnerContent, type SubSessionMeta } from "./learner";
+import {
+  getSubLearnerContent,
+  listSubLearnerContent,
+  isValidSubSessionCode,
+  _resetSubCaches,
+  type SubLearnerContent,
+  type SubNavigation,
+} from "./sub-learner";
+import {
+  getPreRead,
+  listPreReads,
+  parseSummary,
+  parseVideo,
+  parseQuestions,
+  _resetPreReadCaches,
+  type PreReadContent,
+  type PreReadSummary,
+  type PreReadVideo,
+  type PreReadQuestion,
+} from "./preread";
 import { getRootDoc, isRootDocName, type RootDocName } from "./root-docs";
 import {
   getCanonicalFile,
@@ -42,7 +62,7 @@ import {
 } from "./canonical";
 
 // ─── Re-exports for Phase 2c routes ────────────────────────────────────
-export type { SessionContent, RootDocName, CanonicalName, LearnerContent };
+export type { SessionContent, RootDocName, CanonicalName, LearnerContent, SubSessionMeta, SubLearnerContent, SubNavigation, PreReadContent, PreReadSummary, PreReadVideo, PreReadQuestion };
 export {
   getSession,
   listSessions,
@@ -54,6 +74,16 @@ export {
   isCanonicalName,
   getLearnerContent,
   listLearnerSessions,
+  getSubLearnerContent,
+  listSubLearnerContent,
+  isValidSubSessionCode,
+  _resetSubCaches,
+  getPreRead,
+  listPreReads,
+  parseSummary,
+  parseVideo,
+  parseQuestions,
+  _resetPreReadCaches,
 };
 
 // ─── Mock data location ─────────────────────────────────────────────────

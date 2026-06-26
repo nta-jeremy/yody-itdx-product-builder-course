@@ -16,14 +16,18 @@
  */
 
 import type { Metadata } from "next";
+import Link from "next/link";
+import type { Route } from "next";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
-import { getLearnerContent, listLearnerSessions, isValidSessionCode } from "@/lib/content";
+import { getLearnerContent, listLearnerSessions, isValidSessionCode, getPreRead } from "@/lib/content";
 import { MarkdownView } from "@/components/markdown/markdown";
 import { extractToc } from "@/components/markdown/toc";
 import { TocScrollspy } from "@/components/markdown/toc-scrollspy";
 import { Sidebar } from "@/components/shell";
 import { CourseDrawer } from "@/components/learn/course-drawer";
 import { Breadcrumb } from "@/components/learn/breadcrumb";
+import { PreReadBanner } from "@/components/learn/preread-banner";
 import { ReadingTime } from "@/components/learn/reading-time";
 import { PrevNextNav } from "@/components/learn/prev-next-nav";
 import { ReadingProgress } from "@/components/learn/reading-progress";
@@ -36,6 +40,11 @@ export async function generateStaticParams() {
 
 /** Strict static export: 404 for any path not in `generateStaticParams`. */
 export const dynamicParams = false;
+
+/** Opt into dynamic rendering ONLY for the headers() read (sidebar expand).
+ *  Everything else (markdown, TOC, breadcrumb) stays static — see sidebar
+ *  fallback in JSX for build-time render. */
+export const dynamic = "force-static";
 
 type Params = Promise<{ code: string }>;
 
@@ -69,6 +78,11 @@ export default async function LearnPage({
 
   const sessions = await listLearnerSessions();
   const tocItems = await extractToc(content.markdown);
+  const hdrs = await headers();
+  const pathname = hdrs.get("x-pathname") ?? "";
+  // Pre-read optional (only kits that shipped pre-read files — Phase 6
+  // applies template to all 14). Banner hides gracefully when null.
+  const preread = await getPreRead(code);
 
   return (
     <div
@@ -76,9 +90,13 @@ export default async function LearnPage({
       className="mx-auto flex w-full max-w-[var(--container-max)] items-stretch"
     >
       <ReadingProgress />
-      {/* Desktop sidebar (>=lg) — visible inline; mobile uses the drawer below. */}
+      {/* Desktop sidebar (>=lg) — visible inline; mobile uses the drawer below.
+          Reads `x-pathname` (set by `src/middleware.ts`) so the sidebar can
+          auto-expand the parent of an active sub-session. This makes the page
+          dynamic (headers() opt-out of SSG), but the page otherwise prerenders
+          the same for every request — only the sidebar expand state differs. */}
       <div className="hidden lg:flex">
-        <Sidebar sessions={sessions} activeCode={content.code} linkBase="/learn" />
+        <Sidebar sessions={sessions} activeCode={content.code} linkBase="/learn" pathname={pathname} />
       </div>
 
       {/* Center+right slot: the prose column is centred within its flex
@@ -89,42 +107,86 @@ export default async function LearnPage({
             it is rendered here and passed to the client CourseDrawer as children. */}
         <div className="lg:hidden mb-4">
           <CourseDrawer>
-            <Sidebar sessions={sessions} activeCode={content.code} linkBase="/learn" />
+            <Sidebar sessions={sessions} activeCode={content.code} linkBase="/learn" pathname={pathname} />
           </CourseDrawer>
         </div>
 
         <div className="flex items-start gap-10 xl:gap-14">
-          {/* Prose column — centred, VitePress 688px reading width. */}
-          <div className="mx-auto w-full max-w-[688px] min-w-0">
-            <Breadcrumb
-              level={content.level}
-              levelNum={content.levelNum}
-              code={content.code}
-            />
+          {/* Prose column — outer flex-1 reserves the slot so the TOC
+              (flex-none, 220px) can sit at `top: 96px` and stick. Inner
+              mx-auto keeps the 688px reading width centred in that slot. */}
+          <div className="min-w-0 flex-1">
+            <div className="mx-auto w-full max-w-[688px]">
+              <Breadcrumb
+                level={content.level}
+                levelNum={content.levelNum}
+                code={content.code}
+              />
 
-            {/* Article header — eyebrow meta row leads, then a prominent
-                title with comfortable breathing room. */}
-            <header className="mb-10 pb-6 border-b border-border">
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                <span className="font-[family-name:var(--font-mono)] text-[12px] font-bold uppercase tracking-[0.16em] text-[var(--brand)]">
-                  {content.code}
-                </span>
-                <span className="text-[var(--border-hover)]">·</span>
-                <span className="font-[family-name:var(--font-mono)] text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--fg-3)]">
-                  {content.level}
-                </span>
-                <span className="text-[var(--border-hover)]">·</span>
-                <ReadingTime minutes={content.readingMinutes} />
-              </div>
-              <h1 className="mt-4 font-[family-name:var(--font-brand)] text-[clamp(28px,3.4vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-[var(--fg-1)]">
-                {content.title}
-              </h1>
-            </header>
+              {preread ? (
+                <PreReadBanner code={code} totalMinutes={preread.totalMinutes} />
+              ) : null}
 
-            {/* Body: single-column prose. */}
-            <MarkdownView source={content.markdown} />
+              {/* Sub-session list — visible when the parent kit has been
+                  split into multiple `.md` files (Phase 6 applies the split).
+                  Backward compat: when subSessions=[] the section is omitted
+                  entirely so 14 existing pages render unchanged. */}
+              {content.subSessions.length > 0 ? (
+                <section className="mb-8 rounded-lg border border-border bg-[var(--bg-muted)] p-5">
+                  <h2 className="font-[family-name:var(--font-mono)] text-[12px] font-bold uppercase tracking-[0.12em] text-[var(--fg-3)]">
+                    Buổi học gồm {content.subSessions.length} buổi phụ
+                  </h2>
+                  <ul className="mt-3 flex flex-col gap-1.5">
+                    {content.subSessions.map((sub) => {
+                      const shortSub = sub.subCode.replace(`${content.code}.`, "");
+                      return (
+                        <li key={sub.subCode}>
+                          <Link
+                            href={`/learn/${content.code}/${shortSub}` as Route}
+                            className="group flex min-h-[44px] items-center gap-3 rounded-md px-2 outline-ring/50 transition-colors hover:bg-[var(--bg)] focus-visible:ring-[3px]"
+                          >
+                            <span className="font-[family-name:var(--font-mono)] text-[12px] font-bold text-[var(--brand)]">
+                              {sub.subCode}
+                            </span>
+                            <span className="font-[family-name:var(--font-body)] text-[14px] text-[var(--fg-1)]">
+                              {sub.title}
+                            </span>
+                            <span className="ml-auto font-[family-name:var(--font-mono)] text-[11px] text-[var(--fg-3)]">
+                              {sub.readingMinutes}&rsquo; đọc ·{" "}
+                              {sub.duration}&rsquo; live
+                            </span>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </section>
+              ) : null}
 
-            <PrevNextNav sessions={sessions} activeCode={content.code} />
+              {/* Article header — eyebrow meta row leads, then a prominent
+                  title with comfortable breathing room. */}
+              <header className="mb-10 pb-6 border-b border-border">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <span className="font-[family-name:var(--font-mono)] text-[12px] font-bold uppercase tracking-[0.16em] text-[var(--brand)]">
+                    {content.code}
+                  </span>
+                  <span className="text-[var(--border-hover)]">·</span>
+                  <span className="font-[family-name:var(--font-mono)] text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--fg-3)]">
+                    {content.level}
+                  </span>
+                  <span className="text-[var(--border-hover)]">·</span>
+                  <ReadingTime minutes={content.readingMinutes} />
+                </div>
+                <h1 className="mt-4 font-[family-name:var(--font-brand)] text-[clamp(28px,3.4vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-[var(--fg-1)]">
+                  {content.title}
+                </h1>
+              </header>
+
+              {/* Body: single-column prose. */}
+              <MarkdownView source={content.markdown} />
+
+              <PrevNextNav sessions={sessions} activeCode={content.code} />
+            </div>
           </div>
 
           {/* TOC — sticky outline on the right (xl+). Hidden on smaller

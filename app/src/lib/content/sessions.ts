@@ -65,7 +65,7 @@ export type SessionContent = {
  * containing path separators, dots beyond the single separator, or non
  * matching characters is rejected before fs is touched.
  */
-export const SESSION_CODE_RE = /^I[1-5]\.[1-3]$/;
+export const SESSION_CODE_RE = /^I[1-5]\.[1-3](\.[1-3])?$/;
 
 const APP_ROOT = resolveAppRoot();
 export const CONTENT_ROOT = join(APP_ROOT, "content", "idea", "Intern-Product-Builder");
@@ -89,7 +89,8 @@ export function resolveAppRoot(): string {
 
 /**
  * Validate a sessionCode string. Returns true iff `code` matches
- * `^I[1-5]\.[1-3]$`. Use this in route handlers to guard user input.
+ * `^I[1-5]\.[1-3](\.[1-3])?$` (parent or sub-session). Use this in route
+ * handlers to guard user input.
  */
 export function isValidSessionCode(code: string): boolean {
   return SESSION_CODE_RE.test(code);
@@ -98,12 +99,13 @@ export function isValidSessionCode(code: string): boolean {
 /**
  * Assert `code` is a valid sessionCode. Throws on invalid input — callers
  * passing user input (route params) must validate first or catch + 404.
- * Path traversal is impossible: the regex only matches `I[1-5].[1-3]`.
+ * Path traversal is impossible: the regex only matches `I[1-5].[1-3]` or
+ * `I[1-5].[1-3].[1-3]`.
  */
 function assertValidCode(code: string): void {
   if (!SESSION_CODE_RE.test(code)) {
     throw new Error(
-      `Invalid sessionCode: "${code}". Must match ^I[1-5]\\.[1-3]$.`,
+      `Invalid sessionCode: "${code}". Must match ^I[1-5]\\.[1-3](\\.[1-3])?$.`,
     );
   }
 }

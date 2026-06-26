@@ -25,14 +25,21 @@ import { join } from "node:path";
 import { cache } from "react";
 import { CONTENT_ROOT, SESSION_CODE_RE, isValidSessionCode } from "./sessions";
 
+/** Test-only: clear memoisation between cases. Production never calls this. */
+export function _resetSubCaches(): void {
+  // React `cache()` memoizes within a render pass; tests run separately so
+  // there's nothing to clear here. Exists to satisfy the test-only import
+  // surface; sub-learner.ts has its own Map that it clears.
+}
+
 // ─── Types ──────────────────────────────────────────────────────────────
 
 /**
- * Learner-facing content shape (6 fields — YAGNI: no `version`/`date`).
+ * Learner-facing content shape (7 fields — YAGNI: no `version`/`date`).
  * `code` is the FK (e.g. "I1.1"). No file paths leak — rename-safe.
  */
 export type LearnerContent = {
-  /** Stable identifier, e.g. "I1.1". Matches `^I[1-5]\.[1-3]$`. */
+  /** Stable identifier, e.g. "I1.1". Matches `^I[1-5]\.[1-3](\.[1-3])?$`. */
   code: string;
   /** Human title from the H1 (stripped of `I{n}.x — ` prefix), or H2 fallback. */
   title: string;
@@ -46,6 +53,30 @@ export type LearnerContent = {
   wordCount: number;
   /** Reading time estimate, `Math.ceil(wordCount / 200)`, min 1. */
   readingMinutes: number;
+  /**
+   * Sub-session metadata when the parent kit has been split into multiple
+   * `.md` files (Phase 1 stub: empty when only one file exists).
+   * Phase 2 enriches title/readingMinutes from the markdown.
+   */
+  subSessions: SubSessionMeta[];
+};
+
+/**
+ * Sub-session metadata (Phase 1 stub). Populated when a kit's main-content
+ * folder contains multiple `.md` files (e.g. `I4.2.1-*.md`, `I4.2.2-*.md`).
+ * UI consumes this in Phase 3 for the sub-session navigation.
+ */
+export type SubSessionMeta = {
+  /** Sub-session code, e.g. "I4.2.1". Matches parent + `.[1-3]`. */
+  subCode: string;
+  /** Filename slug, e.g. "Kien-Truc-5-Lop". Empty if no `-{slug}` suffix. */
+  slug: string;
+  /** Human title — Phase 1 stub equals subCode; Phase 2 enriches from H1. */
+  title: string;
+  /** Reading minutes — Phase 1 stub `0`; Phase 2 enriches from markdown. */
+  readingMinutes: number;
+  /** Live-session duration: 90' (deep slice) or 75' (gate position). */
+  duration: 75 | 90;
 };
 
 // ─── Level map ───────────────────────────────────────────────────────────
@@ -110,20 +141,44 @@ function parseLearnerTitle(lines: string[], code: string): string {
 // ─── File discovery ─────────────────────────────────────────────────────
 
 /**
- * Find the single main-content markdown for `code` under `Teaching-Kit-${code}`.
- * Glob-tolerant: matches any `*.md` in the folder (I4.3 uses `Noi-Dung-Hoc`,
- * not `Tai-Lieu-Hoc`). Returns absolute path or null if missing.
+ * Parse a main-content filename like `I4.2.1-Kien-Truc-5-Lop.md` into
+ * sub-session metadata. Phase 1 stub: title = subCode, readingMinutes = 0,
+ * duration = 90'. Phase 2 enriches title/readingMinutes from the markdown.
  */
-async function findMainContentFile(code: string): Promise<string | null> {
+function parseSubSessionFromPath(absPath: string): SubSessionMeta {
+  const fileName = absPath.split("/").pop() ?? "";
+  const stem = fileName.replace(/\.md$/, "");
+  const m = stem.match(/^(I[1-5]\.[1-3]\.[1-3])(?:-(.+))?$/);
+  const subCode = m?.[1] ?? stem;
+  const slug = m?.[2] ?? "";
+  return {
+    subCode,
+    slug,
+    title: subCode,
+    readingMinutes: 0,
+    duration: 90,
+  };
+}
+
+/**
+ * List all main-content `.md` files for `code` under `Teaching-Kit-${code}`,
+ * sorted ascending (so `I4.2.1-*.md` precedes `I4.2.2-*.md`). Skips dirs
+ * starting with `_` (e.g. `_archive/`, `_draft/`). Returns absolute paths.
+ * Returns empty array if the folder is missing.
+ */
+async function listMainContentFiles(code: string): Promise<string[]> {
   const kitDir = join(CONTENT_ROOT, `Teaching-Kit-${code}`, "main-content");
   let entries: string[];
   try {
     entries = await readdir(kitDir);
   } catch {
-    return null;
+    return [];
   }
-  const match = entries.filter((e) => e.endsWith(".md")).sort()[0];
-  return match ? join(kitDir, match) : null;
+  return entries
+    .filter((e) => e.endsWith(".md"))
+    .filter((e) => !e.startsWith("_"))
+    .sort()
+    .map((e) => join(kitDir, e));
 }
 
 // ─── Public API ─────────────────────────────────────────────────────────
@@ -131,30 +186,45 @@ async function findMainContentFile(code: string): Promise<string | null> {
 /**
  * Read learner content by stable code.
  *
- * @param code sessionCode, e.g. "I1.1" — must match `^I[1-5]\.[1-3]$`.
+ * @param code sessionCode, e.g. "I1.1" — must match `^I[1-5]\.[1-3](\.[1-3])?$`.
  * @returns `LearnerContent` or `null` if the main-content file is missing.
  * @throws if `code` fails validation (path-traversal guard via `isValidSessionCode`).
  *
  * Memoised per `code` within a single render pass via React `cache` so that
  * `generateStaticParams`, `generateMetadata`, and the page body sharing the
  * same `code` do not re-read the file.
+ *
+ * Sub-session handling (Phase 1+): if multiple `.md` files exist in the
+ * main-content folder, the first (sorted) is treated as primary content,
+ * and the rest populate `subSessions` as metadata stubs. Phase 2 enriches.
  */
 export const getLearnerContent = cache(
   async (code: string): Promise<LearnerContent | null> => {
     if (!isValidSessionCode(code)) {
       throw new Error(
-        `Invalid sessionCode: "${code}". Must match ^I[1-5]\\.[1-3]$.`,
+        `Invalid sessionCode: "${code}". Must match ^I[1-5]\\.[1-3](\\.[1-3])?$.`,
       );
     }
-    const path = await findMainContentFile(code);
-    if (!path) return null;
-    const markdown = await readFile(path, "utf8");
+    const files = await listMainContentFiles(code);
+    if (files.length === 0) return null;
+    const primaryPath = files[0];
+    const markdown = await readFile(primaryPath, "utf8");
     const lines = markdown.split("\n");
     const title = parseLearnerTitle(lines, code);
     const { level, levelNum } = levelFromCode(code);
     const wordCount = markdown.split(/\s+/).filter(Boolean).length;
     const readingMinutes = Math.max(1, Math.ceil(wordCount / 200));
-    return { code, title, level, levelNum, markdown, wordCount, readingMinutes };
+    const subSessions = files.length > 1 ? files.map(parseSubSessionFromPath) : [];
+    return {
+      code,
+      title,
+      level,
+      levelNum,
+      markdown,
+      wordCount,
+      readingMinutes,
+      subSessions,
+    };
   },
 );
 

@@ -7,6 +7,6 @@
  */
 
 export { SiteHeader, type NavKey, type SiteHeaderProps } from "./site-header";
-export { Sidebar, type SidebarProps } from "./sidebar";
+export { Sidebar, SidebarAsync, type SidebarProps } from "./sidebar";
 export { Footer } from "./footer";
 export { PrintLayout, type PrintLayoutProps } from "./print-layout";
