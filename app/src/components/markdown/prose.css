@@ -1,7 +1,7 @@
 /*
  * YODY DS prose styles for rendered markdown.
  *
- * Token-only: every color references a CSS variable from
+ * VitePress-lean reading rhythm, token-only colors from
  * colors_and_type.css / globals.css. NO raw hex anywhere — YODY DS rule.
  * Be Vietnam Pro inherits from the app surface (body font var), no @font-face.
  * No emoji.
@@ -19,74 +19,106 @@
  */
 
 .yody-prose {
+  /* VitePress prose rhythm: generous readable column, relaxed line-height. */
   font-family: var(--font-body);
   color: var(--fg-2);
-  font-size: var(--text-body, 18px);
-  line-height: 1.7;
-  max-width: 72ch;
+  font-size: 17px;
+  line-height: 1.75;
+  max-width: 688px;
+  position: relative;
+}
+
+/* Anchor scroll offset — sticky header + local nav reserve space so the
+   target heading isn't hidden under the top bar (VitePress uses 134px). */
+.yody-prose :is(h1, h2, h3, h4) {
+  scroll-margin-top: 96px;
 }
 
 /* ─── Headings ──────────────────────────────────────────────────────── */
 
 .yody-prose .yody-h1 {
-  font: var(--type-h1);
-  letter-spacing: -0.022em;
+  font: 700 clamp(32px, 4.4vw, 40px) / 1.15 var(--font-brand);
+  letter-spacing: -0.02em;
   color: var(--fg-1);
-  margin: 0 0 var(--s-6);
+  margin: 0 0 var(--s-5);
 }
 
+/* h2 carries a top hairline + breathing room — the VitePress "chapter" beat. */
 .yody-prose .yody-h2 {
-  font: var(--type-h2);
-  letter-spacing: -0.018em;
+  font: 700 clamp(24px, 2.6vw, 28px) / 1.25 var(--font-brand);
+  letter-spacing: -0.016em;
   color: var(--fg-1);
   margin: var(--s-12) 0 var(--s-4);
-  padding-top: var(--s-2);
+  padding-top: var(--s-6);
   border-top: 1px solid var(--border-light);
 }
 
 .yody-prose .yody-h3 {
-  font: var(--type-h3);
+  font: 600 22px / 1.3 var(--font-brand);
   letter-spacing: -0.01em;
   color: var(--fg-1);
   margin: var(--s-10) 0 var(--s-3);
 }
 
 .yody-prose .yody-h4 {
-  font: 600 16px/1.3 var(--font-brand);
+  font: 600 16px / 1.3 var(--font-brand);
   color: var(--fg-1);
   margin: var(--s-8) 0 var(--s-2);
 }
 
 .yody-prose .yody-h5,
 .yody-prose .yody-h6 {
-  font: 600 14px/1.3 var(--font-brand);
+  font: 600 14px / 1.3 var(--font-brand);
   color: var(--fg-2);
   margin: var(--s-6) 0 var(--s-2);
 }
 
-/* Anchor link wrapper from rehype-autolink-headings (behavior: "wrap"). */
+/* Anchor link wrapper from rehype-autolink-headings (behavior: "wrap").
+   VitePress rhythm: the `#` appears on the RIGHT of the heading on hover,
+   absolutely positioned so it never reflows the heading text. */
+.yody-prose .yody-h1,
+.yody-prose .yody-h2,
+.yody-prose .yody-h3,
+.yody-prose .yody-h4 {
+  position: relative;
+}
+
 .yody-prose .yody-anchor {
   color: inherit;
   text-decoration: none;
-  margin-left: -0.5em;
-  padding-left: 0.5em;
+  position: absolute;
+  inset: 0;
+  padding-inline-end: 1.4em;
 }
-.yody-prose .yody-anchor::before {
+
+/* The `#` glyph — hidden by default, fades in on heading hover. */
+.yody-prose .yody-anchor::after {
   content: "#";
-  color: var(--fg-3);
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 0;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.78em;
+  color: var(--brand);
   opacity: 0;
-  margin-right: 0.25em;
   transition: opacity var(--dur) var(--ease-out);
+  user-select: none;
 }
-.yody-prose .yody-h2:hover .yody-anchor::before,
-.yody-prose .yody-h3:hover .yody-anchor::before {
+
+.yody-prose .yody-h1:hover .yody-anchor::after,
+.yody-prose .yody-h2:hover .yody-anchor::after,
+.yody-prose .yody-h3:hover .yody-anchor::after,
+.yody-prose .yody-h4:hover .yody-anchor::after,
+.yody-prose .yody-anchor:focus-visible::after {
   opacity: 1;
 }
 
 /* ─── Paragraphs, inline ─────────────────────────────────────────────── */
 
 .yody-prose .yody-p {
-  margin: 0 0 var(--s-5);
+  margin: 0 0 var(--s-4);
   color: var(--fg-2);
 }
 
@@ -99,22 +131,25 @@
   font-style: italic;
 }
 
+/* Inline links: brand color, underline only on hover (VitePress-style). */
 .yody-prose .yody-link {
   color: var(--iris-deep);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color var(--dur) var(--ease-out);
+  font-weight: 500;
+  text-decoration: none;
+  text-underline-offset: 3px;
+  transition: color var(--dur) var(--ease-out), text-decoration var(--dur) var(--ease-out);
 }
 .yody-prose .yody-link:hover {
   color: var(--brand);
+  text-decoration: underline;
 }
 
 /* ─── Lists ──────────────────────────────────────────────────────────── */
 
 .yody-prose .yody-ul,
 .yody-prose .yody-ol {
-  margin: 0 0 var(--s-5);
-  padding-left: var(--s-6);
+  margin: 0 0 var(--s-4);
+  padding-left: 1.4rem;
   color: var(--fg-2);
 }
 
@@ -127,6 +162,7 @@
 
 .yody-prose .yody-li {
   margin: var(--s-2) 0;
+  padding-left: 2px;
 }
 .yody-prose .yody-li::marker {
   color: var(--fg-3);
@@ -135,7 +171,7 @@
 /* GFM task list items — keep the checkbox aligned, no bullet. */
 .yody-prose .yody-li:has(> input[type="checkbox"]) {
   list-style: none;
-  padding-left: calc(-1 * var(--s-2));
+  padding-left: 0;
   margin-left: calc(-1 * var(--s-4));
 }
 .yody-prose .yody-li > input[type="checkbox"] {
@@ -143,15 +179,18 @@
   accent-color: var(--iris);
 }
 
-/* ─── Blockquote ─────────────────────────────────────────────────────── */
+/* ─── Blockquote — VitePress minimal: border-left only, no fill ──── */
 
 .yody-prose .yody-quote {
-  margin: var(--s-6) 0;
-  padding: var(--s-3) var(--s-5);
-  border-left: 3px solid var(--iris);
-  background: var(--bg-2);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  color: var(--fg-2);
+  margin: var(--s-5) 0;
+  padding: 0 var(--s-4);
+  border-left: 2px solid var(--border-hover);
+  background: transparent;
+  color: var(--fg-3);
+  border-radius: 0;
+}
+.yody-prose .yody-quote .yody-p {
+  margin: var(--s-2) 0;
 }
 .yody-prose .yody-quote .yody-p:last-child {
   margin-bottom: 0;
@@ -161,38 +200,44 @@
 
 .yody-prose .yody-code-inline {
   font-family: var(--font-mono);
-  font-size: 0.875em;
-  padding: 2px var(--s-2);
+  font-size: 0.85em;
+  padding: 3px 6px;
   background: var(--bg-muted);
   color: var(--fg-1);
-  border-radius: var(--radius-xs);
+  border-radius: 4px;
+  font-weight: 500;
 }
 
 .yody-prose .yody-pre {
-  margin: 0 0 var(--s-6);
-  padding: var(--s-4) var(--s-5);
+  margin: 0;
+  padding: 16px 18px;
   background: var(--bg-ink);
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   overflow-x: auto;
-  border: 1px solid var(--border);
+  border: none;
 }
 
 .yody-prose .yody-code-block {
   font-family: var(--font-mono);
-  font-size: var(--type-mono, 13px);
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.6;
   /* Light text on the dark ink surface — `white` is a CSS keyword, not a
      raw hex, keeping YODY DS compliance (no hex literals in components). */
   color: white;
   background: transparent;
   white-space: pre;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0;
 }
 
 /* ─── Code block wrapper (copy button + lang label) ─────────────────── */
 /* The `pre` map in markdown.tsx wraps each fenced block in this container. */
 .yody-prose .yody-code-wrap {
   position: relative;
-  margin: 0 0 var(--s-6);
+  margin: 0 0 var(--s-5);
+  background: var(--bg-ink);
+  border-radius: 12px;
+  overflow: hidden;
 }
 /* Reset the pre margin when nested in the wrap (avoid double margin). */
 .yody-prose .yody-code-wrap .yody-pre {
@@ -201,37 +246,47 @@
 
 .yody-prose .yody-lang-label {
   position: absolute;
-  top: var(--s-2);
-  left: var(--s-3);
+  top: 8px;
+  left: 14px;
   font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.5);
   pointer-events: none;
   user-select: none;
+  transition: opacity var(--dur) var(--ease-out);
+  opacity: 1;
 }
 
-/* Copy button base (interactive states live in the component). The wrap
-   holds the dark ink surface, so the button uses translucent-white hovers. */
+/* Copy button — hidden by default, reveals on wrapper hover/focus-within
+   (VitePress rhythm). Visible after copy for confirmation feedback. */
 .yody-prose .yody-code-copy {
   z-index: 1;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out), color var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out);
+}
+.yody-prose .yody-code-wrap:hover .yody-code-copy,
+.yody-prose .yody-code-wrap:focus-within .yody-code-copy,
+.yody-prose .yody-code-copy[data-copied="true"] {
+  opacity: 1;
 }
 
 /* ─── Tables (GFM) ───────────────────────────────────────────────────── */
 
 .yody-prose .yody-table-wrap {
-  margin: 0 0 var(--s-6);
+  margin: 0 0 var(--s-5);
   overflow-x: auto;
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: 12px;
 }
 
 .yody-prose .yody-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--text-body-sm, 15px);
+  font-size: 15px;
   color: var(--fg-2);
 }
 
@@ -273,24 +328,44 @@
 .yody-prose .yody-img {
   max-width: 100%;
   height: auto;
-  border-radius: var(--radius-md);
-  margin: var(--s-6) 0;
+  border-radius: 12px;
+  margin: var(--s-5) 0;
   display: block;
 }
 
-/* ─── TOC aside (toc.tsx) ────────────────────────────────────────────── */
+/* ─── TOC aside (toc.tsx / toc-scrollspy.tsx) ────────────────────────── */
+/* VitePress-style outline: "On this page" + a sliding vertical marker
+   that tracks the active heading. Container is sticky with independent
+   scroll when the list overflows. */
 
 .yody-toc {
   font-family: var(--font-body);
+  position: relative;
 }
+
+/* The outline-marker: a 2px vertical bar that slides to track the active
+   heading. Positioned by inline style (top/height) from toc-scrollspy. */
+.yody-toc-marker {
+  position: absolute;
+  left: 0;
+  width: 2px;
+  background: var(--brand);
+  border-radius: 2px;
+  transition: top 240ms var(--ease-out), height 240ms var(--ease-out);
+  pointer-events: none;
+}
+
 .yody-toc .yody-toc-link {
-  transition: color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+  transition: color var(--dur) var(--ease-out);
 }
 
 /* ─── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .yody-prose .yody-anchor::before,
-  .yody-toc .yody-toc-link {
+  .yody-prose .yody-anchor::after,
+  .yody-prose .yody-code-copy,
+  .yody-prose .yody-link,
+  .yody-toc .yody-toc-link,
+  .yody-toc-marker {
     transition: none;
   }
 }

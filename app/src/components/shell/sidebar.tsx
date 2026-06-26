@@ -6,7 +6,8 @@
  *   L1 mint · L2-L4 iris · L5 gold
  *
  * Layout: sticky aside, per-module roman numeral + title, indented lesson
- * list with a left rail.
+ * list with a VitePress-style left indicator rail on each item that
+ * highlights on hover/active.
  *
  * YODY DS compliance:
  *  - No emoji. Token colors only (level color via CSS var, not hex).
@@ -63,47 +64,61 @@ export async function Sidebar({ activeCode, sessions, linkBase = "/sessions" }: 
     <aside
       data-surface="app"
       aria-label="Danh sách buổi học theo level"
-      className="sticky top-[73px] max-h-[calc(100vh-73px)] w-[280px] flex-none overflow-auto border-r border-border bg-[var(--bg-warm)] p-4"
+      className="sticky top-[64px] max-h-[calc(100vh-64px)] w-[280px] flex-none overflow-y-auto border-r border-border bg-[var(--bg-warm)] px-3 py-5"
     >
       {LEVELS.map((lvl) => {
         const lvlSessions = all.filter((s) => s.code.startsWith(lvl.modulePrefix));
         if (lvlSessions.length === 0) return null;
         return (
-          <div key={lvl.level} className="mb-5">
-            <div className="mb-2 flex items-baseline gap-2">
+          <div key={lvl.level} className="mb-5 last:mb-0">
+            <div className="mb-1 flex items-baseline gap-2 px-3">
               <span
-                className="font-[family-name:var(--font-impact)] text-[15px] font-extrabold italic"
+                className="font-[family-name:var(--font-impact)] text-[14px] font-extrabold italic"
                 style={{ color: lvl.colorVar }}
               >
                 {lvl.numeral}
               </span>
-              <span className="font-[family-name:var(--font-brand)] text-xs font-bold leading-[1.3] text-[var(--fg-1)]">
+              <span className="font-[family-name:var(--font-brand)] text-[12px] font-bold leading-[1.3] text-[var(--fg-1)]">
                 {lvl.title}
               </span>
             </div>
 
-            <div className="ml-2.5 flex flex-col gap-px border-l border-border pl-[13px]">
-              {lvlSessions.map((s) => {
-                const isActive = activeCode === s.code;
-                return (
-                  <Link
-                    key={s.code}
-                    href={`${linkBase}/${s.code}` as Route}
-                    aria-current={isActive ? "page" : undefined}
-                    className={cn(
-                      "min-h-[36px] rounded-[6px] px-2.5 py-1.5 text-left font-[family-name:var(--font-body)] text-[13px] leading-[1.4] outline-ring/50 transition-colors focus-visible:ring-[3px]",
-                      isActive
-                        ? "bg-[var(--brand-tint)] font-bold text-[var(--brand)]"
-                        : "font-normal text-[var(--fg-2)] hover:bg-[var(--card)] hover:text-[var(--fg-1)]",
-                    )}
-                  >
-                    <span className="mr-2 font-[family-name:var(--font-mono)] text-[11px] text-[var(--fg-3)]">
-                      {s.code}
-                    </span>
-                    {s.title}
-                  </Link>
-                );
-              })}
+            <div className="relative">
+              {/* Left indicator rail spanning the group's items. */}
+              <div className="absolute bottom-1 left-0 top-1 w-px bg-[var(--border)]" aria-hidden="true" />
+              <div className="flex flex-col">
+                {lvlSessions.map((s) => {
+                  const isActive = activeCode === s.code;
+                  return (
+                    <Link
+                      key={s.code}
+                      href={`${linkBase}/${s.code}` as Route}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cn(
+                        "group relative min-h-[36px] rounded-r-[6px] py-1.5 pl-5 pr-3 text-left font-[family-name:var(--font-body)] text-[13px] leading-[1.4] outline-ring/50 transition-colors focus-visible:ring-[3px]",
+                        isActive
+                          ? "bg-[var(--brand-tint)] font-bold text-[var(--brand)]"
+                          : "font-normal text-[var(--fg-2)] hover:bg-[var(--bg-muted)] hover:text-[var(--fg-1)]",
+                      )}
+                    >
+                      {/* Per-item indicator bar — brand when active, brand on hover. */}
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          "absolute bottom-1.5 left-0 top-1.5 w-[2px] rounded-full transition-colors",
+                          isActive
+                            ? "bg-[var(--brand)]"
+                            : "bg-transparent group-hover:bg-[var(--border-hover)]",
+                        )}
+                      />
+                      <span className="mr-2 font-[family-name:var(--font-mono)] text-[11px] text-[var(--fg-3)]">
+                        {s.code}
+                      </span>
+                      {s.title}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
         );

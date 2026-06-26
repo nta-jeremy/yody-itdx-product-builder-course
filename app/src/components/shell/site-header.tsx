@@ -31,8 +31,8 @@ export interface SiteHeaderProps {
 
 /** Nav link descriptors — order matches the rendered bar. */
 const NAV_ITEMS: ReadonlyArray<{ key: NavKey; href: Route; label: string }> = [
-  { key: "learn", href: "/learn", label: "Học" },
-  { key: "sessions", href: "/sessions", label: "Giáo án" },
+  { key: "learn", href: "/learn", label: "Bài giảng" },
+  // { key: "sessions", href: "/sessions", label: "Giáo án" },
   { key: "roadmap", href: "/roadmap", label: "Lộ trình" },
   { key: "badges", href: "/badges", label: "Huy hiệu" },
 ];
