@@ -9,10 +9,12 @@
  * list with a VitePress-style left indicator rail on each item that
  * highlights on hover/active.
  *
- * Auto-expand: when URL is `/learn/{parent}/{subShort}` (set via the
- * `x-pathname` header by `src/middleware.ts`), the matching parent
- * auto-expands to reveal its sub-list. Course detail pages (`/learn/[code]`)
- * do NOT auto-expand — sub-list lives on the detail page itself.
+ * Auto-expand: any parent whose kit has been split into multiple `.md`
+ * files (i.e. `subSessions.length > 0`) is rendered with its sub-list
+ * expanded at all times — the buổi phụ is visible at a glance so users
+ * can navigate directly without first clicking into the parent page.
+ * The active sub-session (if any) is highlighted via `activeSubCode` /
+ * `pathname` (legacy).
  *
  * YODY DS compliance:
  *  - No emoji. Token colors only (level color via CSS var, not hex).
@@ -43,10 +45,10 @@ const LEVELS: ReadonlyArray<{
   modulePrefix: string;
 }> = [
   { level: "L1", numeral: "I",   title: "Nền tảng AI",      colorVar: "var(--mint-deep)", modulePrefix: "I1" },
-  { level: "L2", numeral: "II",  title: "Tạo & đo lường",   colorVar: "var(--iris-deep)", modulePrefix: "I2" },
-  { level: "L3", numeral: "III", title: "Workflow & deliverable", colorVar: "var(--iris-deep)", modulePrefix: "I3" },
-  { level: "L4", numeral: "IV",  title: "Tích hợp & vận hành", colorVar: "var(--iris-deep)", modulePrefix: "I4" },
-  { level: "L5", numeral: "V",   title: "Kiến trúc & ship", colorVar: "var(--gold-deep)", modulePrefix: "I5" },
+  { level: "L2", numeral: "II",  title: "Prompt & Evaluate",   colorVar: "var(--iris-deep)", modulePrefix: "I2" },
+  { level: "L3", numeral: "III", title: "Workflow & Deliverable", colorVar: "var(--iris-deep)", modulePrefix: "I3" },
+  { level: "L4", numeral: "IV",  title: "Tích hợp & Vận hành", colorVar: "var(--iris-deep)", modulePrefix: "I4" },
+  { level: "L5", numeral: "V",   title: "Harness & Ship", colorVar: "var(--gold-deep)", modulePrefix: "I5" },
 ];
 
 /**
@@ -63,10 +65,18 @@ type SidebarSession = {
 
 export interface SidebarProps {
   activeCode?: string;
+  /**
+   * Active sub-session code (full 3-segment form, e.g. "I2.1.1"). When set,
+   * the matching parent auto-expands to reveal its sub-list. Preferred over
+   * the `pathname` prop — call sites already have the code in hand.
+   */
+  activeSubCode?: string;
   sessions?: ReadonlyArray<SidebarSession>;
   linkBase?: string;
   /** Current pathname (set via `x-pathname` header by middleware). When
-   *  provided, used to detect active sub-session for auto-expand. */
+   *  provided, used to detect active sub-session for auto-expand.
+   *  DEPRECATED: prefer `activeSubCode` — this fallback exists only for
+   *  legacy routes that pre-date the sub-session UI. */
   pathname?: string;
 }
 
@@ -86,17 +96,30 @@ async function readPathname(): Promise<string> {
 interface RenderArgs {
   sessions: ReadonlyArray<SidebarSession>;
   activeCode?: string;
+  activeSubCode?: string;
   linkBase: string;
   pathname: string;
 }
 
-function renderSidebar({ sessions, activeCode, linkBase, pathname }: RenderArgs) {
-  const escapedBase = linkBase.replace(/\//g, "\\/");
-  const subMatch = pathname.match(
-    new RegExp(`^${escapedBase}\\/(I[1-5]\\.[1-3])\\/([1-3])$`),
+function renderSidebar({
+  sessions,
+  activeCode,
+  activeSubCode,
+  linkBase,
+  pathname,
+}: RenderArgs) {
+  // Resolve the active sub-session (full 3-segment form, e.g. "I2.1.1").
+  // Prefer explicit prop, fall back to parsing pathname. Used to highlight
+  // the active sub in the expanded list — parents with sub-sessions always
+  // expand (see `expandSubs` below), so highlight can stay decoupled.
+  const subFromPath = pathname.match(
+    new RegExp(`^${linkBase.replace(/\//g, "\\/")}\\/(I[1-5]\\.[1-3])\\/([1-3])$`),
   );
-  const activeSubParentCode = subMatch?.[1];
-  const activeSubCode = subMatch ? `${subMatch[1]}.${subMatch[2]}` : null;
+  const resolvedSubCode = activeSubCode
+    ? activeSubCode
+    : subFromPath
+    ? `${subFromPath[1]}.${subFromPath[2]}`
+    : null;
 
   return (
     <aside
@@ -127,8 +150,10 @@ function renderSidebar({ sessions, activeCode, linkBase, pathname }: RenderArgs)
                 {lvlSessions.map((s) => {
                   const isActive = activeCode === s.code;
                   const hasSubs = (s.subSessions?.length ?? 0) > 0;
-                  const isParentOfActiveSub = activeSubParentCode === s.code;
-                  const expandSubs = hasSubs && isParentOfActiveSub;
+                  // Always expand parents that have sub-sessions — users
+                  // need to see the buổi phụ at a glance, regardless of
+                  // whether the current page is the parent or a sub-route.
+                  const expandSubs = hasSubs;
                   return (
                     <div key={s.code}>
                       <Link
@@ -158,7 +183,7 @@ function renderSidebar({ sessions, activeCode, linkBase, pathname }: RenderArgs)
                       {expandSubs ? (
                         <ul className="mb-1 flex flex-col">
                           {s.subSessions!.map((sub) => {
-                            const isSubActive = sub.subCode === activeSubCode;
+                            const isSubActive = sub.subCode === resolvedSubCode;
                             return (
                               <li key={sub.subCode}>
                                 <Link
@@ -199,16 +224,18 @@ function renderSidebar({ sessions, activeCode, linkBase, pathname }: RenderArgs)
 /** Sync entry — call when `sessions` is pre-fetched (most routes). */
 export function Sidebar({
   activeCode,
+  activeSubCode,
   sessions,
   linkBase = "/sessions",
   pathname,
 }: SidebarProps) {
   if (!sessions) {
-    return SidebarAsync({ activeCode, linkBase });
+    return SidebarAsync({ activeCode, activeSubCode, linkBase });
   }
   return renderSidebar({
     sessions,
     activeCode,
+    activeSubCode,
     linkBase,
     pathname: pathname ?? "",
   });
@@ -217,6 +244,7 @@ export function Sidebar({
 /** Async entry — call when caller wants Sidebar to load sessions itself. */
 export async function SidebarAsync({
   activeCode,
+  activeSubCode,
   linkBase = "/sessions",
   pathname,
 }: Omit<SidebarProps, "sessions">) {
@@ -224,6 +252,7 @@ export async function SidebarAsync({
   return renderSidebar({
     sessions,
     activeCode,
+    activeSubCode,
     linkBase,
     pathname: pathname ?? (await readPathname()),
   });

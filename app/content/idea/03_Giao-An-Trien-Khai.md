@@ -50,7 +50,7 @@
 | **I1.2** | Giới hạn AI & An toàn dữ liệu | L1 | Hallucination góc product; AI là infrastructure; PII & Luật 91/2025 | Viết 1 trang: 1 feature có AI — giải bài toán gì, giới hạn gì | **Gate L1→L2** |
 | **I2.1** | Advanced Prompting | L2 | CoT, task decomposition, context injection, structured output | Giải 1 task phức bằng prompt phân rã | Tích lũy L2 |
 | **I2.2** | AI Tools cho Product Work | L2 | Claude/ChatGPT (research/spec), Cursor/Copilot, v0/Midjourney, Notion AI | Dùng ≥2 tool cho 1 tác vụ product | Tích lũy L2 |
-| **I2.3** | Prompt để Insight & Spec | L2 | Extract insight, draft spec, synthesize research | Tạo bản tóm tắt user research hoặc draft spec từ dữ liệu cho sẵn | **Gate L2→L3** |
+| **I2.3** | Prompt Insight & Spec | L2 | Extract insight, draft spec, synthesize research | Tạo bản tóm tắt user research hoặc draft spec từ dữ liệu cho sẵn | **Gate L2→L3** |
 | **I3.1** | Workflow Design & Cowork | L3 | Workflow product (spec/prototype/insight); Cowork task loop, skills & plugins | Thiết kế workflow AI cho 1 bài toán product | Chuẩn bị evidence L3 |
 | **I3.2** | Build Deliverable sản phẩm | L3 | Dựng spec/prototype/insight report; QC mức product (nguồn, edge case) | Build 1 deliverable sản phẩm thật | Chuẩn bị evidence L3 |
 | **I3.3** | Mentor Review & Iterate | L3 | Nhận review, chỉnh sửa có định hướng | Bảo vệ deliverable trước mentor | **Gate L3→L4** |
@@ -265,7 +265,7 @@ Ba nguyên tắc bắt buộc, mọi buổi đều phải thể hiện:
 
 ### 5.1. Lớp hiển thị tiến độ & Gamification
 
-Vì chương trình **không gắn lương/thăng tiến**, lớp hiển thị tiến độ là động lực chính. Badge cấp khi **qua gate hành vi** (không phải khi đậu điểm).
+Vì chương trình **không gắn lương/thăng tiến**, lớp hiển thị tiến độ là động lực chính. Badge cấp khi **đạt điều kiện để đi tiếp** (không phải khi đậu điểm).
 
 - **Badge theo level** (chuẩn Open Badges — chia sẻ được lên hồ sơ nội bộ/LinkedIn): 🟢 L1 Aware · 🔵 L2 Operator · 🟣 L3 Builder · 🟠 L4 Integrator · 🏆 L5 Architect.
 - **Personal Skill Tracker:** mỗi người thấy level hiện tại, % tiến tới level kế, lab/deliverable đã hoàn thành, trạng thái gate, badge đã đạt.

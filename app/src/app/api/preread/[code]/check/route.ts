@@ -45,20 +45,68 @@ export async function POST(
   const answers = Array.isArray((body as { answers?: unknown })?.answers)
     ? ((body as { answers: unknown[] }).answers as unknown[])
     : [];
+  const questionOrder = Array.isArray(
+    (body as { questionOrder?: unknown })?.questionOrder,
+  )
+    ? ((body as { questionOrder: unknown[] }).questionOrder as number[])
+    : null;
+  const optionOrdersRaw = (body as { optionOrders?: unknown })?.optionOrders;
+  const optionOrders: number[][] | null = Array.isArray(optionOrdersRaw)
+    ? (optionOrdersRaw as unknown[]).map((row) =>
+        Array.isArray(row) ? (row as number[]) : [],
+      )
+    : null;
 
-  const correct = preread.questions.reduce((sum, q, idx) => {
-    const userAns = answers[idx];
+  const isShuffled =
+    questionOrder !== null &&
+    optionOrders !== null &&
+    questionOrder.length === preread.questions.length &&
+    optionOrders.length === preread.questions.length;
+
+  const correct = preread.questions.reduce((sum, q, origIdx) => {
+    if (isShuffled) {
+      // answers array is aligned with the SHUFFLED order; map back to original.
+      const shuffledIdx = questionOrder!.indexOf(origIdx);
+      if (shuffledIdx === -1) return sum;
+      const userShuffledAns = answers[shuffledIdx];
+      const optOrder = optionOrders![shuffledIdx]!;
+      const origOptIdx =
+        typeof userShuffledAns === "number" && userShuffledAns >= 0
+          ? optOrder[userShuffledAns]
+          : undefined;
+      return sum + (origOptIdx === q.correctIndex ? 1 : 0);
+    }
+    // Backward compat: unshuffled quiz (older client).
+    const userAns = answers[origIdx];
     return sum + (userAns === q.correctIndex ? 1 : 0);
   }, 0);
 
-  const explanations = preread.questions.map((q, idx) => {
-    const userAns = answers[idx];
+  const explanations = preread.questions.map((q, origIdx) => {
+    let userOrigOptIdx: number | undefined;
+    if (isShuffled) {
+      const shuffledIdx = questionOrder!.indexOf(origIdx);
+      if (shuffledIdx !== -1) {
+        const userShuffledAns = answers[shuffledIdx];
+        const optOrder = optionOrders![shuffledIdx]!;
+        userOrigOptIdx =
+          typeof userShuffledAns === "number" && userShuffledAns >= 0
+            ? optOrder[userShuffledAns]
+            : undefined;
+      }
+    } else {
+      userOrigOptIdx =
+        typeof answers[origIdx] === "number" ? (answers[origIdx] as number) : undefined;
+    }
     const correctLetter = String.fromCharCode(65 + q.correctIndex);
-    if (userAns === q.correctIndex) {
+    if (userOrigOptIdx === q.correctIndex) {
       return `Đúng! ${q.explanation}`;
     }
     return `Đáp án đúng: ${correctLetter}. ${q.explanation}`;
   });
 
-  return NextResponse.json({ correct, explanations, pass: correct >= PASS_THRESHOLD });
+  return NextResponse.json({
+    correct,
+    explanations,
+    pass: correct >= PASS_THRESHOLD,
+  });
 }

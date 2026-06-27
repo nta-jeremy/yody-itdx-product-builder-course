@@ -1,14 +1,18 @@
 /**
- * EmptyImage — placeholder cho `<!-- CẦN HÌNH: ... -->` trong markdown.
+ * EmptyImage — placeholder cho blockquote `> [IMAGE-INSIGHT]` và comment
+ * `<!-- CẦN HÌNH: ... -->` trong markdown.
  *
- * Render dashed-border box với label "chờ cập nhật" và prompt ở figcaption.
- * `data-prompt` attribute giữ prompt gốc (cho dev script extract sau này).
+ * Render `<img src="/placeholder.svg">` 16:9, không có dashed-box cũ, không
+ * có label "chờ cập nhật", không có figcaption prompt. `data-prompt` vẫn
+ * giữ trên `<figure>` wrapper để dev script extract prompt khi cần
+ * regenerate ảnh.
  *
  * YODY DS:
- * - No emoji as icon (skill rule) — dùng text label uppercase.
- * - Token colors only (--bg-muted, --border-hover, --fg-3).
- * - `aspect-video` reserves CLS-safe height (Core Web Vitals target).
- * - `role="img"` + `aria-label` cho screen reader.
+ * - Token colors only — `.yody-placeholder-img { color: var(--fg-3) }` ở
+ *   prose.css, stroke SVG dùng `currentColor` để kế thừa.
+ * - aspect-video reserves CLS-safe height (Core Web Vitals target).
+ * - Khi có ảnh thật, replace blockquote bằng cú pháp `![alt](path)` chuẩn —
+ *   react-markdown xử lý `<img>` thường, không đi qua component này.
  */
 import { cn } from "@/lib/utils";
 
@@ -24,20 +28,12 @@ export function EmptyImage({ prompt, className }: EmptyImageProps) {
       data-prompt={prompt}
       className={cn("yody-empty-image my-6", className)}
     >
-      <div
-        role="img"
-        aria-label={`Ảnh minh họa chờ cập nhật: ${prompt}`}
-        className="flex aspect-video w-full items-center justify-center rounded-lg border-2 border-dashed border-[var(--border-hover)] bg-[var(--bg-muted)]"
-      >
-        <span className="font-[family-name:var(--font-mono)] text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--fg-3)]">
-          Ảnh minh họa · chờ cập nhật
-        </span>
-      </div>
-      {prompt && (
-        <figcaption className="mt-2 font-[family-name:var(--font-body)] text-[12px] italic leading-[1.5] text-[var(--fg-3)]">
-          <span className="font-bold not-italic">Prompt:</span> {prompt}
-        </figcaption>
-      )}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/placeholder.svg"
+        alt="Ảnh minh họa"
+        className="yody-placeholder-img block aspect-video w-full"
+      />
     </figure>
   );
 }

@@ -1,0 +1,65 @@
+PASS (197) FAIL (14)
+
+1. PreReadBanner shows CTA when no localStorage key
+   Error: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
+       at getRootForUpdatedFiber (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:4624:11)
+       at enqueueConcurrentRenderForLane (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:4588:14)
+       at forceStoreRerender (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:8261:18)
+       at updateStoreInstance (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:8241:39)
+       at Object.react_stack_bottom_frame (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+       at runWithFiberInDEV (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+       at commitHookEffectListMount (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+       at commitHookPassiveMountEffects (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+       at commitPassiveMountOnFiber (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+       at recursivelyTraversePassiveMountEffects (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+2. PreReadBanner hides CTA when localStorage set
+   Error: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
+       at getRootForUpdatedFiber (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:4624:11)
+       at enqueueConcurrentRenderForLane (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:4588:14)
+       at forceStoreRerender (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:8261:18)
+       at updateStoreInstance (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:8241:39)
+       at Object.react_stack_bottom_frame (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+       at runWithFiberInDEV (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+       at commitHookEffectListMount (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+       at commitHookPassiveMountEffects (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+       at commitPassiveMountOnFiber (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+       at recursivelyTraversePassiveMountEffects (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+3. PreReadBanner shows 'Làm lại quiz' link when passed
+   Error: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
+       at getRootForUpdatedFiber (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:4624:11)
+       at enqueueConcurrentRenderForLane (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:4588:14)
+       at forceStoreRerender (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:8261:18)
+       at updateStoreInstance (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:8241:39)
+       at Object.react_stack_bottom_frame (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+       at runWithFiberInDEV (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+       at commitHookEffectListMount (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+       at commitHookPassiveMountEffects (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+       at commitPassiveMountOnFiber (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+       at recursivelyTraversePassiveMountEffects (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+4. PreReadBanner shows attempt summary (highest + last) when multiple attempts exist
+   Error: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
+       at getRootForUpdatedFiber (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:4624:11)
+       at enqueueConcurrentRenderForLane (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:4588:14)
+       at forceStoreRerender (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:8261:18)
+       at updateStoreInstance (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:8241:39)
+       at Object.react_stack_bottom_frame (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+       at runWithFiberInDEV (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+       at commitHookEffectListMount (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+       at commitHookPassiveMountEffects (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+       at commitPassiveMountOnFiber (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+       at recursivelyTraversePassiveMountEffects (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+5. PreReadBanner shows only highest when exactly one attempt exists (no 'Lần cuối')
+   Error: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
+       at getRootForUpdatedFiber (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:4624:11)
+       at enqueueConcurrentRenderForLane (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:4588:14)
+       at forceStoreRerender (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:8261:18)
+       at updateStoreInstance (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:8241:39)
+       at Object.react_stack_bottom_frame (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+       at runWithFiberInDEV (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+       at commitHookEffectListMount (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+       at commitHookPassiveMountEffects (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+       at commitPassiveMountOnFiber (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+       at recursivelyTraversePassiveMountEffects (/Users/tunganh252/Desktop/Work/Yody/others/yody-itdx-product-builder-course/app/node_modules/react-dom/cjs/react-dom-client.development.js:15439:11)
+
+... +9 more failures
+[full output: ~/Library/Application Support/rtk/tee/1782538966_vitest_run.log]

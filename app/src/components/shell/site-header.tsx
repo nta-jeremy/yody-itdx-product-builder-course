@@ -31,10 +31,10 @@ export interface SiteHeaderProps {
 
 /** Nav link descriptors — order matches the rendered bar. */
 const NAV_ITEMS: ReadonlyArray<{ key: NavKey; href: Route; label: string }> = [
-  { key: "learn", href: "/learn", label: "Bài giảng" },
-  // { key: "sessions", href: "/sessions", label: "Giáo án" },
   { key: "roadmap", href: "/roadmap", label: "Lộ trình" },
+  { key: "learn", href: "/learn", label: "Nội dung" },
   { key: "badges", href: "/badges", label: "Huy hiệu" },
+  // { key: "sessions", href: "/sessions", label: "Giáo án" },
 ];
 
 export function SiteHeader({ active }: SiteHeaderProps) {
@@ -45,12 +45,16 @@ export function SiteHeader({ active }: SiteHeaderProps) {
     >
       <Link
         href="/"
-        className="font-[family-name:var(--font-impact)] text-[17px] font-extrabold leading-none text-[var(--brand)] outline-ring/50 focus-visible:ring-[3px]"
+        aria-label="YODY Học — Trang chủ"
+        className="inline-flex items-center outline-ring/50 focus-visible:ring-[3px]"
       >
-        YODY
-        <span className="ml-1 text-[15px] font-bold text-[var(--gold-deep)]">
-          Học
-        </span>
+        <img
+          src="/yody-logo.webp"
+          alt="YODY Học"
+          width={96}
+          height={32}
+          className="h-8 w-auto"
+        />
       </Link>
 
       <nav

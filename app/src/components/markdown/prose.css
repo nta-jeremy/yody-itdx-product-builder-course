@@ -151,6 +151,7 @@
   text-underline-offset: 3px;
   transition: color var(--dur) var(--ease-out), text-decoration var(--dur) var(--ease-out);
 }
+
 .yody-prose .yody-link:hover {
   color: var(--brand);
   text-decoration: underline;
@@ -168,6 +169,7 @@
 .yody-prose .yody-ul {
   list-style: disc;
 }
+
 .yody-prose .yody-ol {
   list-style: decimal;
 }
@@ -176,6 +178,7 @@
   margin: var(--s-2) 0;
   padding-left: 2px;
 }
+
 .yody-prose .yody-li::marker {
   color: var(--fg-3);
 }
@@ -186,7 +189,8 @@
   padding-left: 0;
   margin-left: calc(-1 * var(--s-4));
 }
-.yody-prose .yody-li > input[type="checkbox"] {
+
+.yody-prose .yody-li>input[type="checkbox"] {
   margin-right: var(--s-2);
   accent-color: var(--iris);
 }
@@ -201,9 +205,11 @@
   color: var(--fg-3);
   border-radius: 0;
 }
+
 .yody-prose .yody-quote .yody-p {
   margin: var(--s-2) 0;
 }
+
 .yody-prose .yody-quote .yody-p:last-child {
   margin-bottom: 0;
 }
@@ -251,6 +257,7 @@
   border-radius: 12px;
   overflow: hidden;
 }
+
 /* Reset the pre margin when nested in the wrap (avoid double margin). */
 .yody-prose .yody-code-wrap .yody-pre {
   margin: 0;
@@ -280,6 +287,7 @@
   transition: opacity var(--dur) var(--ease-out), color var(--dur) var(--ease-out),
     background-color var(--dur) var(--ease-out);
 }
+
 .yody-prose .yody-code-wrap:hover .yody-code-copy,
 .yody-prose .yody-code-wrap:focus-within .yody-code-copy,
 .yody-prose .yody-code-copy[data-copied="true"] {
@@ -352,7 +360,6 @@
 
 .yody-toc {
   font-family: var(--font-body);
-  position: relative;
 }
 
 /* The outline-marker: a 2px vertical bar that slides to track the active
@@ -373,6 +380,7 @@
 
 /* ─── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
+
   .yody-prose .yody-anchor::after,
   .yody-prose .yody-code-copy,
   .yody-prose .yody-link,
@@ -383,19 +391,19 @@
 }
 
 /* ─── Empty image placeholder (CẦN HÌNH: ...) ───────────────────────── */
-/* Dashed-border box with prompt figcaption — produced by
- * `rehype-image-placeholder` (after `rehype-raw`) from
- * `<!-- CẦN HÌNH: <prompt> -->` and rendered by `<EmptyImage>`. Box
- * sizing & colors live on the component (Tailwind); CSS here only sets
- * the prose-scoped margin and figcaption rhythm so the placeholder sits
- * flush with surrounding paragraphs. */
+/* Renders a 16:9 <img src="/placeholder.svg"> with `currentColor` stroke —
+ * produced by `remark-image-placeholder` from either:
+ *   • `<!-- CẦN HÌNH: <prompt> -->` (legacy / _archive files), or
+ *   • `> **[IMAGE-INSIGHT]** <prompt>` blockquote (current main-content).
+ * Rendered by `<EmptyImage>`. CSS here sets the prose-scoped margin and
+ * feeds the SVG stroke color via `color: var(--fg-3)` so the placeholder
+ * inherits theme tokens. */
 .yody-prose .yody-empty-image {
   margin: var(--s-8) 0;
 }
-.yody-prose .yody-empty-image figcaption {
-  font-size: 12px;
+
+.yody-prose .yody-placeholder-img {
   color: var(--fg-3);
-  font-style: italic;
-  line-height: 1.5;
-  padding-inline-start: var(--s-2);
+  background: var(--bg-muted);
+  border-radius: 0.5rem;
 }

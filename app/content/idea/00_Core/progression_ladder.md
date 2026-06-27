@@ -178,7 +178,7 @@ Bộ 5 giá trị cốt lõi YODY dùng chung cho mọi level + mọi chương t
 
 ### D.1 Nguyên tắc duyệt (đạt / kèm điều kiện, không "trượt điểm")
 
-Quyết định gate: **Đạt** · **Đạt kèm điều kiện** · **Chưa đạt** (cần bổ sung bằng chứng). **Không có "trượt theo điểm"** — quiz/lab là input bằng chứng, không quyết định trực tiếp. Badges cấp khi **qua gate hành vi**, không phải khi đậu điểm. Recertification + vận hành: `../03_Giao-An-Trien-Khai.md`.
+Quyết định gate: **Đạt** · **Đạt kèm điều kiện** · **Chưa đạt** (cần bổ sung bằng chứng). **Không có "trượt theo điểm"** — quiz/lab là input bằng chứng, không quyết định trực tiếp. Badges cấp khi **đạt điều kiện để đi tiếp**, không phải khi đậu điểm. Recertification + vận hành: `../03_Giao-An-Trien-Khai.md`.
 
 ### D.2 Bảng gate & người duyệt
 
@@ -190,7 +190,7 @@ Quyết định gate: **Đạt** · **Đạt kèm điều kiện** · **Chưa đ
 | L4→L5 | I4.3 | Mentor + đội Product |
 | Tốt nghiệp L5 | I5.3 | Hội đồng Product Builder |
 
-> Lớp hiển thị tiến độ (badge & tracker): badge cấp khi qua gate hành vi. Badge color token: L1 mint · L2–L4 iris · L5 gold.
+> Lớp hiển thị tiến độ (badge & tracker): badge cấp khi đạt điều kiện để đi tiếp. Badge color token: L1 mint · L2–L4 iris · L5 gold.
 
 ---
 

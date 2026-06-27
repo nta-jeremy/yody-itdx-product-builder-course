@@ -52,48 +52,48 @@ export interface MarkdownViewProps {
  *  `data.hName` stamping) is accepted because the intrinsic is
  *  declared in ./jsx.d.ts. */
 const markdownComponents = {
-  h1: ({ children, ...props }) => (
+  h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1 className="yody-h1" {...props}>{children}</h1>
   ),
-  h2: ({ children, ...props }) => (
+  h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2 className="yody-h2" {...props}>{children}</h2>
   ),
-  h3: ({ children, ...props }) => (
+  h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3 className="yody-h3" {...props}>{children}</h3>
   ),
-  h4: ({ children, ...props }) => (
+  h4: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4 className="yody-h4" {...props}>{children}</h4>
   ),
-  h5: ({ children, ...props }) => (
+  h5: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h5 className="yody-h5" {...props}>{children}</h5>
   ),
-  h6: ({ children, ...props }) => (
+  h6: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h6 className="yody-h6" {...props}>{children}</h6>
   ),
-  p: ({ children, ...props }) => (
+  p: ({ children, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p className="yody-p" {...props}>{children}</p>
   ),
-  a: ({ children, ...props }) => (
+  a: ({ children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <a className="yody-link" {...props}>{children}</a>
   ),
-  ul: ({ children, ...props }) => (
+  ul: ({ children, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul className="yody-ul" {...props}>{children}</ul>
   ),
-  ol: ({ children, ...props }) => (
+  ol: ({ children, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol className="yody-ol" {...props}>{children}</ol>
   ),
-  li: ({ children, ...props }) => (
+  li: ({ children, ...props }: React.LiHTMLAttributes<HTMLLIElement>) => (
     <li className="yody-li" {...props}>{children}</li>
   ),
-  blockquote: ({ children, ...props }) => (
+  blockquote: ({ children, ...props }: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
     <blockquote className="yody-quote" {...props}>{children}</blockquote>
   ),
-  table: ({ children, ...props }) => (
+  table: ({ children, ...props }: React.TableHTMLAttributes<HTMLTableElement>) => (
     <div className="yody-table-wrap">
       <table className="yody-table" {...props}>{children}</table>
     </div>
   ),
-  code: ({ children, className, ...props }) => {
+  code: ({ children, className, ...props }: React.HTMLAttributes<HTMLElement>) => {
     // Inline vs block: react-markdown gives `code` a `language-*`
     // className only inside fenced blocks; inline code has none.
     const isBlock = typeof className === "string" && /language-/.test(className);
@@ -108,7 +108,7 @@ const markdownComponents = {
       <code className="yody-code-inline" {...props}>{children}</code>
     );
   },
-  pre: ({ children, ...props }) => {
+  pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
     // Extract the fenced-block language + raw code text from the
     // child <code> element. react-markdown v10 (no syntax highlight)
     // renders the code block's children as a plain string.
@@ -132,14 +132,14 @@ const markdownComponents = {
       </div>
     );
   },
-  hr: (props) => <hr className="yody-hr" {...props} />,
-  strong: ({ children, ...props }) => (
+  hr: (props: React.HTMLAttributes<HTMLHRElement>) => <hr className="yody-hr" {...props} />,
+  strong: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <strong className="yody-strong" {...props}>{children}</strong>
   ),
-  em: ({ children, ...props }) => (
+  em: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <em className="yody-em" {...props}>{children}</em>
   ),
-  img: ({ alt, src, ...props }) => {
+  img: ({ alt, src, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
     // Static export: next/image default loader needs a server, so
     // raw <img> is correct here. The markdown source is trusted.
     return (

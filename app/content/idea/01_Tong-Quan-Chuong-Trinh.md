@@ -133,7 +133,7 @@ Một thang đo duy nhất cho cả tổ chức. Độ sâu kỹ thuật và bà
 
 **Trade-off đã chốt — ai trả giá:** Trần L3 cho nhóm non-IT là *cố tình*. Ép lên L4–L5 sẽ loãng chất lượng, giảm tỷ lệ hoàn thành và niềm tin. Nhóm Intern bỏ qua dạy lại nền nếu đã vững (placement), dồn cho L3–L5.
 
-**Nguyên tắc nối rubric ↔ ladder:** rubric **đo chiều cao** (điểm tại một thời điểm), ladder **vẽ con đường** (đang ở chặng nào). Gate chuyển level dựa trên **bằng chứng hành vi** (deliverable + người duyệt), **không** dựa trên ngưỡng điểm rubric — tránh biến gate hành vi thành gate điểm số. Chi tiết gate & người duyệt: `02_Khung-Nang-Luc-Danh-Gia.md`.
+**Nguyên tắc nối rubric ↔ ladder:** rubric **đo chiều cao** (điểm tại một thời điểm), ladder **vẽ con đường** (đang ở chặng nào). Gate chuyển level dựa trên **bằng chứng hành vi** (deliverable + người duyệt), **không** dựa trên ngưỡng điểm rubric — tránh biến điều kiện để đi tiếp thành cổng chặn theo điểm số. Chi tiết gate & người duyệt: `02_Khung-Nang-Luc-Danh-Gia.md`.
 
 ---
 

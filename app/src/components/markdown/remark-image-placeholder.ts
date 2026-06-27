@@ -1,48 +1,96 @@
 /**
- * remark-image-placeholder — scan mdast for HTML `html` nodes that are
- * comments matching `<!-- CẦN HÌNH: <prompt> -->` and replace each with
- * a synthetic mdast node carrying `data.hName` so `remark-rehype`
- * emits a hast element with the chosen tag (instead of dropping the
- * node — `remark-rehype` strips comments at the mdast→hast boundary
- * by default).
+ * remark-image-placeholder — match `[IMAGE-INSIGHT]` marker used in content.
  *
- * Why this approach: react-markdown@10 uses `remark-rehype` which
- * STRIPS HTML comments entirely (the previous rehype-side walker never
- * saw anything because the boundary drops them). We must intercept
- * BEFORE `remark-rehype` runs. Using `data.hName` is the standard
- * unified escape hatch: `remark-rehype` reads `node.data.hName` and
- * emits a hast `element` with that tag instead of a `raw` node.
+ * Detects the placeholder pattern wherever it appears:
  *
- * Other HTML comments (without `CẦN HÌNH:` prefix) pass through.
+ *   > **[IMAGE-INSIGHT]** Minh họa ...
+ *     **[IMAGE-INSIGHT]** Minh họa ...        ← archive files
+ *
+ * The marker is a `strong` node containing exactly `[IMAGE-INSIGHT]`. Optional
+ * leading text (emoji, whitespace) is allowed inside the same paragraph.
+ * No emoji prefix required, no HTML comment format.
+ *
+ * On match, the node is replaced with a synthetic html node that stamps
+ * `data.hName = "image-placeholder"` and `data.hProperties = { "data-prompt": ... }`.
+ * `remark-rehype` reads `data.hName` and emits a hast `element` with that
+ * tag instead of dropping the node, which is how `react-markdown` finds the
+ * custom `image-placeholder` component in `markdown.tsx`.
+ *
+ * Anything else passes through unchanged.
  */
-import type { Root, Html, Data } from "mdast";
+import type { Root, Blockquote, Paragraph, PhrasingContent } from "mdast";
 import type { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 
-const MARKER_RE = /^<!--\s*CẦN HÌNH:\s*([\s\S]*?)\s*-->/;
-
 export const REHYPE_IMAGE_PLACEHOLDER_TAG = "image-placeholder";
+const MARKER = "[IMAGE-INSIGHT]";
 
-interface PlaceholderData extends Data {
-  hName: string;
-  hProperties: { "data-prompt": string };
+function findMarkerIndex(children: PhrasingContent[]): number {
+  for (let i = 0; i < children.length; i++) {
+    const node = children[i];
+    if (node.type === "strong") {
+      const c = node.children;
+      if (
+        c.length === 1 &&
+        c[0].type === "text" &&
+        c[0].value.trim() === MARKER
+      ) {
+        return i;
+      }
+    }
+  }
+  return -1;
+}
+
+function extractPromptAfterMarker(para: Paragraph, markerIdx: number): string {
+  let prompt = "";
+  for (let i = markerIdx + 1; i < para.children.length; i++) {
+    const node = para.children[i];
+    if (node.type === "text") {
+      prompt += node.value;
+    }
+  }
+  return prompt.trim();
+}
+
+function buildPlaceholderNode(prompt: string) {
+  return {
+    type: "html" as const,
+    value: `<!-- placeholder:${prompt} -->`,
+    data: {
+      hName: REHYPE_IMAGE_PLACEHOLDER_TAG,
+      hProperties: { "data-prompt": prompt },
+    },
+  };
 }
 
 export const remarkImagePlaceholder: Plugin<[], Root> = () => {
   return (tree) => {
-    visit(tree, "html", (node: Html) => {
-      const match = node.value.match(MARKER_RE);
-      if (!match) return;
-      // Re-purpose the existing mdast node into a placeholder. We keep
-      // `type: "html"` so the parser doesn't reject the modification,
-      // and stamp `data.hName` so `remark-rehype` emits our custom
-      // hast tag.
-      const data: Partial<PlaceholderData> = {
-        ...node.data,
-        hName: REHYPE_IMAGE_PLACEHOLDER_TAG,
-        hProperties: { "data-prompt": match[1].trim() },
-      };
-      Object.assign(node, { data });
+    // Blockquote: first paragraph contains [IMAGE-INSIGHT] → replace the
+    // whole blockquote (any number of following lines like `> *(Prompt: ...)*`
+    // are discarded along with it).
+    visit(tree, "blockquote", (node: Blockquote, index, parent) => {
+      if (!parent || index === undefined) return;
+      const first = node.children[0];
+      if (!first || first.type !== "paragraph") return;
+      const markerIdx = findMarkerIndex(first.children);
+      if (markerIdx === -1) return;
+      parent.children[index] = buildPlaceholderNode(
+        extractPromptAfterMarker(first, markerIdx),
+      );
+    });
+
+    // Plain paragraph at root: `[IMAGE-INSIGHT]` as the only marker → replace
+    // the paragraph itself (used in archive files where the marker isn't
+    // wrapped in a blockquote).
+    visit(tree, "paragraph", (node: Paragraph, index, parent) => {
+      if (!parent || index === undefined) return;
+      if (parent.type !== "root") return;
+      const markerIdx = findMarkerIndex(node.children);
+      if (markerIdx === -1) return;
+      parent.children[index] = buildPlaceholderNode(
+        extractPromptAfterMarker(node, markerIdx),
+      );
     });
   };
 };

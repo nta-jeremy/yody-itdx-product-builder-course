@@ -14,15 +14,19 @@
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
 import {
   getSubLearnerContent,
   listSubLearnerContent,
   isValidSubSessionCode,
   isValidSessionCode,
+  getLearnerContent,
 } from "@/lib/content";
 import { listLearnerSessions } from "@/lib/content";
 import { MarkdownView } from "@/components/markdown/markdown";
 import { Sidebar } from "@/components/shell";
+import { SubBreadcrumb } from "@/components/learn/sub-breadcrumb";
+import { SubSessionNav } from "@/components/learn/sub-session-nav";
 
 /**
  * Pre-render all sub-session short forms at build time.
@@ -38,6 +42,11 @@ export async function generateStaticParams() {
 
 /** Strict static export: 404 for any path not in `generateStaticParams`. */
 export const dynamicParams = false;
+
+/** Opt into dynamic rendering ONLY for the headers() read (sidebar expand).
+ *  Everything else (markdown, breadcrumb, nav) stays static — see sidebar
+ *  fallback in JSX for build-time render. */
+export const dynamic = "force-static";
 
 type Params = Promise<{ code: string; subCode: string }>;
 
@@ -73,6 +82,18 @@ export default async function SubLearnPage({
   if (!content) notFound();
 
   const sessions = await listLearnerSessions();
+  const parent = await getLearnerContent(content.parentCode);
+  const parentTitle = parent?.title ?? content.parentCode;
+  const hdrs = await headers();
+  const pathname = hdrs.get("x-pathname") ?? "";
+  const prevSibling = content.navigation.prevCode
+    ? await getSubLearnerContent(content.navigation.prevCode)
+    : null;
+  const nextSibling = content.navigation.nextCode
+    ? await getSubLearnerContent(content.navigation.nextCode)
+    : null;
+  const prevTitle = prevSibling?.title ?? content.navigation.prevCode ?? "";
+  const nextTitle = nextSibling?.title ?? content.navigation.nextCode ?? "";
 
   return (
     <div
@@ -80,10 +101,19 @@ export default async function SubLearnPage({
       className="mx-auto flex w-full max-w-[var(--container-max)] items-stretch"
     >
       <div className="hidden lg:flex">
-        <Sidebar sessions={sessions} activeCode={content.subCode} linkBase="/learn" />
+        <Sidebar sessions={sessions} activeCode={content.subCode} activeSubCode={content.subCode} linkBase="/learn" pathname={pathname} />
       </div>
       <main className="min-w-0 flex-1 px-6 py-10 md:px-10 xl:px-14">
         <div className="mx-auto w-full max-w-[688px] min-w-0">
+          <SubBreadcrumb
+            level={content.level}
+            levelNum={content.levelNum}
+            parentCode={content.parentCode}
+            parentTitle={parentTitle}
+            subCode={content.subCode}
+            subTitle={content.title}
+          />
+
           <header className="mb-10 pb-6 border-b border-border">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <span className="font-[family-name:var(--font-mono)] text-[12px] font-bold uppercase tracking-[0.16em] text-[var(--brand)]">
@@ -104,6 +134,15 @@ export default async function SubLearnPage({
           </header>
 
           <MarkdownView source={content.markdown} />
+
+          <SubSessionNav
+            prevCode={content.navigation.prevCode}
+            prevTitle={prevTitle}
+            prevKind={content.navigation.prevKind}
+            nextCode={content.navigation.nextCode}
+            nextTitle={nextTitle}
+            nextKind={content.navigation.nextKind}
+          />
         </div>
       </main>
     </div>

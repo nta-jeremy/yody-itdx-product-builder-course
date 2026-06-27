@@ -111,7 +111,7 @@ export default async function LearnPage({
           </CourseDrawer>
         </div>
 
-        <div className="flex items-start gap-10 xl:gap-14">
+        <div className="flex items-stretch gap-10 xl:gap-14">
           {/* Prose column — outer flex-1 reserves the slot so the TOC
               (flex-none, 220px) can sit at `top: 96px` and stick. Inner
               mx-auto keeps the 688px reading width centred in that slot. */}
