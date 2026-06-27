@@ -24,7 +24,7 @@ import { Badge } from "@/components/ui/badge";
 export const metadata: Metadata = {
   title: "Lộ trình 5 cấp độ",
   description:
-    "Lộ trình Intern Product Builder — 5 cấp độ từ L1 Nhận thức đến L5 Kiến trúc sư, với các gate hành vi chốt giữa mỗi cấp.",
+    "Lộ trình Intern Product Builder — 5 cấp độ từ Mindset (L1) đến Product Builder thực thụ (L5), với các điều kiện để đi tiếp chốt giữa mỗi cấp.",
 };
 
 /** One level row. */
@@ -138,11 +138,11 @@ export default function RoadmapPage() {
           Lộ trình
         </span>
         <h1 className="mt-3 font-[family-name:var(--font-impact)] text-[clamp(36px,4vw,52px)] font-extrabold leading-[1.08] text-[var(--fg-1)]">
-          Năm cấp độ — từ L1 Nhận thức đến L5 Kiến trúc sư
+          Năm cấp độ — từ Mindset (L1) đến Product Builder thực thụ (L5)
         </h1>
         <p className="mt-3 max-w-[680px] font-[family-name:var(--font-body)] text-[17px] leading-[1.65] text-[var(--fg-2)]">
-          Mỗi cấp độ chốt lại bằng một <strong className="text-[var(--fg-1)]">gate hành vi</strong>:
-          bạn vượt qua gate nhờ một deliverable thực tế được duyệt, không dựa trên điểm số.
+          Mỗi cấp độ chốt lại bằng một <strong className="text-[var(--fg-1)]">điều kiện để đi tiếp</strong>:
+          bạn vượt qua nhờ một deliverable thực tế được duyệt, không dựa trên điểm số.
         </p>
       </header>
 

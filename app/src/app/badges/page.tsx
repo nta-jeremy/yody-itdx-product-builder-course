@@ -14,7 +14,7 @@ import { listBadges, type Badge } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Huy hiệu",
-  description: "5 huy hiệu của chương trình Intern Product Builder — L1 Aware đến L5 Architect, cấp theo gate hành vi.",
+  description: "5 huy hiệu của chương trình Intern Product Builder — L1 Aware đến L5 Architect, cấp khi đạt điều kiện để đi tiếp.",
 };
 
 const TOKEN_TONE: Record<Badge["color_token"], { chipBg: string; chipText: string; bar: string }> = {
@@ -45,10 +45,10 @@ export default async function BadgesPage() {
           Huy hiệu
         </span>
         <h1 className="mt-3 font-[family-name:var(--font-impact)] text-[clamp(32px,3.4vw,44px)] font-extrabold leading-[1.1] text-[var(--fg-1)]">
-          5 huy hiệu — cấp theo gate hành vi
+          5 huy hiệu — cấp khi đạt điều kiện để đi tiếp
         </h1>
         <p className="mt-3 max-w-[640px] font-[family-name:var(--font-body)] text-[16px] leading-[1.6] text-[var(--fg-2)]">
-          Huy hiệu cấp khi <strong className="text-[var(--fg-1)]">qua gate hành vi</strong>, không
+          Huy hiệu cấp khi <strong className="text-[var(--fg-1)]">đạt điều kiện để đi tiếp</strong>, không
           phải khi đậu điểm. L1 mint · L2–L4 iris · L5 gold (quý giá nhất — kỷ
           niệm tốt nghiệp).
         </p>

@@ -31,8 +31,8 @@ export default async function HomePage() {
         </h1>
         <p className="max-w-[680px] font-[family-name:var(--font-body)] text-[18px] leading-[1.65] text-[var(--fg-2)]">
           Chương trình Intern Product Builder gồm 5 level (L1–L5), 14 buổi học
-          và cẩm nang giảng kèm. Mỗi level chốt bằng gate hành vi — bạn vượt
-          gate bằng deliverable thật, không phải điểm số.
+          và cẩm nang giảng kèm. Mỗi level chốt bằng điều kiện để đi tiếp — bạn vượt
+          qua bằng deliverable thật, không phải điểm số.
         </p>
         <div className="flex flex-wrap items-center gap-3 pt-2">
           <Link
@@ -65,18 +65,17 @@ export default async function HomePage() {
       <section className="mt-16 flex flex-col gap-4 rounded-xl border border-border bg-[var(--bg-2)] px-6 py-10 md:flex-row md:items-center md:justify-between md:px-11">
         <div>
           <h2 className="font-[family-name:var(--font-brand)] text-lg font-bold text-[var(--fg-1)]">
-            Đọc giáo án + cẩm nang giảng song song
+            Nội dung được biên soạn và sưu tầm từ nhiều nguồn thông qua AI
           </h2>
           <p className="mt-1 font-[family-name:var(--font-body)] text-[15px] text-[var(--fg-2)]">
-            Mỗi buổi có hai cột: giáo án cho học viên, cẩm nang giảng cho trainer.
-            Có chế độ in cho trainer in ra lớp.
+            Mỗi buổi sẽ có cả lý thuyết lẫn thực hành cùng quiz để tăng khả năng ghi nhớ.
           </p>
         </div>
         <Link
           href="/sessions"
           className="inline-flex min-h-[44px] shrink-0 items-center rounded-full bg-[var(--brand)] px-7 text-sm font-semibold text-white outline-ring/50 transition-colors hover:bg-[var(--brand-light)] focus-visible:ring-[3px]"
         >
-          Vào danh sách buổi
+          Vào học
         </Link>
       </section>
     </div>

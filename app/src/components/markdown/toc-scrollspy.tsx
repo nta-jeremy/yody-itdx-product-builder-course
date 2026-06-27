@@ -89,8 +89,8 @@ export function TocScrollspy({ items, className }: TocScrollspyProps) {
       data-surface="app"
       className={cn(
         "yody-toc",
-        "sticky top-[96px]",
-        "max-h-[calc(100vh-128px)]",
+        "sticky top-[64px]",
+        "max-h-[calc(100vh-96px)]",
         "w-[220px] flex-none overflow-y-auto",
         "py-[var(--s-8)] pl-[var(--s-4)] pr-[var(--s-3)]",
         className,

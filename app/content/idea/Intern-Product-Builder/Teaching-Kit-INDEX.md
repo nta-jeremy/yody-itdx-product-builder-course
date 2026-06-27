@@ -14,7 +14,7 @@
 | **I1.2** | Giới hạn AI & An toàn dữ liệu | L1 | **Gate L1→L2** | [Teaching-Kit-I1.2](Teaching-Kit-I1.2/I1.2-Cam-Nang-Giang-Gioi-Han-AI-An-Toan.md) | [I1.2-preread](/learn/I1.2/preread) | — |
 | **I2.1** | Advanced Prompting | L2 | tích lũy | [Teaching-Kit-I2.1](Teaching-Kit-I2.1/I2.1-Cam-Nang-Giang-Advanced-Prompting.md) | [I2.1-preread](/learn/I2.1/preread) | [I2.1.1](/learn/I2.1/1) · [I2.1.2](/learn/I2.1/2) |
 | **I2.2** | AI Tools cho Product Work | L2 | tích lũy | [Teaching-Kit-I2.2](Teaching-Kit-I2.2/I2.2-Cam-Nang-Giang-AI-Tools-Product-Work.md) | [I2.2-preread](/learn/I2.2/preread) | — |
-| **I2.3** | Prompt để Insight & Spec | L2 | **Gate L2→L3** | [Teaching-Kit-I2.3](Teaching-Kit-I2.3/I2.3-Cam-Nang-Giang-Prompt-de-Insight-Spec.md) | [I2.3-preread](/learn/I2.3/preread) | [I2.3.1](/learn/I2.3/1) · [I2.3.2](/learn/I2.3/2) |
+| **I2.3** | Prompt Insight & Spec | L2 | **Gate L2→L3** | [Teaching-Kit-I2.3](Teaching-Kit-I2.3/I2.3-Cam-Nang-Giang-Prompt-de-Insight-Spec.md) | [I2.3-preread](/learn/I2.3/preread) | [I2.3.1](/learn/I2.3/1) · [I2.3.2](/learn/I2.3/2) |
 | **I3.1** | Workflow Design & Cowork | L3 | mở đầu L3 | [Teaching-Kit-I3.1](Teaching-Kit-I3.1/I3.1-Cam-Nang-Giang-Workflow-Design-Cowork.md) | [I3.1-preread](/learn/I3.1/preread) | [I3.1.1](/learn/I3.1/1) · [I3.1.2](/learn/I3.1/2) |
 | **I3.2** | Build Deliverable sản phẩm | L3 | tích lũy | [Teaching-Kit-I3.2](Teaching-Kit-I3.2/I3.2-Cam-Nang-Giang-Build-Deliverable.md) | [I3.2-preread](/learn/I3.2/preread) | — |
 | **I3.3** | Mentor Review & Iterate | L3 | **Gate L3→L4** | [Teaching-Kit-I3.3](Teaching-Kit-I3.3/I3.3-Cam-Nang-Giang-Mentor-Review-Iterate.md) | [I3.3-preread](/learn/I3.3/preread) | — |

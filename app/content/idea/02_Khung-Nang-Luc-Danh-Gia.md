@@ -396,7 +396,7 @@ Mỗi chương trình = **khung gốc + override**. Tiêu chí không liệt kê
 
 > Nguyên tắc: bài đánh giá tốt là bài mà *người dùng AI giỏi sẽ vượt qua, người chỉ biết copy-paste AI thì trượt*.
 
-**Lớp hiển thị tiến độ (badge & tracker):** badge cấp khi **qua gate hành vi**, không phải khi đậu điểm. Chi tiết gamification, recertification, vận hành: `03_Giao-An-Trien-Khai.md`.
+**Lớp hiển thị tiến độ (badge & tracker):** badge cấp khi **đạt điều kiện để đi tiếp**, không phải khi đậu điểm. Chi tiết gamification, recertification, vận hành: `03_Giao-An-Trien-Khai.md`.
 
 ---
 

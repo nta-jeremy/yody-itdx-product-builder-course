@@ -28,56 +28,92 @@ function placeholders(root: Root): PlaceholderNode[] {
 }
 
 describe("remark-image-placeholder", () => {
-  it("replaces <!-- CẦN HÌNH: foo --> by stamping hName + hProperties", () => {
-    const root = runPlugin("<!-- CẦN HÌNH: foo -->");
+  // ─── Blockquote format (main-content) ───────────────────────────────
+
+  it("replaces blockquote with **[IMAGE-INSIGHT]** marker (single line)", () => {
+    const root = runPlugin("> **[IMAGE-INSIGHT]** Một prompt ngắn");
     const found = placeholders(root);
     expect(found).toHaveLength(1);
-    expect(found[0].data?.hName).toBe("image-placeholder");
-    expect(found[0].data?.hProperties?.["data-prompt"]).toBe("foo");
+    expect(found[0].data?.hProperties?.["data-prompt"]).toBe(
+      "Một prompt ngắn",
+    );
   });
 
-  it("carries prompt text in data-prompt", () => {
-    const root = runPlugin("<!-- CẦN HÌNH: mô tả -->");
+  it("replaces blockquote with multi-line prompt + *(Prompt: ...)* metadata", () => {
+    const src = [
+      "> **[IMAGE-INSIGHT]** Minh họa một nhạc trưởng đứng trước bốn nhạc cụ",
+      '> *(Prompt tạo hình: "abc")*',
+    ].join("\n");
+    const root = runPlugin(src);
     const found = placeholders(root);
-    expect(found[0]?.data?.hProperties?.["data-prompt"]).toBe("mô tả");
+    expect(found).toHaveLength(1);
+    expect(found[0].data?.hProperties?.["data-prompt"]).toBe(
+      "Minh họa một nhạc trưởng đứng trước bốn nhạc cụ",
+    );
   });
 
-  it("preserves multi-line prompts", () => {
-    const root = runPlugin("<!-- CẦN HÌNH: line1\nline2 -->");
+  it("handles blockquote followed by paragraph", () => {
+    const src = [
+      "Paragraph trước.",
+      "",
+      "> **[IMAGE-INSIGHT]** Mô tả",
+      "",
+      "Paragraph sau.",
+    ].join("\n");
+    const root = runPlugin(src);
     const found = placeholders(root);
-    expect(found[0]?.data?.hProperties?.["data-prompt"]).toBe("line1\nline2");
+    expect(found).toHaveLength(1);
+    expect(found[0].data?.hProperties?.["data-prompt"]).toBe("Mô tả");
   });
 
-  it("matches marker with no whitespace after <!--", () => {
-    const root = runPlugin("<!--CẦN HÌNH: tight-->");
-    expect(placeholders(root)).toHaveLength(1);
-  });
-
-  it("leaves unrelated HTML comments as plain html nodes", () => {
-    const root = runPlugin("<!-- TODO: review this -->");
+  it("tolerates optional 🖼️ emoji prefix before the marker", () => {
+    const root = runPlugin("> 🖼️ **[IMAGE-INSIGHT]** Prompt có emoji");
     const found = placeholders(root);
-    expect(found).toHaveLength(0);
-    const htmls = root.children.filter((n) => n.type === "html");
-    expect(htmls).toHaveLength(1);
-    expect((htmls[0] as { value: string }).value).toContain("TODO");
+    expect(found).toHaveLength(1);
+    expect(found[0].data?.hProperties?.["data-prompt"]).toBe(
+      "Prompt có emoji",
+    );
+  });
+
+  it("does not touch blockquote without [IMAGE-INSIGHT] marker", () => {
+    const root = runPlugin("> Đây là blockquote bình thường");
+    expect(placeholders(root)).toHaveLength(0);
+  });
+
+  // ─── Paragraph format (_archive) ───────────────────────────────────
+
+  it("replaces paragraph with **[IMAGE-INSIGHT]** marker (archive style)", () => {
+    const root = runPlugin("**[IMAGE-INSIGHT]** Prompt trong archive");
+    const found = placeholders(root);
+    expect(found).toHaveLength(1);
+    expect(found[0].data?.hProperties?.["data-prompt"]).toBe(
+      "Prompt trong archive",
+    );
+  });
+
+  it("tolerates 🖼️ emoji prefix in paragraph marker", () => {
+    const root = runPlugin("🖼️ **[IMAGE-INSIGHT]** Có emoji");
+    const found = placeholders(root);
+    expect(found).toHaveLength(1);
+    expect(found[0].data?.hProperties?.["data-prompt"]).toBe("Có emoji");
   });
 
   it("replaces multiple markers in one document", () => {
     const root = runPlugin(
-      "<!-- CẦN HÌNH: first -->\n\nmiddle\n\n<!-- CẦN HÌNH: second -->",
+      "**[IMAGE-INSIGHT]** first\n\nmiddle\n\n> **[IMAGE-INSIGHT]** second",
     );
     expect(placeholders(root)).toHaveLength(2);
   });
 
   it("trims surrounding whitespace from prompt", () => {
-    const root = runPlugin("<!-- CẦN HÌNH:   spaced prompt   -->");
+    const root = runPlugin("> **[IMAGE-INSIGHT]**   spaced prompt   ");
     expect(placeholders(root)[0]?.data?.hProperties?.["data-prompt"]).toBe(
       "spaced prompt",
     );
   });
 
   it("does not touch plain text containing the marker", () => {
-    const root = runPlugin("CẦN HÌNH: foo bar");
+    const root = runPlugin("paragraph mentioning IMAGE-INSIGHT: inline");
     expect(placeholders(root)).toHaveLength(0);
   });
 });
