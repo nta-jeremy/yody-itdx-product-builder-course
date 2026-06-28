@@ -6,9 +6,11 @@ Self-contained Next.js 16 project. The entire `app/` directory (including `conte
 
 ## URL
 
-- **Production (aliased):** https://app-plum-three-64.vercel.app
+- **Production (aliased):** https://yody-itdx-product-builder-program.vercel.app/
+- **Latest deployment URL:** https://app-2zmuwpe3d-tunganh252s-projects.vercel.app
 - **Project dashboard:** https://vercel.com/tunganh252s-projects/app
 - **Account/team:** `tunganh252` / `tunganh252's projects` (Hobby plan)
+- **Last deploy:** 2026-06-27 (re-deploy từ local) — verified HTTP 200 trên 5 route chính
 
 ## Deploy Command
 

@@ -174,8 +174,12 @@ export default async function LearnPage({
                   <span className="font-[family-name:var(--font-mono)] text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--fg-3)]">
                     {content.level}
                   </span>
-                  <span className="text-[var(--border-hover)]">·</span>
-                  <ReadingTime minutes={content.readingMinutes} />
+                  {content.subSessions.length === 0 && (
+                    <>
+                      <span className="text-[var(--border-hover)]">·</span>
+                      <ReadingTime minutes={content.readingMinutes} />
+                    </>
+                  )}
                 </div>
                 <h1 className="mt-4 font-[family-name:var(--font-brand)] text-[clamp(28px,3.4vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-[var(--fg-1)]">
                   {content.title}
@@ -183,7 +187,18 @@ export default async function LearnPage({
               </header>
 
               {/* Body: single-column prose. */}
-              <MarkdownView source={content.markdown} />
+              {content.subSessions.length === 0 ? (
+                <MarkdownView source={content.markdown} />
+              ) : (
+                <div className="mt-8 rounded-lg border border-dashed border-border p-6 text-center bg-[var(--bg-muted)]">
+                  <p className="text-[15px] text-[var(--fg-2)]">
+                    Nội dung của buổi học này được chia làm <strong>{content.subSessions.length} buổi phụ</strong>.
+                  </p>
+                  <p className="mt-2 text-[14px] text-[var(--fg-3)]">
+                    Vui lòng chọn một buổi học cụ thể ở danh sách phía trên để bắt đầu học.
+                  </p>
+                </div>
+              )}
 
               <PrevNextNav sessions={sessions} activeCode={content.code} />
             </div>
@@ -191,7 +206,9 @@ export default async function LearnPage({
 
           {/* TOC — sticky outline on the right (xl+). Hidden on smaller
               screens to keep the reading column uncluttered. */}
-          <TocScrollspy items={tocItems} className="hidden xl:block" />
+          {content.subSessions.length === 0 && (
+            <TocScrollspy items={tocItems} className="hidden xl:block" />
+          )}
         </div>
       </main>
     </div>
