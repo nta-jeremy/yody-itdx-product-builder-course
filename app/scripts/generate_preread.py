@@ -5,6 +5,7 @@ I1.1 was already produced in Phase 4; this script adds preread for the
 remaining kits (I1.2, I2.1, I2.2, I2.3, I3.1, I3.2, I3.3, I4.1, I4.2,
 I4.3, I5.1, I5.2, I5.3 = 13 kits).
 """
+
 import sys
 from pathlib import Path
 
@@ -619,13 +620,13 @@ VIDEO_DURATION_SECONDS = 600
 def render_summary(kit: dict) -> str:
     bullets_md = "\n".join(f"- {b}" for b in kit["bullets"])
     return f"""---
-kit: {kit['code']}
-title: {kit['title']}
+kit: {kit["code"]}
+title: {kit["title"]}
 ---
 
-# TL;DR
 
-{kit['title']} trang bị nền tảng và thực hành để học viên vận dụng được ngay sau buổi live — kết hợp pre-read 30-45 phút với 90 phút thực hành có mentor hướng dẫn.
+
+{kit["title"]} trang bị nền tảng và thực hành để học viên vận dụng được ngay sau buổi live — kết hợp pre-read 30-45 phút với 90 phút thực hành có mentor hướng dẫn.
 
 # Điểm cốt lõi cần nhớ trước buổi live
 
@@ -641,7 +642,7 @@ title: {kit['title']}
 
 def render_video(kit: dict) -> str:
     return f"""---
-kit: {kit['code']}
+kit: {kit["code"]}
 duration_seconds: {VIDEO_DURATION_SECONDS}
 ---
 
@@ -655,24 +656,25 @@ duration: {VIDEO_DURATION_SECONDS}
 
 
 def render_qa(kit: dict) -> str:
-    blocks: list[str] = [f"""---
-kit: {kit['code']}
-quiz_count: {len(kit['questions'])}
+    blocks: list[str] = [
+        f"""---
+kit: {kit["code"]}
+quiz_count: {len(kit["questions"])}
 ---
 
-"""]
+"""
+    ]
     for idx, q in enumerate(kit["questions"], start=1):
         letters = ["A", "B", "C", "D"]
         options_md = "\n".join(
-            f"> - {letter}. {opt}"
-            for letter, opt in zip(letters, q["options"])
+            f"> - {letter}. {opt}" for letter, opt in zip(letters, q["options"])
         )
         blocks.append(
             f"""> [!question]
-> **Câu {idx}:** {q['q']}
+> **Câu {idx}:** {q["q"]}
 {options_md}
-> **Đáp án: {q['answer']}**
-> **Giải thích:** {q['explanation']}
+> **Đáp án: {q["answer"]}**
+> **Giải thích:** {q["explanation"]}
 
 """
         )

@@ -6,7 +6,7 @@
 
 ---
 
-## TL;DR — Đề xuất em chốt
+# — Đề xuất em chốt
 
 **Phương án C đã chốt (Flipped)** + **mở rộng thành "Hybrid Flipped + Split cho buổi nặng"**:
 

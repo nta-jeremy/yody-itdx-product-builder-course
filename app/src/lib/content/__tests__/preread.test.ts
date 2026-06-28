@@ -19,7 +19,7 @@ describe("getPreRead", () => {
     ] as any);
     vi.mocked(fsPromises.readFile).mockImplementation(async (path) => {
       if (String(path).includes("summary")) {
-        return "# TL;DR\nAI is prediction.\n\n# Điểm cốt lõi\n- Token\n- Context\n- Temperature\n- Embeddings\n- RAG";
+        return "\nAI is prediction.\n\n# Điểm cốt lõi\n- Token\n- Context\n- Temperature\n- Embeddings\n- RAG";
       }
       if (String(path).includes("video")) {
         return "url: https://youtube.com/embed/abc123\nduration: 600";

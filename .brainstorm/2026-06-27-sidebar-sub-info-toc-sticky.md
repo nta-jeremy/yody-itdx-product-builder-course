@@ -6,7 +6,7 @@
 
 ---
 
-## TL;DR
+#
 
 2 việc user yêu cầu:
 1. **Sub-item menu trong sidebar cho buổi có buổi phụ** (vd I4.1.1, I4.1.2) — **thiếu `duration` + `readingMinutes`**

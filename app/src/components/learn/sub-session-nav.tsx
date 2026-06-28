@@ -26,7 +26,7 @@ export interface SubSessionNavProps {
 }
 
 function buildHref(code: string): Route {
-  const dot = code.indexOf(".");
+  const dot = code.lastIndexOf(".");
   const parent = code.slice(0, dot);
   const sub = code.slice(dot + 1);
   return `/learn/${parent}/${sub}` as Route;

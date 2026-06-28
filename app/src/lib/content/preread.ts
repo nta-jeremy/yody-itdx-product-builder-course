@@ -29,7 +29,7 @@ import { CONTENT_ROOT, isValidSessionCode } from "./sessions";
 export type PreReadSummary = {
   /** 3-5 bullet points from `# Điểm cốt lõi`. */
   bullets: string[];
-  /** TL;DR paragraph from `# TL;DR`. */
+  /** TL;DR paragraph from ``. */
   tldr: string;
   /** Estimated reading time (minutes). */
   readingMinutes: number;
@@ -110,7 +110,7 @@ const VIDEO_PLACEHOLDER = "placeholder";
 
 /**
  * Parse summary markdown. Expected format:
- *   # TL;DR
+ *   
  *   <paragraph>
  *   # Điểm cốt lõi
  *   - bullet 1

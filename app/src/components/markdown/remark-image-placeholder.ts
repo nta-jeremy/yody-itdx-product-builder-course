@@ -92,6 +92,16 @@ export const remarkImagePlaceholder: Plugin<[], Root> = () => {
         extractPromptAfterMarker(node, markerIdx),
       );
     });
+
+    // Strip any other HTML comments/blocks that are NOT our custom image placeholders.
+    visit(tree, "html", (node, index, parent) => {
+      if (!parent || index === undefined) return;
+      if (node.data?.hName === REHYPE_IMAGE_PLACEHOLDER_TAG) {
+        return;
+      }
+      parent.children.splice(index, 1);
+      return [visit.SKIP, index];
+    });
   };
 };
 

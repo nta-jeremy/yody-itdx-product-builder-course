@@ -31,7 +31,7 @@ Rubric đầy đủ = bộ gốc `../00_Core/competency_dictionary.json` + overr
     │   └── _archive/                     # File gốc trước khi split (Phase 6)
     │       └── I{x}.{y}-Tai-Lieu-Hoc-*.md
     ├── preread/                          # Pre-read async (Phase 4)
-    │   ├── I{x}.{y}-preread-summary.md  # TL;DR + 5 bullets
+    │   ├── I{x}.{y}-preread-summary.md   + 5 bullets
     │   ├── I{x}.{y}-preread-video.md    # Video URL + duration
     │   └── I{x}.{y}-preread-qa.md       # 3 câu quiz multiple-choice
     └── I{x}.{y}-Cam-Nang-Giang-*.md     # Cẩm nang giảng dạy (cho mentor)
@@ -53,7 +53,7 @@ Rubric đầy đủ = bộ gốc `../00_Core/competency_dictionary.json` + overr
 **Pre-read files** (Phase 4+, bắt buộc cho 14 kit):
 
 - 3 file: `summary`, `video`, `qa` — đặt trong `preread/`.
-- `summary`: `# TL;DR` + `# Điểm cốt lõi` (3-5 bullets).
+- `summary`: `` + `# Điểm cốt lõi` (3-5 bullets).
 - `video`: `url:` placeholder + `duration: 600` (giây) + transcript TODO.
 - `qa`: 3 câu format `> [!question]` với 4 đáp án `A. B. C. D.` + `**Đáp án: X**` + `**Giải thích:**`.
 

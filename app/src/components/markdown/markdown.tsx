@@ -37,6 +37,8 @@ export interface MarkdownViewProps {
   source: string;
   /** Extra className for the article wrapper (in addition to `yody-prose`). */
   className?: string;
+  /** Optional session code for resolving relative assets like ../images/ */
+  sessionCode?: string;
 }
 
 /**
@@ -159,7 +161,25 @@ const markdownComponents = {
   }) => <EmptyImage prompt={dataPrompt ?? ""} />,
 };
 
-export function MarkdownView({ source, className }: MarkdownViewProps) {
+export function MarkdownView({ source, className, sessionCode }: MarkdownViewProps) {
+  const components = React.useMemo(() => {
+    if (!sessionCode) return markdownComponents;
+    return {
+      ...markdownComponents,
+      img: ({ alt, src, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
+        let resolvedSrc = src ?? "";
+        if (resolvedSrc.startsWith("../images/")) {
+          const filename = resolvedSrc.replace("../images/", "");
+          resolvedSrc = `/api/images/${sessionCode}/${filename}`;
+        }
+        return (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="yody-img" alt={alt ?? ""} src={resolvedSrc} {...props} />
+        );
+      },
+    };
+  }, [sessionCode]);
+
   return (
     <div data-surface="app" className={cn("yody-prose", className)}>
       <Markdown
@@ -177,7 +197,7 @@ export function MarkdownView({ source, className }: MarkdownViewProps) {
             },
           }],
         ]}
-        components={markdownComponents}
+        components={components}
       >
         {source}
       </Markdown>

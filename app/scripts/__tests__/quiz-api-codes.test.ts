@@ -52,7 +52,7 @@ describe("Quiz API 14 codes (direct handler call)", () => {
       });
       vi.mocked(fsPromises.readFile).mockImplementation(async (p) => {
         const s = String(p);
-        if (s.includes("summary")) return "# TL;DR\nTóm tắt.\n\n# Điểm cốt lõi\n- A\n- B\n- C";
+        if (s.includes("summary")) return "\nTóm tắt.\n\n# Điểm cốt lõi\n- A\n- B\n- C";
         if (s.includes("video")) return "url: https://youtube.com/embed/placeholder\nduration: 600";
         if (s.includes("qa")) {
           return [
