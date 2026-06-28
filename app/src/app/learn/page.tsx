@@ -24,7 +24,7 @@ import { Sidebar } from "@/components/shell";
 export const metadata: Metadata = {
   title: "Học — 14 buổi",
   description:
-    "14 buổi học dành cho người học, theo 5 level (L1 Aware → L5 Architect).",
+    "14 buổi học theo 5 level (L1 Aware → L5 Architect).",
 };
 
 /** Level path-card descriptors — token colors per plan decision #20. */

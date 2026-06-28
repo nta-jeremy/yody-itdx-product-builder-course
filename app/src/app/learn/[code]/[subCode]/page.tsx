@@ -133,7 +133,7 @@ export default async function SubLearnPage({
             </h1>
           </header>
 
-          <MarkdownView source={content.markdown} />
+          <MarkdownView source={content.markdown} sessionCode={content.parentCode} />
 
           <SubSessionNav
             prevCode={content.navigation.prevCode}

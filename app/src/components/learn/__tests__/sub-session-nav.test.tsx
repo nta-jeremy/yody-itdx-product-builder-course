@@ -18,6 +18,10 @@ describe("SubSessionNav", () => {
     expect(screen.getByText("I2.1.2")).toBeInTheDocument();
     expect(screen.getByText(/Buổi phụ trước/)).toBeInTheDocument();
     expect(screen.getByText(/Buổi phụ sau/)).toBeInTheDocument();
+    
+    // Check hrefs are correctly formatted as /learn/[parent]/[sub]
+    expect(screen.getByRole("link", { name: /Buổi phụ trước/i })).toHaveAttribute("href", "/learn/I2.1/1");
+    expect(screen.getByRole("link", { name: /Buổi phụ sau/i })).toHaveAttribute("href", "/learn/I2.1/2");
   });
 
   it("renders 'Buổi sau' label when nextKind='parent'", () => {
@@ -33,6 +37,7 @@ describe("SubSessionNav", () => {
     );
     expect(screen.getByText(/Buổi sau/)).toBeInTheDocument();
     expect(screen.getByText("I2.3.1")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Buổi sau/i })).toHaveAttribute("href", "/learn/I2.3/1");
   });
 
   it("hides prev when null (first sub)", () => {

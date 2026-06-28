@@ -49,7 +49,7 @@
 
 ## Cấu trúc chuẩn mỗi cẩm nang (theo I1.1)
 
-0. **Định vị buổi & cách dùng** — khác biệt cốt lõi (người dùng vs người build), bảng xương sống, agenda timeboxed.
+0. **Định vị buổi & cách dùng** — khác biệt cốt lõi (người dùng vs builder), bảng xương sống, agenda timeboxed.
 1. **Lời giảng theo slide** — 13 slide, mỗi slide có "Trên slide" + "Lời giảng" (đọc gần nguyên văn) + 🖼️ vị trí ảnh.
 2. **Kịch bản demo** — prompt thật + output kỳ vọng + "rút ra".
 3. **Lab + đáp án mẫu** — đề, tiêu chí ĐẠT, đáp án để mentor đối chiếu.

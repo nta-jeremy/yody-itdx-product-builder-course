@@ -37,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" suppressHydrationWarning className={`${fontVariables} h-full antialiased`}>
-      <body data-surface="app" className="min-h-full flex flex-col bg-background text-foreground">
+      <body suppressHydrationWarning data-surface="app" className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider>
           <SiteHeader />
           <main className="flex flex-1 flex-col">{children}</main>

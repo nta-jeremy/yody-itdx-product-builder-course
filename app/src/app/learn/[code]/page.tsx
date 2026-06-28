@@ -188,7 +188,7 @@ export default async function LearnPage({
 
               {/* Body: single-column prose. */}
               {content.subSessions.length === 0 ? (
-                <MarkdownView source={content.markdown} />
+                <MarkdownView source={content.markdown} sessionCode={content.code} />
               ) : (
                 <div className="mt-8 rounded-lg border border-dashed border-border p-6 text-center bg-[var(--bg-muted)]">
                   <p className="text-[15px] text-[var(--fg-2)]">

@@ -76,7 +76,7 @@ export default async function SessionPrintPage({
             Giáo án
           </h2>
           {session.sessionMarkdown ? (
-            <MarkdownView source={session.sessionMarkdown} />
+            <MarkdownView source={session.sessionMarkdown} sessionCode={session.code} />
           ) : (
             <p className="font-[family-name:var(--font-body)] text-sm text-[var(--fg-3)]">
               Giáo án đang chờ cập nhật.
@@ -89,7 +89,7 @@ export default async function SessionPrintPage({
             Cẩm nang giảng
           </h2>
           {session.kitMarkdown ? (
-            <MarkdownView source={session.kitMarkdown} />
+            <MarkdownView source={session.kitMarkdown} sessionCode={session.code} />
           ) : (
             <p className="font-[family-name:var(--font-body)] text-sm text-[var(--fg-3)]">
               Chưa có cẩm nang giảng cho buổi này.

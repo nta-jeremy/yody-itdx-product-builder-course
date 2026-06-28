@@ -118,7 +118,7 @@ export default async function SessionPage({
                 Giáo án
               </h2>
               {session.sessionMarkdown ? (
-                <MarkdownView source={session.sessionMarkdown} />
+                <MarkdownView source={session.sessionMarkdown} sessionCode={session.code} />
               ) : (
                 <EmptySource label="Giáo án đang chờ cập nhật." />
               )}
@@ -129,7 +129,7 @@ export default async function SessionPage({
                 Cẩm nang giảng
               </h2>
               {session.kitMarkdown ? (
-                <MarkdownView source={session.kitMarkdown} />
+                <MarkdownView source={session.kitMarkdown} sessionCode={session.code} />
               ) : (
                 <EmptySource label="Chưa có cẩm nang giảng cho buổi này." />
               )}

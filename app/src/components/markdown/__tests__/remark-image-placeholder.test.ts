@@ -116,4 +116,10 @@ describe("remark-image-placeholder", () => {
     const root = runPlugin("paragraph mentioning IMAGE-INSIGHT: inline");
     expect(placeholders(root)).toHaveLength(0);
   });
+
+  it("strips HTML comments that do not contain the [IMAGE-INSIGHT] marker", () => {
+    const root = runPlugin("Text before.\n\n<!--\nsome comment\n-->\n\nText after.");
+    const htmlNodes = root.children.filter((n) => n.type === "html");
+    expect(htmlNodes).toHaveLength(0);
+  });
 });

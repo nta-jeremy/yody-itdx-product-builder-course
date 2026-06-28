@@ -1,4 +1,4 @@
-# Brainstorm — UI/UX đọc course dành cho người học (route `/learn`)
+# Brainstorm — UI/UX đọc course (route `/learn`)
 
 > **Phiên bản:** 1.0 · **Ngày:** 25/06/2026 · **Loại:** follow-up brainstorm (kế tiếp `brainstorm-yody-hoc-replace.md`) · **Vai trò:** Solution Brainstormer (phân tích + đề xuất, không code).
 > **Đầu vào:** `app/content/idea/Intern-Product-Builder/Teaching-Kit-I*/main-content/*.md` (14 file tài liệu học) + route `/sessions/[code]` hiện tại (mentor-facing, side-by-side giáo án + cẩm nang) + báo cáo research UX từ planner agent.

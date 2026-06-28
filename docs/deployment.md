@@ -7,10 +7,11 @@ Self-contained Next.js 16 project. The entire `app/` directory (including `conte
 ## URL
 
 - **Production (aliased):** https://yody-itdx-product-builder-program.vercel.app/
-- **Latest deployment URL:** https://app-2zmuwpe3d-tunganh252s-projects.vercel.app
+- **Latest deployment URL:** https://app-dakbyey9f-tunganh252s-projects.vercel.app
+- **Previous deployment URL:** https://app-2zmuwpe3d-tunganh252s-projects.vercel.app
 - **Project dashboard:** https://vercel.com/tunganh252s-projects/app
 - **Account/team:** `tunganh252` / `tunganh252's projects` (Hobby plan)
-- **Last deploy:** 2026-06-27 (re-deploy từ local) — verified HTTP 200 trên 5 route chính
+- **Last deploy:** 2026-06-28 — build 31s, deploy 52s, aliased Ready
 
 ## Deploy Command
 
@@ -78,11 +79,7 @@ All routes are pre-rendered at build time (SSG):
 
 > `/learn` + `/learn/[code]` are the learner-facing routes (reader: `src/lib/content/learner.ts`); `/sessions/*` remains the mentor view.
 
-Verified live (HTTP 200) on production:
-- `https://app-plum-three-64.vercel.app/`
-- `https://app-plum-three-64.vercel.app/sessions/I1.1`
-- `https://app-plum-three-64.vercel.app/roadmap`
-- `https://app-plum-three-64.vercel.app/badges`
+NFT trace warning vẫn xuất hiện — bổ sung thêm trace qua `./src/app/api/preread/[code]/check/route.ts`. Impact: none (đã ghi nhận trong Phase 2c nếu cần migrate `output: 'export'`).
 
 ## Known Build Warnings
 
