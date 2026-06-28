@@ -92,7 +92,7 @@ export default async function LearnListPage() {
             14 buổi — tài liệu học
           </h1>
           <p className="mt-3 font-[family-name:var(--font-body)] text-[17px] leading-[1.65] text-[var(--fg-2)]">
-            Tài liệu học dành cho người học. Đọc theo lộ trình 5 level từ nền
+            Tài liệu học. Đọc theo lộ trình 5 level từ nền
             tảng AI đến kiến trúc và ship sản phẩm. Mỗi buổi là một đơn vị đọc
             độc lập, kèm mục lục và ước tính thời gian đọc.
           </p>

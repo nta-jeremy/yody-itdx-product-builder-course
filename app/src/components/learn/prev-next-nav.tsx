@@ -40,17 +40,17 @@ export function PrevNextNav({ sessions, activeCode }: PrevNextNavProps) {
       {prev ? (
         <Link
           href={`/learn/${prev.code}` as Route}
-          className="group flex min-h-[88px] flex-col justify-center rounded-lg border border-border bg-[var(--bg)] px-5 py-4 outline-ring/50 transition-colors hover:border-[var(--border-hover)] hover:bg-[var(--bg-muted)] focus-visible:ring-[3px]"
+          className="group flex flex-col justify-center gap-1.5 overflow-hidden rounded-lg border border-border bg-[var(--bg)] px-5 py-4 outline-ring/50 transition-colors hover:border-[var(--border-hover)] hover:bg-[var(--bg-muted)] focus-visible:ring-[3px]"
         >
           <span className="flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--fg-3)]">
             <ArrowLeft size={14} className="flex-none text-[var(--fg-3)] transition-colors group-hover:text-[var(--brand)]" />
             Trang trước
           </span>
-          <span className="mt-1.5 flex items-center gap-2 font-[family-name:var(--font-brand)] text-[15px] font-bold leading-[1.3] text-[var(--fg-1)]">
-            <span className="font-[family-name:var(--font-mono)] text-[12px] font-semibold text-[var(--brand)]">
+          <span className="flex min-w-0 items-baseline gap-2 font-[family-name:var(--font-brand)] text-[15px] font-bold leading-[1.35] text-[var(--fg-1)]">
+            <span className="flex-none font-[family-name:var(--font-mono)] text-[12px] font-semibold text-[var(--brand)]">
               {prev.code}
             </span>
-            <span className="truncate">{prev.title}</span>
+            <span className="min-w-0 line-clamp-2 break-words">{prev.title}</span>
           </span>
         </Link>
       ) : (
@@ -59,15 +59,15 @@ export function PrevNextNav({ sessions, activeCode }: PrevNextNavProps) {
       {next ? (
         <Link
           href={`/learn/${next.code}` as Route}
-          className="group flex min-h-[88px] flex-col items-end justify-center rounded-lg border border-border bg-[var(--bg)] px-5 py-4 text-right outline-ring/50 transition-colors hover:border-[var(--border-hover)] hover:bg-[var(--bg-muted)] focus-visible:ring-[3px]"
+          className="group flex flex-col items-end justify-center gap-1.5 overflow-hidden rounded-lg border border-border bg-[var(--bg)] px-5 py-4 text-right outline-ring/50 transition-colors hover:border-[var(--border-hover)] hover:bg-[var(--bg-muted)] focus-visible:ring-[3px]"
         >
           <span className="flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--fg-3)]">
             Trang sau
             <ArrowRight size={14} className="flex-none text-[var(--fg-3)] transition-colors group-hover:text-[var(--brand)]" />
           </span>
-          <span className="mt-1.5 flex items-center justify-end gap-2 font-[family-name:var(--font-brand)] text-[15px] font-bold leading-[1.3] text-[var(--fg-1)]">
-            <span className="truncate">{next.title}</span>
-            <span className="font-[family-name:var(--font-mono)] text-[12px] font-semibold text-[var(--brand)]">
+          <span className="flex min-w-0 items-baseline justify-end gap-2 font-[family-name:var(--font-brand)] text-[15px] font-bold leading-[1.35] text-[var(--fg-1)]">
+            <span className="min-w-0 line-clamp-2 break-words">{next.title}</span>
+            <span className="flex-none font-[family-name:var(--font-mono)] text-[12px] font-semibold text-[var(--brand)]">
               {next.code}
             </span>
           </span>

@@ -1,7 +1,7 @@
 /**
  * / — Intern program home (Server Component).
  *
- * Renders the Intern program cover: hero + stats + CTA → /sessions. Reads
+ * Renders the Intern program cover: hero + stats + CTA → /learn. Reads
  * live session count from the content layer at build time.
  *
  * YODY DS: no emoji, token colors only, gold reserved for the logo wordmark
@@ -27,7 +27,7 @@ export default async function HomePage() {
           id="hero-title"
           className="font-[family-name:var(--font-impact)] text-[clamp(40px,5vw,64px)] font-extrabold leading-[1.05] text-[var(--fg-1)]"
         >
-          Xây sản phẩm AI thật — từ nhân thức đến ship.
+          Xây dựng sản phẩm AI — từ Mindset đến Ship.
         </h1>
         <p className="max-w-[680px] font-[family-name:var(--font-body)] text-[18px] leading-[1.65] text-[var(--fg-2)]">
           Chương trình Intern Product Builder gồm 5 level (L1–L5), 14 buổi học
@@ -36,7 +36,7 @@ export default async function HomePage() {
         </p>
         <div className="flex flex-wrap items-center gap-3 pt-2">
           <Link
-            href="/sessions"
+            href="/learn"
             className="inline-flex min-h-[44px] items-center rounded-full bg-[var(--brand)] px-7 text-sm font-semibold text-white outline-ring/50 transition-colors hover:bg-[var(--brand-light)] focus-visible:ring-[3px]"
           >
             Bắt đầu học
@@ -72,7 +72,7 @@ export default async function HomePage() {
           </p>
         </div>
         <Link
-          href="/sessions"
+          href="/learn"
           className="inline-flex min-h-[44px] shrink-0 items-center rounded-full bg-[var(--brand)] px-7 text-sm font-semibold text-white outline-ring/50 transition-colors hover:bg-[var(--brand-light)] focus-visible:ring-[3px]"
         >
           Vào học

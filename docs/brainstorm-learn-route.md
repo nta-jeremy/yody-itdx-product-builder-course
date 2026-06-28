@@ -33,7 +33,7 @@
 
 | Buổi | H1 | Dòng mở đầu |
 |---|---|---|
-| I1.1 | `# I1.1 — AI Fundamentals` | `## Tài liệu học dành cho người học` |
+| I1.1 | `# I1.1 — AI Fundamentals` | `## Tài liệu học` |
 | I1.2 | `# I1.2 — Giới Hạn AI & An Toàn Dữ Liệu` | `## Tài Liệu Học · Module 1 · Level 1 Aware` |
 | I5.3 | `# YODY PRODUCT BUILDER PROGRAM` | `## Tài Liệu Học Viên — I5.3: ...` |
 | I4.3 | `# I4.3 — Tích hợp vào Initiative & Iterate` | `## Tài liệu học dành cho học viên` |
